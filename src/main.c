@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/03 15:57:33 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/03 16:20:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	prompt_loop()
 
 	while (status)
 	{
+		// I guess this reads from the prompt:
 		line = readline("minishell$ ");
 		
 		//free(line);
