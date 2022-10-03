@@ -1,0 +1,6 @@
+.vscode
+minishell
+test*
+*.DS*
+a.out
+*.o
