@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/03 16:20:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/05 09:30:35 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	prompt_loop()
 	{
 		// I guess this reads from the prompt:
 		line = readline("minishell$ ");
-		
-		//free(line);
+		add_history(line);
+		free(line);
 	}
 	return (status);
 }

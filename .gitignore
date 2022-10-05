@@ -4,3 +4,4 @@ test*
 *.DS*
 a.out
 *.o
+*.a
