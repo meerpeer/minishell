@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/05 11:17:26 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/11 08:25:45 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,11 @@
 # include <readline/history.h>
 # include <stdlib.h>
 
+typedef struct s_cmd {
+	char	**in_fd;
+	char	**out_fd;
+	char	**cmd;
+	t_cmd	*next;
+}				t_cmd;
 
 #endif
