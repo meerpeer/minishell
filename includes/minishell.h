@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/11 08:25:45 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/11 08:39:44 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ typedef struct s_cmd {
 	char	**cmd;
 	t_cmd	*next;
 }				t_cmd;
+
+typedef struct s_mini {
+	t_cmd	*cmds;
+	char	**envp;
+}				t_mini;
 
 #endif
