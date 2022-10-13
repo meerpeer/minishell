@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   redirection.c                                      :+:    :+:            */
+/*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/11 11:27:57 by mevan-de      ########   odam.nl         */
+/*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/10/13 10:34:08 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-//open in files
-//every command can have multiple in files, try to open them all WRONLY
-//here_doc is also a thing here...
-//exit child process on fail
+#include "minishell.h"
 
-//open out files
-//every command can have multiple out files
-//exit on fail
-
-//redirect in files
-//check re
-
-//redirect out files
-
-//close all fds
-void	close_unused_fds()
+void	error_exit(char *message, int errorCode)
 {
-	return ;
+	//char	*final_message;
+
+	
+	if (message)
+		ft_putstr_fd(message, 2);
+	// this is totally incomplete...
+	// just make sure to create one string before using write to 
+	// make it thread safe
+	exit (errorCode);
 }

@@ -2,9 +2,12 @@ NAME = minishell
 CFLAGS ?= -Wall -Wextra -Werror
 CC = gcc
 
-HEADERFILES = includes/minishell.h
+INC = includes
+HEADERFILES = minishell.h
 
-SRC_FILES = main.c\
+SRC_FILES = main.c \
+			executor/execute.c executor/redirection.c \
+			error/error.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ_FILES))
@@ -15,13 +18,13 @@ LIBFT_DIR = libft/
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADERFILES)
+$(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) $(LIB) -o $(NAME)
 
-obj/%.o: src/%.c 
-	@mkdir -p obj
-	$(CC) $(CFLAGS) -c $< -o $@
+obj/%.o: src/%.c $(INC)/$(HEADERFILES)
+	@mkdir -p obj/$(dir $*)
+	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
