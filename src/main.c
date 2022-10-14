@@ -6,13 +6,13 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/05 09:30:35 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/14 13:54:21 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
+#include <readline/readline.h>
 
-# include <readline/readline.h>
 int	prompt_loop()
 {
 	char	*line = NULL;
@@ -27,6 +27,11 @@ int	prompt_loop()
 		free(line);
 	}
 	return (status);
+}
+
+void	init_builtins(t_mini *data)
+{
+	data->
 }
 
 int	main(int argc, char **argv, char **env)
