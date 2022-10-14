@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/13 10:43:51 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/14 11:28:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define READ_END = 0;
 # define WRITE_END = 1;
+# define PROMPT = "minishell$ ";
 
 struct s_mini;
 struct s_cmd;
@@ -33,14 +34,16 @@ typedef struct s_mini	t_mini;
 typedef struct s_cmd	t_cmd;
 typedef struct s_file	t_file;
 
-/*
+/**
 	Struct for General data for minishell
+	
 */
 typedef struct s_mini {
 	t_cmd	*cmds;
-	char	**envp;
-	int		cmd_count;
-	int		cmd_index;
+	char	**envp; // I'll need these to get the path for the commands
+	int		cmd_count; // to see how many pipes there are
+	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
+	int		exit_status; //will take the exit status off the last child process :)
 }				t_mini;
 
 /*
@@ -66,20 +69,27 @@ typedef struct s_file {
 	Struct for every cmd, includes the files with their types 
 */
 typedef struct s_cmd {
+	char	**cmd;
 	t_file	*in_files;
 	t_file	*out_files;
+	char	*cmd_path;
 	int		fd_int;
 	int		fd_out;
 	int		cmd_index;
-	char	**cmd;
 	t_cmd	*next;
 }				t_cmd;
+
+typedef struct s_exec {
+	t_cmd	*cmd;
+	pid_t	pid;
+	int		pipe_fd[2];
+}				t_exec;
 
 //error
 void	error_exit(char *message, int errorCode);
 
 //execute
-int		open_infiles(t_cmd *cmd);
+int		open_infiles(t_file *in_files);
 int		open_outfiles(t_cmd *cmd);
 void	redirect_in(t_cmd *cmd, t_mini *data);
 void	close_unused_fds();
