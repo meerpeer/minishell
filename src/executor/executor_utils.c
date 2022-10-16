@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 10:35:12 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/16 11:50:18 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,8 @@ bool	is_builtin(char *cmd)
 		return (true);
 	return (false);
 }
+
+// t_exec	*init_executor_data(void)
+// {
+	
+// }

@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 10:38:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/16 12:08:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int		open_outfiles(t_cmd *cmd);
 void	redirect_in(t_cmd *cmd, t_mini *data);
 void	close_unused_fds();
 bool	is_builtin(char *cmd);
+void	execute_cmds(t_mini *data);
+void	wait_for_cmd(t_mini *data, pid_t pid);
 
 //builtins
 void	cd_builtin(t_mini *data);
@@ -107,8 +109,5 @@ void	exit_builtin(t_mini *data);
 void	export_builtin(t_mini *data);
 void	pwd_builtin(t_mini *data);
 void	unset_builtin(t_mini *data);
-
-
-
 
 #endif
