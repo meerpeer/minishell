@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
+/*   cd_builtin.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 10:35:12 by mevan-de      ########   odam.nl         */
+/*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/10/16 10:24:14 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_builtin(char *cmd)
+void	cd_builtin(t_mini *data)
 {
-	if (!cmd)
-		return (false);
-	if (ft_strncmp(cmd, "echo", 5) == 0
-		|| ft_strncmp(cmd, "pwd", 4) == 0
-		|| ft_strncmp(cmd, "unset", 6) == 0
-		|| ft_strncmp(cmd, "exit", 5) == 0
-		|| ft_strncmp(cmd, "cd", 3) == 0
-		|| ft_strncmp(cmd, "export", 7) == 0
-		|| ft_strncmp(cmd, "env", 4) == 0)
-		return (true);
-	return (false);
+	(void) data;
+	printf("cd :D\n");
+	return ;
 }

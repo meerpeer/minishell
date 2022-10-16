@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/14 13:54:21 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/16 10:33:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ int	prompt_loop()
 	return (status);
 }
 
-void	init_builtins(t_mini *data)
-{
-	data->
-}
 
 int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
 	(void)env;
+	t_mini	data;
 	//should not run with any arguments:
 	if (argc != 1)
 		exit (1);
+	init_mini_data(&data);
 	//1.	make sure signals don't quit the program (ctrl + C 
 	// 		should go to next prompt not quit minishell).
 

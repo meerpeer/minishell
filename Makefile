@@ -6,7 +6,11 @@ INC = includes
 HEADERFILES = minishell.h
 
 SRC_FILES = main.c \
-			executor/execute.c executor/redirection.c \
+			initialize/init_mini_data.c\
+			executor/execute.c executor/redirection.c executor/wait.c executor/executor_utils.c\
+			builtins/cd_builtin.c builtins/echo_builtin.c builtins/env_builtin.c\
+			builtins/exit_builtin.c builtins/export_builtin.c\
+			builtins/pwd_builtin.c builtins/unset_builtin.c\
 			error/error.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
+/*   init_mini_data.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 10:35:12 by mevan-de      ########   odam.nl         */
+/*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/10/16 10:17:31 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_builtin(char *cmd)
+void	init_mini_data(t_mini *data)
 {
-	if (!cmd)
-		return (false);
-	if (ft_strncmp(cmd, "echo", 5) == 0
-		|| ft_strncmp(cmd, "pwd", 4) == 0
-		|| ft_strncmp(cmd, "unset", 6) == 0
-		|| ft_strncmp(cmd, "exit", 5) == 0
-		|| ft_strncmp(cmd, "cd", 3) == 0
-		|| ft_strncmp(cmd, "export", 7) == 0
-		|| ft_strncmp(cmd, "env", 4) == 0)
-		return (true);
-	return (false);
+	// init env
+	data->cmd_count = 0;
+	data->cmd_index = 0;
+	data->exit_status = 0;
+	return ;
 }
