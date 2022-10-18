@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 08:59:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 10:12:57 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,44 @@ void	child_process(t_cmd *cmd, char **envp)
 	* @param *data: minishell data;
 	* @return VOID
 */
+
+void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
+{
+	int		pipe_fds[2];
+	pid_t	pid;
+	
+	if(pipe(pipe_fds) == -1)
+		error_exit(strerror(errno), 1);
+	pid = fork();
+	if (pid == -1)
+		error_exit(strerror(errno), 1);
+	if (pid == 0)
+	{
+		if(is_builtin(cmd_data->cmd[0]))
+			execute_builtin(cmd_data, mini_data);
+		else
+			child_process(cmd_data, mini_data->envp);
+	}
+	//dup2(pipe)
+	wait_for_cmd(mini_data, pid);
+	return ;
+}
+
 void	execute_cmds(t_mini *data)
 {
 	t_cmd	*cmd_data;
-	t_exec	*exec;
 
-	exec = ft_calloc(sizeof(t_exec), 1);
 	cmd_data = data->cmds;
+	// save std?
 	while (cmd_data)
 	{
 		if (data->cmd_count == 1 && is_builtin(cmd_data->cmd[0]))
-			execute_builtin(cmd_data, data);
-		if(pipe(exec->pipe_fd) == -1)
-			error_exit(strerror(errno), 1);
-		exec->pid = fork();
-		if (exec->pid == -1)
-			error_exit(strerror(errno), 1);
-		if (exec->pid == 0)
 		{
-			if(is_builtin(cmd_data->cmd[0]))
-				execute_builtin(cmd_data, data);
-			else
-				child_process(cmd_data, data->envp);
+			execute_builtin(cmd_data, data);
+			break ;
 		}
-		wait_for_cmd(data, exec->pid);
+		execute_in_child(cmd_data, data);
 		cmd_data = cmd_data->next;
 	}
-	free(exec);
+	//restore stdin?
 }

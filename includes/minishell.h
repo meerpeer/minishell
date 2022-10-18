@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 08:54:02 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 10:16:17 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mini {
 	int		cmd_count; // to see how many pipes there are
 	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
 	int		exit_status; //will take the exit status off the last child process :)
-	
+	int		std_backup[2];
 }				t_mini;
 
 /*
@@ -103,7 +103,7 @@ void	wait_for_cmd(t_mini *data, pid_t pid);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //builtins
-void	cd_builtin(t_cmd *cmd, t_mini *data);
+void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);
 void	echo_builtin(t_cmd *cmd, t_mini *data);
 void	env_builtin(t_cmd *cmd, t_mini *data);
 void	exit_builtin(t_cmd *cmd, t_mini *data);

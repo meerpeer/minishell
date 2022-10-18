@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 08:56:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 10:35:31 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,24 @@ int	prompt_loop()
 // 	return (0);
 // }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)env;
+	//(void)argc;
+	//(void)env;
 	
-	t_cmd	cmd;
+	t_cmd	*cmd;
 	t_mini	*mini;
+	int		i = 0;
 
-	cmd.cmd[0] = argv[1];
+	cmd = ft_calloc(sizeof(t_cmd), 1);
+	cmd->cmd = ft_calloc(sizeof( char **), argc);
+	while(i < argc - 1)
+	{
+		cmd->cmd[i] = ft_strdup(argv[i + 1]);
+		i++;
+	}
 	mini = NULL;
-	if(is_builtin(argv[1]))
-		execute_builtin(&cmd, mini);
 	
+	echo_builtin(cmd, mini);
 	return (0);
 }
