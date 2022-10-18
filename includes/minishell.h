@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 12:08:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 08:54:02 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,15 @@ void	close_unused_fds();
 bool	is_builtin(char *cmd);
 void	execute_cmds(t_mini *data);
 void	wait_for_cmd(t_mini *data, pid_t pid);
+void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //builtins
-void	cd_builtin(t_mini *data);
-void	echo_builtin(t_mini *data);
-void	env_builtin(t_mini *data);
-void	exit_builtin(t_mini *data);
-void	export_builtin(t_mini *data);
-void	pwd_builtin(t_mini *data);
-void	unset_builtin(t_mini *data);
+void	cd_builtin(t_cmd *cmd, t_mini *data);
+void	echo_builtin(t_cmd *cmd, t_mini *data);
+void	env_builtin(t_cmd *cmd, t_mini *data);
+void	exit_builtin(t_cmd *cmd, t_mini *data);
+void	export_builtin(t_cmd *cmd, t_mini *data);
+void	pwd_builtin(t_cmd *cmd, t_mini *data);
+void	unset_builtin(t_cmd *cmd, t_mini *data);
 
 #endif

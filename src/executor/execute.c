@@ -6,12 +6,32 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/16 12:56:14 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 08:59:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
+void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
+{
+	printf("cmd->cmd[0] = %s\n", cmd_data->cmd[0]);
+	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
+		return (echo_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
+		return (pwd_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "unset", 6) == 0)
+		return (unset_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "exit", 5) == 0)
+		return (exit_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "cd", 3) == 0)
+		return (cd_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "export", 7) == 0)
+		return (export_builtin(cmd_data, mini_data)) ;
+	if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
+		return (env_builtin(cmd_data, mini_data)) ;
+	return ; //should return error?
+}
 /**
 	* Child process (not built-in)
 	* Calls functions to open all in and out files.
@@ -21,8 +41,10 @@
 	* @param *in_files: the first in_file of the current command;
 	* @return the fd of the last file (which should be the infile used)
 */
-void	child_process(*t_cmd *cmd, char **envp)
+void	child_process(t_cmd *cmd, char **envp)
 {
+	(void) envp;
+	(void) cmd;
 	// int	in_fd;
 
 		
@@ -40,16 +62,15 @@ void	child_process(*t_cmd *cmd, char **envp)
 */
 void	execute_cmds(t_mini *data)
 {
-	t_cmd	*cmd;
+	t_cmd	*cmd_data;
 	t_exec	*exec;
 
 	exec = ft_calloc(sizeof(t_exec), 1);
-	cmd = data->cmds;
-	while (cmd)
+	cmd_data = data->cmds;
+	while (cmd_data)
 	{
-		// check if no pipes and builtin (you don't want to do a cd in
-		// a child if no pipes as it won't work), with pipes it should
-		// be done in the child
+		if (data->cmd_count == 1 && is_builtin(cmd_data->cmd[0]))
+			execute_builtin(cmd_data, data);
 		if(pipe(exec->pipe_fd) == -1)
 			error_exit(strerror(errno), 1);
 		exec->pid = fork();
@@ -57,13 +78,13 @@ void	execute_cmds(t_mini *data)
 			error_exit(strerror(errno), 1);
 		if (exec->pid == 0)
 		{
-			//if(is_builtin(cmd->cmd[0]))
-			//		do builtins
-			//else
-			child_process(cmd, data->envp);
+			if(is_builtin(cmd_data->cmd[0]))
+				execute_builtin(cmd_data, data);
+			else
+				child_process(cmd_data, data->envp);
 		}
 		wait_for_cmd(data, exec->pid);
-		cmd = cmd->next;
+		cmd_data = cmd_data->next;
 	}
 	free(exec);
 }
