@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 10:16:17 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 10:58:54 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	echo_builtin(t_cmd *cmd, t_mini *data);
 void	env_builtin(t_cmd *cmd, t_mini *data);
 void	exit_builtin(t_cmd *cmd, t_mini *data);
 void	export_builtin(t_cmd *cmd, t_mini *data);
-void	pwd_builtin(t_cmd *cmd, t_mini *data);
+void	pwd_builtin(t_mini *mini_data);
 void	unset_builtin(t_cmd *cmd, t_mini *data);
 
 #endif

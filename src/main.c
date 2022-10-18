@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 10:35:31 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:00:46 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	main(int argc, char **argv)
 	}
 	mini = NULL;
 	
-	echo_builtin(cmd, mini);
+	pwd_builtin(mini);
 	return (0);
 }

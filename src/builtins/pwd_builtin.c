@@ -6,16 +6,29 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:36 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 08:51:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:03:16 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <unistd.h>
 
-void	pwd_builtin(t_cmd *cmd, t_mini *data)
+/**
+	* Gets the Current Working Directory with getcwd and prints it to STDOUT
+	* @param *mini_data: minishell data, used to set the exit_code;
+	* @return VOID
+*/
+void	pwd_builtin(t_mini *mini_data)
 {
-	(void) data;
-	(void) cmd;
-	printf("pwd baby :D\n");
+	//make sure to set the error code pls
+	(void)	mini_data;
+	char	*pwd_str;
+
+	pwd_str = getcwd(NULL, 0);
+	if (pwd_str)
+	{
+		printf("%s\n", pwd_str);
+		free(pwd_str);
+	}
 	return ;
 }

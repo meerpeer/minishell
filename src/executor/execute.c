@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 10:12:57 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:02:21 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
 	printf("cmd->cmd[0] = %s\n", cmd_data->cmd[0]);
 	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
-		return (echo_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
-		return (pwd_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "unset", 6) == 0)
-		return (unset_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "exit", 5) == 0)
-		return (exit_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "cd", 3) == 0)
-		return (cd_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "export", 7) == 0)
-		return (export_builtin(cmd_data, mini_data)) ;
-	if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
-		return (env_builtin(cmd_data, mini_data)) ;
+		echo_builtin(cmd_data, mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
+		pwd_builtin(mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "unset", 6) == 0)
+		unset_builtin(cmd_data, mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "exit", 5) == 0)
+		exit_builtin(cmd_data, mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "cd", 3) == 0)
+		cd_builtin(cmd_data, mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "export", 7) == 0)
+		export_builtin(cmd_data, mini_data);
+	else if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
+		env_builtin(cmd_data, mini_data);
 	return ; //should return error?
 }
 /**
@@ -60,7 +60,6 @@ void	child_process(t_cmd *cmd, char **envp)
 	* @param *data: minishell data;
 	* @return VOID
 */
-
 void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
 	int		pipe_fds[2];
