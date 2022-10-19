@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 11:02:21 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:41:35 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 	* @param *in_files: the first in_file of the current command;
 	* @return the fd of the last file (which should be the infile used)
 */
-void	child_process(t_cmd *cmd, char **envp)
+void	child_process(t_cmd *cmd, char **env)
 {
-	(void) envp;
+	(void) env;
 	(void) cmd;
 	// int	in_fd;
 
 		
-	// if (execve(cmd->path, cmd->cmd, envp ) == -1)
+	// if (execve(cmd->path, cmd->cmd, env ) == -1)
 	// {
 	// 	perror(0);
 	// 	exit(1);
@@ -75,7 +75,7 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 		if(is_builtin(cmd_data->cmd[0]))
 			execute_builtin(cmd_data, mini_data);
 		else
-			child_process(cmd_data, mini_data->envp);
+			child_process(cmd_data, mini_data->env);
 	}
 	//dup2(pipe)
 	wait_for_cmd(mini_data, pid);

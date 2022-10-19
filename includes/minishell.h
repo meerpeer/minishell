@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 10:58:54 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:54:37 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_file	t_file;
 */
 typedef struct s_mini {
 	t_cmd	*cmds;
-	char	**envp; // I'll need these to get the path for the commands
+	char	**env; // I'll need these to get the path for the commands
 	int		cmd_count; // to see how many pipes there are
 	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
 	int		exit_status; //will take the exit status off the last child process :)
@@ -90,7 +90,10 @@ typedef struct s_exec {
 void	error_exit(char *message, int errorCode);
 
 //init
-void	init_mini_data(t_mini *data);
+void	init_mini_data(t_mini *data, char **env);
+
+//environment variables
+int	get_count_env_vars(char **env);
 
 //execute
 int		open_infiles(t_file *in_files);
