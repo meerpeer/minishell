@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 11:54:37 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:10:54 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 
-# define READ_END = 0;
-# define WRITE_END = 1;
-# define PROMPT = "minishell$ ";
+# define READ_END 0
+# define WRITE_END 1
+# define PROMPT "minishell$ "
 
 struct s_mini;
 struct s_cmd;
@@ -44,6 +44,7 @@ typedef struct s_mini {
 	int		cmd_count; // to see how many pipes there are
 	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
 	int		exit_status; //will take the exit status off the last child process :)
+	pid_t	last_pid;
 	int		std_backup[2];
 }				t_mini;
 
@@ -74,7 +75,7 @@ typedef struct s_cmd {
 	t_file	*in_files;
 	t_file	*out_files;
 	char	*cmd_path;
-	int		fd_int;
+	int		fd_in;
 	int		fd_out;
 	int		cmd_index;
 	t_cmd	*next;
@@ -96,13 +97,14 @@ void	init_mini_data(t_mini *data, char **env);
 int	get_count_env_vars(char **env);
 
 //execute
-int		open_infiles(t_file *in_files);
-int		open_outfiles(t_cmd *cmd);
-void	redirect_in(t_cmd *cmd, t_mini *data);
-void	close_unused_fds();
+void	backup_std_in_and_out(int backup[2]);
+void	restore_std_in_and_out(int backup[2]);
+void	redirect_in(int *fd_in, t_file *in_files);
+void	redirect_out(int *fd_out, t_file *out_files, int pipe_write);
+void	save_read_fd(t_cmd *current_command, int pipe_read_end);
 bool	is_builtin(char *cmd);
 void	execute_cmds(t_mini *data);
-void	wait_for_cmd(t_mini *data, pid_t pid);
+void	wait_for_cmds(int *exit_status, pid_t pid);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //builtins

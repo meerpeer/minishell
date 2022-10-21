@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/14 11:07:23 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:12:52 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,56 @@
 	* @param *in_files: the first in_file of the current command;
 	* @return the fd of the last file (which should be the infile used)
 */
-int	open_infiles(t_file *in_files)
+void	open_files(int *fd_to_change, t_file *file_list)
 {
 	t_file	*file;
 	int		last_fd;
 
 	last_fd = 0;
-	file = in_files;
+	file = file_list;
 	while (file)
 	{
+		if(last_fd != 0)
+			close (last_fd);
 		if (file->file_type == INPUT)
-		{
-			if(last_fd != 0)
-				close (last_fd);
 			last_fd = open(file->file_name, O_RDONLY);
-			if (last_fd < 0)
-				error_exit(0, errno);
-		}
+		else if (file->file_type == OUTPUT_APPEND)
+			open(file->file_name, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		else if (file->file_type == OUTPUT_TRUNC)
+			open(file->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (last_fd < 0)
+			return (perror(file->file_name), error_exit(NULL , 1));
+		*fd_to_change = last_fd;
 		file = file->next;
 	}
-	return (last_fd);
 }
-
-int	open_outfiles(t_cmd *cmd)
-{
-	(void) cmd;
-	return (1);
-}
-
-//open out files
-//every command can have multiple out files
-//exit on fail
 
 //redirect in files
-//check re
-void	redirect_in(t_cmd *cmd, t_mini *data)
+void	redirect_in(int *fd_in, t_file *in_files)
 {
-	(void) cmd;
-	(void) data;
-	
+	open_files(fd_in, in_files);
+	if (*fd_in)
+	{
+		if (dup2(*fd_in, STDIN_FILENO) == -1)
+			perror("dup2");
+		close(*fd_in);
+	}
 }
 
 //redirect out files
-
-//close all fds
-void	close_unused_fds()
+void	redirect_out(int *fd_out, t_file *out_files, int pipe_write)
 {
-	return ;
+	open_files(fd_out, out_files);
+	if (*fd_out > 0)
+	{
+		if (dup2(*fd_out, STDOUT_FILENO) == -1)
+			perror("dup2");
+		close(*fd_out);
+	}
+	else
+	{
+		if (dup2(pipe_write, STDOUT_FILENO) == -1)
+			perror("dup2");
+	}
+	close(pipe_write);
 }
