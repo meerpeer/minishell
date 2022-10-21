@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:11:02 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:10:40 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 	* @param *in_files: the first in_file of the current command;
 	* @return the fd of the last file (which should be the infile used)
 */
-void	child_process(t_cmd *cmd, char **env, int pipe_fds[2])
+void	child_process(t_cmd *cmd, t_mini *mini_data)
 {
-	(void) env;
-	
+	extern char **environ;
+
 	redirect_in(&cmd->fd_in, cmd->in_files);
-	redirect_out(&cmd->fd_out, cmd->out_files, pipe_fds[WRITE_END]);
-	//get cmd path
-	if (execve(cmd->cmd_path, cmd->cmd, env) == -1)
+	redirect_out(cmd, mini_data);
+	cmd->cmd_path = get_cmd_path(cmd->cmd[0], environ);
+	if (execve(cmd->cmd_path, cmd->cmd, environ) == -1)
 	{
-		perror("minishell :");
+		perror(NULL);
 		exit (1);
 	}
 }
@@ -62,10 +62,9 @@ void	child_process(t_cmd *cmd, char **env, int pipe_fds[2])
 */
 void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
-	int		pipe_fds[2];
 	pid_t	pid;
 	
-	if(pipe(pipe_fds) == -1)
+	if(pipe(cmd_data->pipe_fd) == -1)
 		error_exit(strerror(errno), 1);
 	pid = fork();
 	mini_data->last_pid = pid;
@@ -76,11 +75,11 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 		if(is_builtin(cmd_data->cmd[0]))
 			execute_builtin(cmd_data, mini_data);
 		else
-			child_process(cmd_data, mini_data->env, pipe_fds);
+			child_process(cmd_data, mini_data);
 	}
-	close (pipe_fds[WRITE_END]);
-	save_read_fd(cmd_data, pipe_fds[READ_END]);
-	close (pipe_fds[READ_END]);
+	close (cmd_data->pipe_fd[WRITE_END]);
+	save_read_fd(cmd_data, cmd_data->pipe_fd[READ_END]);
+	close (cmd_data->pipe_fd[READ_END]);
 	return ;
 }
 

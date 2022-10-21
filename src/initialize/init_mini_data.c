@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 11:55:36 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:01:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ char	**copy_env(char **env)
 
 void	init_mini_data(t_mini *data, char **env)
 {
+	//data = ft_calloc(1, sizeof(t_mini *));
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;
-	data->env = copy_env(env);
+	data->env = env; //actually copy it myself?
 	//set SHLVL++;
 	return ;
 }

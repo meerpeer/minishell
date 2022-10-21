@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:10:54 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:45:08 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_cmd {
 	t_file	*in_files;
 	t_file	*out_files;
 	char	*cmd_path;
+	int		pipe_fd[2];
 	int		fd_in;
 	int		fd_out;
 	int		cmd_index;
@@ -100,10 +101,11 @@ int	get_count_env_vars(char **env);
 void	backup_std_in_and_out(int backup[2]);
 void	restore_std_in_and_out(int backup[2]);
 void	redirect_in(int *fd_in, t_file *in_files);
-void	redirect_out(int *fd_out, t_file *out_files, int pipe_write);
+void	redirect_out(t_cmd *cmd, t_mini *mini_data);
 void	save_read_fd(t_cmd *current_command, int pipe_read_end);
 bool	is_builtin(char *cmd);
 void	execute_cmds(t_mini *data);
+char	*get_cmd_path(char *cmd, char **envp);
 void	wait_for_cmds(int *exit_status, pid_t pid);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
