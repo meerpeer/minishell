@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:17:31 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:26:27 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	init_placeholder_data(t_mini *data)
 	t_cmd	*cmd2;
 	t_cmd	*cmd1;
 	
-	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, out_files1, 2);
-	cmd2 = create_placeholder_cmd("ls", NULL, cmd3, in_files2, NULL, 1);
-	cmd1 = create_placeholder_cmd("cat", NULL, cmd2, in_files1, NULL, 0);
+	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
+	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
+	cmd1 = create_placeholder_cmd("ls", NULL, cmd2, in_files1, NULL, 0);
 	init_mini_data(data, environ);
 	data->cmds = cmd1;
 	data->cmd_count = 3;

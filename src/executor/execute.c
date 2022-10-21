@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:10:40 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:25:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	close (cmd_data->pipe_fd[WRITE_END]);
 	save_read_fd(cmd_data, cmd_data->pipe_fd[READ_END]);
 	close (cmd_data->pipe_fd[READ_END]);
+	if (cmd_data->cmd_index > 0)
+		close (cmd_data->fd_out);
 	return ;
 }
 
