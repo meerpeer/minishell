@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:26:27 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:38:08 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,14 @@ int	main()
 {
 	t_mini mini;
 	extern char **environ;
+	int	i = 0;
 
 	init_placeholder_data(&mini);
-	execute_cmds(&mini);
+	//execute_cmds(&mini);
+	while(mini.env[i])
+	{
+		printf("%s\n",mini.env[i]);
+		i++;
+	}
 	return (0);
 }

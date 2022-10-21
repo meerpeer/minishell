@@ -6,12 +6,34 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:01:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/21 16:04:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+	* Should increment the shell level (SHLVL) in the environment variables. 
+	* If there is none, it should be created!
+	* @param *env environment variables from the main env;
+	* @return the copied environment variables!
+*/
+void	update_shell_level(char **env)
+{
+	char	*sh_lvl_var;
+	char	*temp;
+	int		i;
+
+	sh_lvl_var = get_env_var(env, "SHLVL");
+	if (!sh_lvl_var)
+		temp
+}
+
+/**
+	* Copies the environment variables so we can use and manipulate them.
+	* @param *env environment variables from the main env;
+	* @return the copied environment variables!
+*/
 char	**copy_env(char **env)
 {
 	int		i;
@@ -28,6 +50,7 @@ char	**copy_env(char **env)
 			return (NULL); // again error exit "environment copy failed"
 		i++;
 	}
+	copy_env[i] = NULL;
 	return (copy_env);
 }
 
@@ -37,7 +60,7 @@ void	init_mini_data(t_mini *data, char **env)
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;
-	data->env = env; //actually copy it myself?
+	data->env = copy_env(env);
 	//set SHLVL++;
 	return ;
 }
