@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/14 13:00:41 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 12:11:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ void	error_exit(char *message, int errorCode)
 	// just make sure to create one string before using write to? or not, be fast.
 	// make it thread safe
 	exit (errorCode);
+}
+
+void	*protect_check(void *ptr)
+{
+	if (ptr == NULL)
+		error_exit("memory allocation failed", 1);
+	return (ptr);
 }

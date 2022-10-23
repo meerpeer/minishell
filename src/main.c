@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:38:08 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 14:15:53 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_cmd	*create_placeholder_cmd(char *cmd, char *options, t_cmd *next, t_file *in_
 
 void	init_placeholder_data(t_mini *data)
 {
-	extern char **environ;
 	t_file	*in_files1 = NULL; //create_placeholder_file_list("Makefile", ".gitignore", true);
 	t_file	*in_files2 = NULL;
 	t_file	*out_files1 = create_placeholder_file_list("outfile", "out", false);
@@ -75,7 +74,6 @@ void	init_placeholder_data(t_mini *data)
 	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
 	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
 	cmd1 = create_placeholder_cmd("ls", NULL, cmd2, in_files1, NULL, 0);
-	init_mini_data(data, environ);
 	data->cmds = cmd1;
 	data->cmd_count = 3;
 }
@@ -118,18 +116,34 @@ int	prompt_loop()
 // 	return (0);
 // }
 
+void	f()
+{
+	system("leaks -q minishell");
+}
+
 int	main()
 {
-	t_mini mini;
-	extern char **environ;
+	t_mini *mini;
 	int	i = 0;
 
-	init_placeholder_data(&mini);
+	atexit(f);
+
+//	init_placeholder_data(&mini);
+	mini = init_mini_data();
 	//execute_cmds(&mini);
-	while(mini.env[i])
+	//set_key_value(mini.env, "TERM", "200");
+	//set_key_value(mini.env, "PWD", "kaasbroodje");
+	//printf("%s\n", get_env_var_value(mini.env, "SHLVL"));
+	env_builtin(mini);
+//	mini = init_mini_data();
+printf("INIT COMPLETe\n");
+//	env_builtin(mini);
+	while (mini->env[i])
 	{
-		printf("%s\n",mini.env[i]);
+		free(mini->env[i]);
 		i++;
 	}
+	free(mini->env);
+	free(mini);
 	return (0);
 }

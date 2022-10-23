@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:25:00 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 13:35:12 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 	else if (ft_strncmp(cmd_data->cmd[0], "export", 7) == 0)
 		export_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
-		env_builtin(cmd_data, mini_data);
+		env_builtin(mini_data);
 	return ; //should return error?
 }
 /**

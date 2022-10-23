@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 12:03:14 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 14:14:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@
 void	update_shell_level(char **env)
 {
 	char	*sh_lvl_var;
-//	char	*temp;
-//	int		i;
+	//int		i;
 
-	sh_lvl_var = get_env_var(env, "SHLVL");
-	// if (!sh_lvl_var)
-	// 	temp
+	sh_lvl_var = get_env_var_value(env, "SHLVL");
+	if (!sh_lvl_var)
+		new_env_entry(&env, "SHLVL", "1");
 }
 
 /**
@@ -34,33 +33,35 @@ void	update_shell_level(char **env)
 	* @param *env environment variables from the main env;
 	* @return the copied environment variables!
 */
-char	**copy_env(char **env)
+char	**copy_env()
 {
-	int		i;
-	char	**copy_env;
-
+	int			i;
+	extern char	**environ;
+	char		**copy_env;
+	
 	i = 0;
-	copy_env = ft_calloc(get_count_env_vars(env) + 1, sizeof(char **));
+	copy_env = ft_calloc(get_count_env_vars(environ) + 1, sizeof(char *));
 	if (!copy_env)
-		return (NULL); // error exit. "environment copy failed"
-	while(env[i])
+		error_exit("environment variable copy failed", 1);
+	while(environ[i])
 	{
-		copy_env[i] = ft_strdup(env[i]);
-		if (!copy_env[i])
-			return (NULL); // again error exit "environment copy failed"
+		copy_env[i] = protect_check(ft_strdup(environ[i]));
 		i++;
 	}
 	copy_env[i] = NULL;
 	return (copy_env);
 }
 
-void	init_mini_data(t_mini *data, char **env)
+t_mini	*init_mini_data(void)
 {
-	//data = ft_calloc(1, sizeof(t_mini *));
+	t_mini	*data;
+
+	data = ft_calloc(1, sizeof(t_mini *));
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;
-	data->env = copy_env(env);
-	//set SHLVL++;
-	return ;
+	data->env = copy_env();
+
+	//printf("JUST TRYING SOMETHING: %s\n\n", data->env[0]);
+	return (data);
 }
