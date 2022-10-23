@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 16:02:45 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 12:01:55 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	init_mini_data(t_mini *data, char **env);
 //environment variables
 int		get_count_env_vars(char **env);
 char	*get_env_var(char **env, char *key);
+void	new_env_entry(char ***env, char *key);
+void	delete_env_entry(char **env, char *key);
 
 //execute
 void	backup_std_in_and_out(int backup[2]);

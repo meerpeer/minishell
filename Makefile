@@ -12,7 +12,7 @@ SRC_FILES = main.c \
 			builtins/cd_builtin.c builtins/echo_builtin.c builtins/env_builtin.c\
 			builtins/exit_builtin.c builtins/export_builtin.c\
 			builtins/pwd_builtin.c builtins/unset_builtin.c\
-			environment/env_gets.c\
+			environment/env_gets.c environment/env_change.c\
 			error/error.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

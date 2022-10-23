@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 16:04:00 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/23 12:03:14 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 void	update_shell_level(char **env)
 {
 	char	*sh_lvl_var;
-	char	*temp;
-	int		i;
+//	char	*temp;
+//	int		i;
 
 	sh_lvl_var = get_env_var(env, "SHLVL");
-	if (!sh_lvl_var)
-		temp
+	// if (!sh_lvl_var)
+	// 	temp
 }
 
 /**
