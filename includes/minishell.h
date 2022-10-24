@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 09:15:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 14:06:21 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	set_key_value(char **env, char *key, char *value);
 int		get_env_var_index(char **env, char *key);
 char	*join_3_strings(char *s1, char *s2, char *s3);
 bool	key_exists(char **env, char *key);
+char	*get_key_from_full_env_var(char *full_str);
+char	*get_value_from_full_env_var(char *full_str);
 
 //execute
 void	backup_std_in_and_out(int backup[2]);

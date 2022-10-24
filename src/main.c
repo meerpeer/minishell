@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 09:14:14 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 11:27:20 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ t_cmd	*create_placeholder_cmd(char *cmd, char *options, t_cmd *next, t_file *in_
 void	init_placeholder_data(t_mini *data)
 {
 	t_file	*in_files1 = NULL; //create_placeholder_file_list("Makefile", ".gitignore", true);
-	t_file	*in_files2 = NULL;
-	t_file	*out_files1 = create_placeholder_file_list("outfile", "out", false);
-	t_cmd	*cmd3;
-	t_cmd	*cmd2;
+//	t_file	*in_files2 = NULL;
+//	t_file	*out_files1 = create_placeholder_file_list("outfile", "out", false);
+//	t_cmd	*cmd3;
+//	t_cmd	*cmd2;
 	t_cmd	*cmd1;
 	
-	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
-	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
-	cmd1 = create_placeholder_cmd("ls", NULL, cmd2, in_files1, NULL, 0);
+//	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
+//	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
+	cmd1 = create_placeholder_cmd("export", NULL, NULL, in_files1, NULL, 0);
 	data->cmds = cmd1;
-	data->cmd_count = 3;
+	data->cmd_count = 1;
 }
 
 int	prompt_loop()
@@ -132,8 +132,8 @@ int	main()
 
 	mini = init_mini_data();
 	init_placeholder_data(mini);
-	//execute_cmds(&mini);
-	env_builtin(mini);
+	execute_cmds(mini);
+//	env_builtin(mini);
 	//unset_builtin()
 //	mini = init_mini_data();
 //	env_builtin(mini);
