@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:22 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 08:03:56 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:05:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ void	env_builtin(t_mini *mini_data)
 		free(all_env);
 		all_env = protect_check(ft_strdup(join));
 		free (join);
-		// if (all_env)
-		// {
-		// 	join = protect_check(ft_strjoin(all_env, mini_data->env[i]));
-		// 	free(all_env);
-		// 	all_env = protect_check(ft_strdup(join));
-		// 	free(join);
-		// }
-		// else
-		// 	all_env = protect_check(ft_strdup(mini_data->env[i]));
-		// join = protect_check(ft_strjoin(all_env, "\n"));
-		// free(all_env);
-		// all_env = protect_check(ft_strdup(join));
-		// free (join);
 		i++;
 	}
 	printf("%s", all_env);

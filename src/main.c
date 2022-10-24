@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 14:15:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:09:30 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ int	main()
 //	init_placeholder_data(&mini);
 	mini = init_mini_data();
 	//execute_cmds(&mini);
-	//set_key_value(mini.env, "TERM", "200");
-	//set_key_value(mini.env, "PWD", "kaasbroodje");
+	set_key_value(mini->env, "TERM", "200");
+	set_key_value(mini->env, "PWD", "kaasbroodje");
+	set_key_value(mini->env, "SHLVL", "200");
 	//printf("%s\n", get_env_var_value(mini.env, "SHLVL"));
+	
 	env_builtin(mini);
 //	mini = init_mini_data();
 printf("INIT COMPLETe\n");

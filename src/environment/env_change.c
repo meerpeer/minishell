@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/23 11:41:05 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 14:24:12 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:08:08 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,15 @@ void	delete_env_entry(char **env, char *key)
 void	set_key_value(char **env, char *key, char *value)
 {
 	int		i;
-	char	*key_equals;
-	char	*new_value;
+	char	*new_entry;
 
 	i = get_env_var_index(env, key);
 	if (i == -1)
 		return ; //means key not found
-	key_equals = protect_check(ft_strjoin(key, "="));
-	printf("key_equals = %s\n", key_equals);
-	free (key_equals);
-//	return ;
-	new_value = protect_check(ft_strjoin(key_equals, value));
-	env[i] = (char *)protect_check(ft_strdup(new_value));
-	free (new_value);
+	new_entry = join_3_strings(key, "=", value);
+	free (env[i]);
+	env[i] = (char *)protect_check(ft_strdup(new_entry));
+	free (new_entry);
 	return ; // REMOVE ME
 }
 
