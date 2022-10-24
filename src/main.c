@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 08:37:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 09:14:14 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ t_file	*create_placeholder_file_list(char *first, char *second, bool are_infiles
 	else
 		first_file->file_type = OUTPUT_TRUNC;
 	first_file->next = second_file;
-
 	second_file->file_name = ft_strdup(second);
 	if (are_infiles)
 		second_file->file_type = INPUT;
 	else
 		second_file->file_type = OUTPUT_TRUNC;
 	second_file->next = NULL;
-	
 	return (first_file);
 }
 
@@ -116,43 +114,30 @@ int	prompt_loop()
 // 	return (0);
 // }
 
+
+
 void	f()
 {
+	printf("\n\n----\n\n");
 	system("leaks -q minishell");
+	printf("\n\n----\n\n");
+	return ;
 }
 
 int	main()
 {
 	t_mini *mini;
-	int	i = 0;
 
 	atexit(f);
 
-//	init_placeholder_data(&mini);
 	mini = init_mini_data();
+	init_placeholder_data(mini);
 	//execute_cmds(&mini);
 	env_builtin(mini);
-	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
-	delete_env_entry(mini->env, "SHLVL");
-	//printf("%s\n", get_env_var_value(mini.env, "SHLVL"));
-	
-	env_builtin(mini);
-	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
-	delete_env_entry(mini->env, "SHLVL");
-	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
-	set_key_value(mini->env, "TERM", "kaas");
-	delete_env_entry(mini->env, "PWD");
-	env_builtin(mini);
-	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
+	//unset_builtin()
 //	mini = init_mini_data();
-printf("INIT COMPLETe\n");
 //	env_builtin(mini);
-	while (mini->env[i])
-	{
-		free(mini->env[i]);
-		i++;
-	}
-	free(mini->env);
-	free(mini);
+	free_mini_data(mini);
+
 	return (0);
 }

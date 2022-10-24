@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 14:32:38 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 09:15:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ typedef struct s_exec {
 void	error_exit(char *message, int errorCode);
 void	*protect_check(void *ptr);
 
+//clean
+void	free_mini_data(t_mini	*mini);
+
 //init
 t_mini	*init_mini_data(void);
 
@@ -103,6 +106,7 @@ void	delete_env_entry(char **env, char *key);
 void	set_key_value(char **env, char *key, char *value);
 int		get_env_var_index(char **env, char *key);
 char	*join_3_strings(char *s1, char *s2, char *s3);
+bool	key_exists(char **env, char *key);
 
 //execute
 void	backup_std_in_and_out(int backup[2]);
@@ -123,6 +127,6 @@ void	env_builtin(t_mini *mini_data);
 void	exit_builtin(t_cmd *cmd, t_mini *data);
 void	export_builtin(t_cmd *cmd, t_mini *data);
 void	pwd_builtin(t_mini *mini_data);
-void	unset_builtin(t_cmd *cmd, t_mini *data);
+void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 #endif
