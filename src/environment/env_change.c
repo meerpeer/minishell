@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/23 11:41:05 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 08:08:08 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:35:27 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,25 @@
 */
 void	delete_env_entry(char **env, char *key)
 {
-	int	i;
+	int		i;
 
-	i = 0;
 	if (!env || !key)
 		return ;
-	while (env[i])
+	i = get_env_var_index(env, key);
+	if (i == -1)
+		return ;
+	free (env[i]);
+	while (env[i + 1])
 	{
-		if (ft_strncmp(env[i], key, ft_strlen(key)))
-		{
-			free (env[i]);
-			break ;
-		}
-		i++;
-	}
-	while (env[i] && env[i + 1])
-	{
-		env[i] = protect_check(ft_strdup(env[i + 1]));
+		env[i] = env[i + 1];
 		i++;
 	}
 	env[i] = NULL;
 }
 
 /**
-	* Changes the value of a key if it exists
+	* Changes the value of a key if it exists. 
+	* If the key doesn't exist, it returns without setting anything.
 	* @param env the environment variables
 	* @param key the existing name of the variable
 	* @param value the new value of the variable
@@ -58,12 +53,12 @@ void	set_key_value(char **env, char *key, char *value)
 
 	i = get_env_var_index(env, key);
 	if (i == -1)
-		return ; //means key not found
+		return ;
 	new_entry = join_3_strings(key, "=", value);
 	free (env[i]);
 	env[i] = (char *)protect_check(ft_strdup(new_entry));
 	free (new_entry);
-	return ; // REMOVE ME
+	return ;
 }
 
 /**
@@ -79,7 +74,7 @@ void	new_env_entry(char ***env, char *key, char *value)
 	int		i;
 	int		original_size;
 	char	**new_env;
-(void) value;
+
 	//add check to see if exists
 	original_size = get_count_env_vars(*env);
 	new_env = protect_check(ft_calloc(original_size + 1, sizeof(char **)));

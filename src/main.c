@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 08:09:30 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:37:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,19 @@ int	main()
 //	init_placeholder_data(&mini);
 	mini = init_mini_data();
 	//execute_cmds(&mini);
-	set_key_value(mini->env, "TERM", "200");
-	set_key_value(mini->env, "PWD", "kaasbroodje");
-	set_key_value(mini->env, "SHLVL", "200");
+	env_builtin(mini);
+	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
+	delete_env_entry(mini->env, "SHLVL");
 	//printf("%s\n", get_env_var_value(mini.env, "SHLVL"));
 	
 	env_builtin(mini);
+	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
+	delete_env_entry(mini->env, "SHLVL");
+	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
+	set_key_value(mini->env, "TERM", "kaas");
+	delete_env_entry(mini->env, "PWD");
+	env_builtin(mini);
+	printf("\n\n----count = %i------\n\n", get_count_env_vars(mini->env));
 //	mini = init_mini_data();
 printf("INIT COMPLETe\n");
 //	env_builtin(mini);
