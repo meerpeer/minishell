@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:22 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 14:34:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 08:03:56 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	env_builtin(t_mini *mini_data)
 	char	*all_env;
 	char	*join;
 
-	i = 0;
 	join = NULL;
-	all_env = NULL;
+	all_env = protect_check(ft_strdup(mini_data->env[0]));
+	i = 1;
 	while(mini_data->env[i])
 	{
 		join = join_3_strings(all_env, mini_data->env[i], "\n");
 		free(all_env);
-		all_env = join;
+		all_env = protect_check(ft_strdup(join));
 		free (join);
 		// if (all_env)
 		// {
