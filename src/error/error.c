@@ -6,13 +6,23 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 12:11:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 14:31:52 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
+
+
+void	print_error(char *s1, char *s2, char *s3)
+{
+	char	*combined_string;
+
+	combined_string = join_3_strings(s1, s2, s3);
+	printf("s\n", combined_string);
+}
+
+/**
 	* Function that displays "minishell: +message" message and returns with
 	* the errorCode. Used when error occurs in child process;
 	* @param *message: a possible message to be printed after "minishell: "

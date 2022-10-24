@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 14:15:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/24 14:24:48 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,15 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 			{
 				key = get_key_from_full_env_var(to_export[i]);
 				value = get_value_from_full_env_var(to_export[i]);
-				if (!key_exists)
+				if (key_exists(data->env, key))
 					set_key_value(data->env, key, value);
 				else
 					new_env_entry(data->env, key, value);
 				free (key);
 			}
+			else
+				
+				//print an error
 			i++;
 		}
 	}
