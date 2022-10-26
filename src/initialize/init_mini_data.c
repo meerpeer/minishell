@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 08:57:17 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 14:16:03 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,22 @@
 */
 void	update_shell_level(char **env)
 {
-	char	*sh_lvl_var;
-	//int		i;
+	char	*old_value;
+	char	*new_value;
+	int		converted_value;
 
-	sh_lvl_var = get_env_var_value(env, "SHLVL");
-	if (!sh_lvl_var)
+	if (!key_exists(env, "SHLVL"))
 		add_new_env_entry(&env, "SHLVL", "1");
+	else
+	{
+		old_value = get_env_var_value(env, "SHLVL");
+		converted_value = ft_atoi(old_value);
+		converted_value++;
+		printf("new level = %i\n", converted_value);
+		new_value = protect_check(ft_itoa(converted_value));
+		set_key_value(env, "SHLVL", new_value);
+		free(new_value);
+	}
 }
 
 /**
@@ -49,6 +59,7 @@ char	**copy_env()
 		i++;
 	}
 	copy_env[i] = NULL;
+	update_shell_level(copy_env);
 	return (copy_env);
 }
 

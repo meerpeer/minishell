@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 11:49:28 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 13:59:06 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ void	print_export(char **env)
 	int	j;
 
 	i = 0;
-	printf("trying to print export\n");
 	while (env[i])
 	{
 		j = 0;
-		printf("---env[%i] = %s----\n", i, env[i]);
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		print_export_key(env[i]);
 		try_print_export_value(env[i]);
@@ -89,7 +87,6 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 			{
 				key = get_key_from_full_env_var(to_export[i]);
 				value = get_value_from_full_env_var(to_export[i]);
-				printf("value = %s\n", value);
 				if (key_exists(data->env, key))
 					set_key_value(data->env, key, value);
 				else

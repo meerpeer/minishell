@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 10:47:16 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 14:00:05 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	backup_std_in_and_out(int backup[2])
 
 void	restore_std_in_and_out(int backup[2])
 {
-	printf("restoring\n");
 	if (dup2(backup[READ_END], STDIN_FILENO) == -1)
 		return (perror("dup2"), error_exit(NULL, 1));
 	if (dup2(backup[WRITE_END], STDOUT_FILENO) == -1)

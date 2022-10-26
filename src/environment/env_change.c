@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/23 11:41:05 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 11:50:57 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 14:15:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,12 @@ void	set_key_value(char **env, char *key, char *value)
 	int		i;
 	char	*new_entry;
 
-	printf("setting %s to value: %s\n", key, value);
 	i = get_env_var_index(env, key);
-	printf("env index = %i\n", i);
 	if (i == -1)
 		return ;
 	new_entry = join_3_strings(key, "=", value);
 	free (env[i]);
 	env[i] = (char *)protect_check(ft_strdup(new_entry));
-	printf("env[i] = %s\n", env[i]);
 	free (new_entry);
 	return ;
 }
@@ -82,13 +79,12 @@ void	add_new_env_entry(char ***env, char *key, char *value)
 
 	old_env = *env;
 	original_size = get_count_env_vars(old_env);
-	new_env = protect_check(ft_calloc(original_size + 1, sizeof(char **)));
+	new_env = protect_check(ft_calloc(original_size + 2, sizeof(char **)));
 	i = 0;
 	while (old_env[i])
 	{
 		new_env[i] = protect_check(ft_strdup(old_env[i]));
 		free(old_env[i]);
-		printf ("---- new_env[%i] = %s\n", i, new_env[i]);
 		i++;
 	}
 	new_env[i] = protect_check(ft_strjoin(key, "="));
