@@ -6,18 +6,11 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:22 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 13:48:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 11:15:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	is_variable_set(char *env_variable)
-{
-	if (ft_strchr(env_variable, '='))
-		return (true);
-	return (false);
-}
 
 void	env_builtin(t_mini *mini_data)
 {
@@ -40,6 +33,7 @@ void	env_builtin(t_mini *mini_data)
 		i++;
 	}
 	printf("%s", all_env);
-	free (all_env);
+	if (all_env)
+		free (all_env);
 	return ;
 }

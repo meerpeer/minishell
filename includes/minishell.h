@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 14:06:21 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 11:15:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	*protect_check(void *ptr);
 
 //clean
 void	free_mini_data(t_mini	*mini);
+void	free_cmds(t_cmd	**cmds);
 
 //init
 t_mini	*init_mini_data(void);
@@ -101,7 +102,7 @@ t_mini	*init_mini_data(void);
 //environment variables
 int		get_count_env_vars(char **env);
 char	*get_env_var_value(char **env, char *key);
-void	new_env_entry(char ***env, char *key, char *value);
+void	add_new_env_entry(char ***env, char *key, char *value);
 void	delete_env_entry(char **env, char *key);
 void	set_key_value(char **env, char *key, char *value);
 int		get_env_var_index(char **env, char *key);
@@ -109,6 +110,7 @@ char	*join_3_strings(char *s1, char *s2, char *s3);
 bool	key_exists(char **env, char *key);
 char	*get_key_from_full_env_var(char *full_str);
 char	*get_value_from_full_env_var(char *full_str);
+bool	is_variable_set(char *env_variable);
 
 //execute
 void	backup_std_in_and_out(int backup[2]);

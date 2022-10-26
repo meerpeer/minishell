@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 11:27:20 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 11:55:33 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_placeholder_data(t_mini *data)
 	
 //	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
 //	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
-	cmd1 = create_placeholder_cmd("export", NULL, NULL, in_files1, NULL, 0);
+	cmd1 = create_placeholder_cmd("export", "hoi", NULL, in_files1, NULL, 0);
 	data->cmds = cmd1;
 	data->cmd_count = 1;
 }
@@ -118,9 +118,7 @@ int	prompt_loop()
 
 void	f()
 {
-	printf("\n\n----\n\n");
-	system("leaks -q minishell");
-	printf("\n\n----\n\n");
+	
 	return ;
 }
 
@@ -129,15 +127,39 @@ int	main()
 	t_mini *mini;
 
 	atexit(f);
-
 	mini = init_mini_data();
 	init_placeholder_data(mini);
+	
+	t_cmd *extra_cmd = create_placeholder_cmd("export", NULL, NULL, NULL, NULL, 10);
+	printf("MMMM MMMMMMMmini->env[1] = %s\n", mini->env[0]);
 	execute_cmds(mini);
-//	env_builtin(mini);
+	printf("MMMM MMMMMMMmini->env[1] = %s\n", mini->env[0]);
+
+
+	//env_builtin(mini);
 	//unset_builtin()
 //	mini = init_mini_data();
 //	env_builtin(mini);
+	
+	
+	// //char	*test = get_key_from_full_env_var("HELLO=you look great");
+	// char *test = get_value_from_full_env_var("monki");
+	// printf("%s", test);
+//	if (test)
+//		free (test);
+//printf("-------- value=%s-------\n", get_env_var_value(mini->env, "hoi"));
+	//env_builtin(mini);
+	//env_builtin(mini);
+//	env_builtin(mini);
+	//export_builtin(extra_cmd, mini);
+	export_builtin(extra_cmd, mini);
+	
+	
 	free_mini_data(mini);
-
+	//free_cmds(&extra_cmd);
+	printf("\n\n----\n\n");
+	system("leaks -q minishell");
+	printf("\n\n----\n\n");
+	
 	return (0);
 }

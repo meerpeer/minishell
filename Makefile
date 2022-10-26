@@ -14,7 +14,7 @@ SRC_FILES = main.c \
 			builtins/pwd_builtin.c builtins/unset_builtin.c\
 			environment/env_gets.c environment/env_change.c environment/env_utils.c\
 			error/error.c\
-			utils/free_data.c\
+			utils/free_data.c utils/string_utils.c\
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ_FILES))

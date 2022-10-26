@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 14:24:48 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 11:49:28 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_export_key(char *env_var)
 	char	*key;
 
 	key = get_key_from_full_env_var(env_var);
+	
 	ft_putstr_fd(key, STDOUT_FILENO);
 	free (key);
 }
@@ -40,13 +41,15 @@ void	print_export(char **env)
 	int	j;
 
 	i = 0;
+	printf("trying to print export\n");
 	while (env[i])
 	{
 		j = 0;
+		printf("---env[%i] = %s----\n", i, env[i]);
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		print_export_key(env[i]);
 		try_print_export_value(env[i]);
-		ft_putchar_fd("\n", STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
 }
@@ -74,27 +77,28 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 	char	*key;
 	char	*value;
 
-	to_export = &cmd[1];
+	to_export = cmd->cmd;
 	if (!to_export[1])
 		print_export(data->env);
 	else
 	{
-		i = 0;
+		i = 1;
 		while (to_export[i])
 		{
 			if (is_valid_export(to_export[i]))
 			{
 				key = get_key_from_full_env_var(to_export[i]);
 				value = get_value_from_full_env_var(to_export[i]);
+				printf("value = %s\n", value);
 				if (key_exists(data->env, key))
 					set_key_value(data->env, key, value);
 				else
-					new_env_entry(data->env, key, value);
+					add_new_env_entry(&data->env, key, value);
 				free (key);
 			}
 			else
-				
-				//print an error
+				error_exit(join_3_strings(key, ": not a valid identifier",
+						NULL), 1);
 			i++;
 		}
 	}

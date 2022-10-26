@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 14:14:07 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 08:57:17 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_shell_level(char **env)
 
 	sh_lvl_var = get_env_var_value(env, "SHLVL");
 	if (!sh_lvl_var)
-		new_env_entry(&env, "SHLVL", "1");
+		add_new_env_entry(&env, "SHLVL", "1");
 }
 
 /**
@@ -57,6 +57,7 @@ t_mini	*init_mini_data(void)
 	t_mini	*data;
 
 	data = ft_calloc(1, sizeof(t_mini *));
+	data->cmds = NULL;
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;

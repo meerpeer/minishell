@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/18 11:43:46 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/23 12:28:41 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 11:24:05 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
 	* Finds the environment variable value based on a key. 
 	* Only searches from the start of every str in env, until key_length; 
+	* @note Tested
 	* @param env: the environment variables to check
 	* @param key: the key word used to search env
 	* @return the pointer to the place where the variable starts, 
@@ -31,8 +32,8 @@ char	*get_env_var_value(char **env, char *key)
 	{
 		if (ft_strncmp(env[i], key, key_len) == 0)
 		{
-			if (env[i][key_len] == '=')
-				return (env[i] + key_len + 1);
+			if (env[i][key_len] == '=' && env[i][key_len + 1])
+				return (&env[i][key_len + 1]);
 		}
 		i++;
 	}

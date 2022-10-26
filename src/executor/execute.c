@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/24 11:12:10 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/26 09:43:01 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void	execute_cmds(t_mini *data)
 		cmd_data = cmd_data->next;
 	}
 	wait_for_cmds(&data->exit_status, data->last_pid);
+	printf("done with command \n");
 	restore_std_in_and_out(data->std_backup);
+
 }
