@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 09:43:01 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/27 13:33:14 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
-	//printf("cmd->cmd[0] = %s\n", cmd_data->cmd[0]);
+	// TODO: make sure to redirect output!
 	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
 		echo_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
