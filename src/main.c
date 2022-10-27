@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 14:03:14 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/27 11:18:50 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_placeholder_data(t_mini *data)
 	
 //	cmd3 = create_placeholder_cmd("ls", NULL, NULL, in_files2, NULL, 2);
 //	cmd2 = create_placeholder_cmd("wc", NULL, cmd3, in_files2, out_files1, 1);
-	cmd1 = create_placeholder_cmd("export", "poh", NULL, in_files1, NULL, 0);
+	cmd1 = create_placeholder_cmd("unset", "PWD", NULL, in_files1, NULL, 0);
 	data->cmds = cmd1;
 	data->cmd_count = 1;
 }
@@ -128,12 +128,12 @@ int	main()
 
 	atexit(f);
 	mini = init_mini_data();
-	//init_placeholder_data(mini);
+	init_placeholder_data(mini);
 	
 	t_cmd *extra_cmd = create_placeholder_cmd("export", NULL, NULL, NULL, NULL, 10);
 
 	execute_cmds(mini);
-	env_builtin(mini);
+	//env_builtin(mini);
 	
 	//env_builtin(mini);
 	//unset_builtin()
@@ -150,8 +150,8 @@ int	main()
 	//env_builtin(mini);
 	//env_builtin(mini);
 //	env_builtin(mini);
-	export_builtin(extra_cmd, mini);
 	//export_builtin(extra_cmd, mini);
+	export_builtin(extra_cmd, mini);
 	
 	
 	//free_mini_data(mini);
