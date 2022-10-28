@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 13:43:26 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/10/28 15:14:14 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ t_mini	*init_mini_data(void)
 	t_mini	*data;
 
 	data = ft_calloc(1, sizeof(t_mini));
-	data->cmds = NULL;
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;

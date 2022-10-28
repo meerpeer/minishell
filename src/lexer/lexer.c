@@ -6,13 +6,13 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:40 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 11:33:24 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 15:17:07 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	**lexer_input(char *input)
+static char	**lexer_input(char *input)
 {
 	int		index;
 	int		operator_count;
@@ -35,13 +35,14 @@ static void	**lexer_input(char *input)
 		printf(B23"tokens: [%s]\n"RESET, token[index]);
 		index++;
 	}
-	return (0);
+	return (token);
 }
 
 void	lexer(t_mini *mini_data)
 {
 	int		index;
 	char	*result;
+	char	**tokens;
 	int		len;
 
 	len = ft_strlen(mini_data->cmd_input);
@@ -56,6 +57,15 @@ void	lexer(t_mini *mini_data)
 	}
 	printf("[%s]\n", result);
 	printf("[%c]last of line\n", result[index]);
-	lexer_input(result);
+	tokens = lexer_input(result);
+	index = 0;
+	while (tokens[index])
+	{
+		ft_lstadd_back(&mini_data->tokens, ft_lstnew(tokens[index]));
+		printf(B23"tokens: [%s]\n"RESET, tokens[index]);
+		index++;
+	}
+	//print_list(mini_data->tokens);
+	free(tokens);
 }
 

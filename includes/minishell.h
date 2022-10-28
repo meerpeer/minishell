@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 11:37:05 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 14:59:56 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,6 @@ int		count_operator(char *input);
 void	isolate_operater(char *new_line, char *line, int *temp, int *index);
 char	*prep_line(char *line, int operator_count);
 char	**split(char *str);
-t_token	*add_new_token_back(t_token *token_node, char *command, int token_type);
-t_token	*new_token_lst(char *command, int token_type);
+void	print_list(t_list *tokens);
 
 #endif
