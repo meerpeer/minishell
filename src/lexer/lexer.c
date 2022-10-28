@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:40 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 15:17:07 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/10/28 15:27:14 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	lexer(t_mini *mini_data)
 		printf(B23"tokens: [%s]\n"RESET, tokens[index]);
 		index++;
 	}
-	//print_list(mini_data->tokens);
+	print_list(mini_data->tokens);
 	free(tokens);
 }
 
