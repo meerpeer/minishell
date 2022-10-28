@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 11:36:30 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 11:51:07 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int word_len(char *str, int tracker)
 		tracker++;
 		word_len++;
 	}
-	printf(G40"word len[%d]\n"RESET, word_len);
 	return (word_len);
 }
 
