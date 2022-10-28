@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 10:48:44 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 11:00:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,20 @@ void	*protect_check(void *ptr)
 	if (ptr == NULL)
 		error_exit("memory allocation failed", 1);
 	return (ptr);
+}
+
+int	exit_program(char *message, int id)
+{
+	if (id == 0)
+	{
+		ft_putstr_fd(message, 1);
+		exit(0);
+	}
+	else if (id == 1)
+	{
+		ft_putstr_fd(R124"ERROR\n"RESET, 1);
+		ft_putstr_fd(message, 1);
+		exit(1);
+	}
+	return (0);
 }

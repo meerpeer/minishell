@@ -5,7 +5,7 @@ CC = gcc
 INC = includes
 HEADERFILES = minishell.h
 
-SRC_FILES = main.c \
+SRC_FILES = main.c prompt.c\
 			initialize/init_mini_data.c\
 			executor/execute.c executor/redirection.c executor/wait.c\
 			executor/executor_utils.c executor/execute_path.c\
@@ -15,6 +15,7 @@ SRC_FILES = main.c \
 			environment/env_gets.c environment/env_change.c environment/env_utils.c\
 			error/error.c\
 			utils/free_data.c utils/string_utils.c\
+			lexer/lexer_utils.c lexer/lexer.c lexer/split_str.c\
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ_FILES))
