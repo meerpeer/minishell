@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 11:37:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 13:45:08 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	check_if_leaks_at_exit()
 int	main()
 {
 	t_mini *mini;
-
 	//atexit(check_if_leaks_at_exit);
 	mini = init_mini_data();
 	//init_placeholder_data(mini);
