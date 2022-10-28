@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 11:37:05 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/10/28 13:14:45 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,11 @@ typedef struct s_cmd {
 	char	**cmd;
 	t_file	*in_files;
 	t_file	*out_files;
+	int		cmd_index;
 	char	*cmd_path;
 	int		pipe_fd[2];
 	int		fd_in;
 	int		fd_out;
-	int		cmd_index;
 	t_cmd	*next;
 }				t_cmd;
 
