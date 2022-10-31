@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:32 by merel            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:32:32 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	try_fill_cmd(t_list **tokens, t_cmd *cmd)
 		if (is_redirect(current_token->type))
 			succes = try_parse_redirect(tokens, cmd);
 		else if (current_token->type == IS_WORD)
-			succes = try_parse_word(tokens, cmd);
+			succes = try_parse_word(current_token->value, cmd);
 		if (!succes)
 			return (false);
 	}

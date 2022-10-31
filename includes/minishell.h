@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 11:02:48 by merel            ###   ########.fr       */
+/*   Updated: 2022/10/31 12:34:36 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ typedef struct s_token
 	t_token_type	type;
 }				t_token;
 
+typedef struct s_word
+{
+	char	*word;
+	int		word_length;
+	int		malloced;
+}				t_word;
 
 // Struct to check file type and name for every command
 typedef struct s_file {
@@ -159,6 +165,12 @@ int		exit_program(char *message, int id);
 void	free_mini_data(t_mini	*mini);
 void	free_cmds(t_cmd	**cmds);
 
+//utils
+t_quote	get__quote_type(char c);
+t_quote update_quote_type(t_quote quote_type, char c);
+char	*join_3_strings(char *s1, char *s2, char *s3);
+void	add_to_2d_array(char ***array, char *word);
+
 //init
 t_mini	*init_mini_data(void);
 
@@ -169,7 +181,6 @@ void	add_new_env_entry(char ***env, char *key, char *value);
 void	delete_env_entry(char **env, char *key);
 void	set_key_value(char **env, char *key, char *value);
 int		get_env_var_index(char **env, char *key);
-char	*join_3_strings(char *s1, char *s2, char *s3);
 bool	key_exists(char **env, char *key);
 char	*get_key_from_full_env_var(char *full_str);
 char	*get_value_from_full_env_var(char *full_str);
@@ -209,6 +220,6 @@ void	print_list(t_list *tokens);
 //parser
 bool	try_parsing(t_mini *mini_data);
 bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
-bool	try_parse_word(t_list **tokens, t_cmd *cmd);
+bool	try_parse_word(char	*word, t_cmd *cmd);
 
 #endif

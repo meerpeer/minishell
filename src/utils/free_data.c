@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   free_data.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/24 09:14:18 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 11:42:24 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   free_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/24 09:14:18 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/10/31 11:39:39 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ void	free_2d_array_(char **array)
 	i = 0;
 	if (!array)
 		return ;
-	printf("hello\n");
 	while(array[i])
 	{
-		printf("trying to free %s", array[i]);
 		free(array[i]);
 		i++;
 	}
