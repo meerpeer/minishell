@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/10/31 12:35:46 by merel            ###   ########.fr       */
+/*   Updated: 2022/10/31 20:33:27 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,47 @@ void	add_char_to_word_copy(char c, t_word *word_copy)
 	word_copy->word[word_copy->word_length - 1] = c;
 }
 
+/**
+ * @brief should expand the environment variable if it's there and should
+ * increment i past the env variable;
+ * 
+ * TODO: try to get env in here
+ * TODO: test!
+ * @param word the original string 
+ * @param i the index on the original string
+ * @param word_copy where we copy the new word into
+ */
+void	expand_env(char *word, int *i, t_word *word_copy)
+{
+	int		j;
+	int		size;
+	char	*key;
+	char	*value = NULL;
+
+	*i = *i + 1;
+	size = 0;
+	while (word[*i + size] && word[*i + size] != ' ')// check if more space characters
+		size++;
+	key = protect_check(ft_calloc(size + 1, sizeof(char)));
+	j = 0;
+	while (j < size)// see comment above
+	{
+		key[j] = word[*i];
+		*i = *i + 1;
+		j++;
+	}
+	// fuck this, how am I supposed to get those env variable fuckers here?
+	// value = get_env_var_value(ENV???, key);
+	if (!value)
+		return;
+	j = 0;
+	while (value[j])
+	{
+		add_char_to_word_copy(value[j], word_copy);
+		j++;
+	}
+}
+
 void	loop_quote(char *word, int *i, t_word *word_copy, t_quote *quote_type)
 {
 	bool	should_expand;
@@ -71,7 +112,7 @@ void	loop_quote(char *word, int *i, t_word *word_copy, t_quote *quote_type)
 		if (*quote_type == NO_QUOTE)
 			return ;
 		if (should_expand && word[*i] == '$')
-			//expand! yay
+			expand_env(word, i, word_copy);
 		add_char_to_word_copy(word[*i], word_copy);
 		*i = *i + 1;
 	}
