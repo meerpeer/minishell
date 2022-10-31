@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 15:26:30 by lhoukes       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/10/31 11:02:48 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,10 @@ void	isolate_operater(char *new_line, char *line, int *temp, int *index);
 char	*prep_line(char *line, int operator_count);
 char	**split(char *str);
 void	print_list(t_list *tokens);
+
+//parser
+bool	try_parsing(t_mini *mini_data);
+bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
+bool	try_parse_word(t_list **tokens, t_cmd *cmd);
 
 #endif
