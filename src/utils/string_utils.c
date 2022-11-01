@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:11:46 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 12:35:12 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/01 12:11:16 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void	add_to_2d_array(char ***array, char *word)
 	char **new_array;
 
 	i = 0;
-	while (*array[i])
+	printf("starting to add to 2d array cmd\n");
+	while (*array && *array[i])
 		i++;
+	printf("snakes %i\n", i);
 	new_array = protect_check(ft_calloc(i + 2, sizeof(char *)));
 	i = 0;
-	while (*array[i])
+	while (*array && *array[i])
 	{
 		new_array[i] = protect_check(ft_strdup(*array[i]));
 		free (*array[i]);

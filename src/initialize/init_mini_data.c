@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_mini_data.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/28 15:14:14 by lhoukes       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_mini_data.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/16 09:57:43 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/01 12:04:47 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_mini	*init_mini_data(void)
 	data->cmd_count = 0;
 	data->cmd_index = 0;
 	data->exit_status = 0;
+	data->cmds = NULL;
+	data->tokens = NULL;
 	data->env = copy_env();
 	
 

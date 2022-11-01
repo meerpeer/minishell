@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 12:34:36 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/01 10:58:16 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ void	print_list(t_list *tokens);
 
 //parser
 bool	try_parsing(t_mini *mini_data);
+bool	try_parse_word(char *word, t_cmd *cmd, char **env);
 bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
-bool	try_parse_word(char	*word, t_cmd *cmd);
 
 #endif

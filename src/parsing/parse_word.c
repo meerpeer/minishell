@@ -6,12 +6,18 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/10/31 20:33:27 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/01 12:15:26 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief checks if too much memory was allocated and creates a perfectly 
+ * allocated char * if needed
+ * 
+ * @param word_copy the copied word with it's word length and allocated size
+ */
 void	reallocate_to_word_length(t_word *word_copy)
 {
 	char	*old_word;
@@ -31,6 +37,12 @@ void	reallocate_to_word_length(t_word *word_copy)
 	free (old_word);
 }
 
+/**
+ * @brief should store the character in the word_copy->word
+ * 
+ * @param c character to add to the word
+ * @param word_copy the place the character should be copied to
+ */
 void	add_char_to_word_copy(char c, t_word *word_copy)
 {
 	char	*old_word;
@@ -67,12 +79,12 @@ void	add_char_to_word_copy(char c, t_word *word_copy)
  * @param i the index on the original string
  * @param word_copy where we copy the new word into
  */
-void	expand_env(char *word, int *i, t_word *word_copy)
+void	expand_env(char *word, int *i, t_word *word_copy, char **env)
 {
 	int		j;
 	int		size;
 	char	*key;
-	char	*value = NULL;
+	char	*value;
 
 	*i = *i + 1;
 	size = 0;
@@ -86,8 +98,8 @@ void	expand_env(char *word, int *i, t_word *word_copy)
 		*i = *i + 1;
 		j++;
 	}
-	// fuck this, how am I supposed to get those env variable fuckers here?
-	// value = get_env_var_value(ENV???, key);
+	value = get_env_var_value(env, key);
+	free (key);
 	if (!value)
 		return;
 	j = 0;
@@ -98,21 +110,23 @@ void	expand_env(char *word, int *i, t_word *word_copy)
 	}
 }
 
-void	loop_quote(char *word, int *i, t_word *word_copy, t_quote *quote_type)
+void	loop_quote(char *word, int *i, t_word *word_copy, char **env)
 {
 	bool	should_expand;
+	t_quote	quote_type;
 
+	quote_type = get__quote_type(word[*i]);
 	should_expand = false;
-	if (*quote_type == DOUBLE)
+	if (quote_type == DOUBLE)
 		should_expand = true;
 	*i = *i + 1;
 	while (word[*i])
 	{
-		*quote_type = update_quote_type(*quote_type, word[*i]);
-		if (*quote_type == NO_QUOTE)
+		quote_type = update_quote_type(quote_type, word[*i]);
+		if (quote_type == NO_QUOTE)
 			return ;
 		if (should_expand && word[*i] == '$')
-			expand_env(word, i, word_copy);
+			expand_env(word, i, word_copy, env);
 		add_char_to_word_copy(word[*i], word_copy);
 		*i = *i + 1;
 	}
@@ -121,31 +135,39 @@ void	loop_quote(char *word, int *i, t_word *word_copy, t_quote *quote_type)
 /**
 	TODO: test!
 */
-bool	try_parse_word(char	*word, t_cmd *cmd)
+bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 {
 	int		i;
-	t_word	word_copy;
+	t_word	*word_copy;
 	t_quote	quote_type;
 
 	i = 0;
 	quote_type = NO_QUOTE;
-	//word_copy = protect_check(ft_calloc(1, sizeof(word_copy)));
+	printf("starting to parse word\n");
+	word_copy = protect_check(ft_calloc(1, sizeof(t_word)));
+	word_copy->word = protect_check(ft_calloc(8, sizeof(t_word)));
+	word_copy->malloced = 8;
 	while (word[i])
 	{
 		quote_type = update_quote_type(quote_type, word[i]);
+		printf("word[i] = %c\n", word[i]);
 		if (quote_type != NO_QUOTE)
-			loop_quote(word, &i, &word_copy, &quote_type);
+			loop_quote(word, &i, word_copy, env);
 		else
-			add_char_to_word_copy(word[i], &word_copy);
+			add_char_to_word_copy(word[i], word_copy);
+		quote_type = update_quote_type(quote_type, word[i]);
 		i++;
 	}
 	if (quote_type != NO_QUOTE)
 	{
-		free(word_copy.word);
+		free(word_copy->word);
 		return (printf("syntax error: multiline command"), false);
 	}
-	reallocate_to_word_length(&word_copy);
-	add_to_2d_array(&cmd->cmd, word_copy.word);
-	free(word_copy.word);
+	reallocate_to_word_length(word_copy);
+	printf("done parsing word = %s\n", word_copy->word);
+	if (cmd->cmd)
+		printf("cmd[0] = %s\n", cmd->cmd[0]);
+	add_to_2d_array(&cmd->cmd, word_copy->word);
+	free(word_copy->word);
 	return (true);
 }

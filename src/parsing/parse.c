@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 11:32:32 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/01 12:19:32 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ bool	is_redirect(t_token_type type)
 	return (false);
 }
 
-bool	try_fill_cmd(t_list **tokens, t_cmd *cmd)
+bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, char **env)
 {
 	t_token	*current_token;
 	bool	succes;
 
-	current_token = (*tokens)->content;
 	succes = true;
+	current_token = (*tokens)->content;
 	while (current_token->type != IS_PIPE)
 	{
 		if (is_redirect(current_token->type))
 			succes = try_parse_redirect(tokens, cmd);
 		else if (current_token->type == IS_WORD)
-			succes = try_parse_word(current_token->value, cmd);
+			succes = try_parse_word(current_token->value, cmd, env);
 		if (!succes)
 			return (false);
+		*tokens = (*tokens)->next;
+		if (!*tokens)
+			break ;
+		current_token = (*tokens)->content;
 	}
 	return (true);
 }
@@ -47,6 +51,7 @@ t_cmd	*create_new_cmd(t_mini *mini_data, int index)
 
 	cmd = protect_check(ft_calloc(1, sizeof(t_cmd)));
 	cmd->cmd_index = index;
+	cmd->cmd = NULL;
 	mini_data->cmd_count++;
 	first = mini_data->cmds;
 	if (!first)
@@ -79,8 +84,9 @@ bool	try_parsing(t_mini *mini_data)
 		current_token = tokens->content;
 		if (current_token->type == IS_PIPE)
 			return (printf("syntax error near unexpected token `|'"), false);
-		if (!try_fill_cmd(&tokens, cmd))
+		if (!try_fill_cmd(&tokens, cmd, mini_data->env))
 			return (false);
+		//tokens = tokens->next;
 	}
 	return (true);
 }
