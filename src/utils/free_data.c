@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 09:14:18 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/10/31 11:39:39 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:15:19 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ void	free_cmds(t_cmd	**cmds)
 	}
 }
 
+void	reset_mini_data(t_mini *mini_data)
+{
+	free_cmds(&mini_data->cmds);
+	mini_data->cmds = NULL;
+	mini_data->cmd_count = 0;
+	//properly free these with Lisanne:
+	mini_data->tokens = NULL;
+}
+
 void	free_mini_data(t_mini	*mini)
 {
 	//t_cmd	*prev_cmd;
@@ -65,18 +74,5 @@ void	free_mini_data(t_mini	*mini)
 	free_2d_array_(mini->env);
 	printf("freed env\n");
 	free_cmds(&mini->cmds);
-	// while (mini->cmds)
-	// {
-	// 	printf("starting to free cmds\n");
-	// 	free_files(mini->cmds->out_files);
-	// 	printf("freed out files\n");
-	// 	free_files(mini->cmds->in_files);
-	// 	printf("freed infiles\n");
-	// 	free_2d_array_(mini->cmds->cmd);
-	// 	printf("freed cmds\n");
-	// 	prev_cmd = mini->cmds;
-	// 	mini->cmds = mini->cmds->next;
-	// 	free(prev_cmd);
-	// }
 	free(mini);
 }

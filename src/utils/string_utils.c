@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:11:46 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/01 12:11:16 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 12:14:12 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,34 @@ char	*join_3_strings(char *s1, char *s2, char *s3)
 }
 
 /**
-	TODO: test!
+	TODO: tested, but not for leaks.
 */
 void	add_to_2d_array(char ***array, char *word)
 {
 	int i;
 	char **new_array;
+	char **old_array;
 
+	old_array = *array;
 	i = 0;
-	printf("starting to add to 2d array cmd\n");
-	while (*array && *array[i])
-		i++;
-	printf("snakes %i\n", i);
-	new_array = protect_check(ft_calloc(i + 2, sizeof(char *)));
-	i = 0;
-	while (*array && *array[i])
+	while (old_array && old_array[i])
 	{
-		new_array[i] = protect_check(ft_strdup(*array[i]));
-		free (*array[i]);
+		printf("%s\n", old_array[i]);
 		i++;
 	}
-	free(*array);
+	new_array = protect_check(ft_calloc(i + 3, sizeof(char *)));
+	i = 0;
+	while (old_array && old_array[i])
+	{
+		new_array[i] = protect_check(ft_strdup(old_array[i]));
+		free (old_array[i]);
+		i++;
+	}
+	if (old_array)
+		free(old_array);
+	new_array[i] = protect_check(ft_strdup(word));
+	new_array[i + 1] = NULL;
 	*array = new_array;
-	*array[i] = word;
 }
 
 t_quote	get__quote_type(char c)

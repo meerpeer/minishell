@@ -6,3 +6,5 @@ a.out
 *.o
 *.a
 out*
+.gitignore
+src/lexer/*

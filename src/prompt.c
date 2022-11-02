@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 07:48:55 by lhoukes           #+#    #+#             */
-/*   Updated: 2022/11/01 11:08:17 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 12:12:59 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	prompt_loop(t_mini *mini_data)
 			add_history(mini_data->cmd_input);
 		lexer(mini_data);
 		try_parsing(mini_data);
+	//	execute_cmds(mini_data);
+		reset_mini_data(mini_data);
+		
 		
 		//printf(G42"input[%s]\n"RESET, mini_data->cmd_input);
 	}

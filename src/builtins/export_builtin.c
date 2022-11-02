@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   export_builtin.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 13:59:06 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   export_builtin.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/16 10:22:31 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/02 12:06:26 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	try_print_export_value(char *env_var)
 void	print_export(char **env)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (env[i])
 	{
-		j = 0;
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		print_export_key(env[i]);
 		try_print_export_value(env[i]);

@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/11/01 12:15:26 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:18:45 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,9 @@ bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 	}
 	reallocate_to_word_length(word_copy);
 	printf("done parsing word = %s\n", word_copy->word);
+	add_to_2d_array(&cmd->cmd, word_copy->word);
 	if (cmd->cmd)
 		printf("cmd[0] = %s\n", cmd->cmd[0]);
-	add_to_2d_array(&cmd->cmd, word_copy->word);
 	free(word_copy->word);
 	return (true);
 }

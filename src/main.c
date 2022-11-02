@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:25:40 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/01 10:40:31 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 12:06:04 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,17 @@ int	main()
 	mini = init_mini_data();
 	//init_placeholder_data(mini);
 	prompt_loop(mini);
+	char **array;
+	array = ft_calloc(sizeof(char *), 10);
+	array[0] = ft_strdup("kaas");
+	array[1] = ft_strdup("hoi");
+	array[2] = ft_strdup("wiodhd");
+	add_to_2d_array(&array, "maki");
+	int i = 0;
+	while(array[i])
+	{
+		printf("array[%i] = %s\n", i, array[i]);
+		i++;
+	}
 	return (0);
 }
