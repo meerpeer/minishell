@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 11:51:07 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/02 18:27:48 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char **split(char *str)
 	if (str == NULL)
 		return (NULL);
 	words = word_count(str);
-	printf("word_count[%d]\n", words);
+	//printf("word_count[%d]\n", words);
 	strptr = (char **)malloc(sizeof (char *) * (words + 1));
 	if (strptr == NULL)
 		return (NULL); 

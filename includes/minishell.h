@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 11:13:03 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/02 18:26:17 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ typedef enum e_redirect_type{
 	Enum for token types!
 */
 typedef enum e_token_type{
+	NOTHING,
 	IS_PIPE,
 	IS_REDIRECT_IN,
 	IS_REDIRECT_OUT_TRUNC,
 	IS_REDIRECT_OUT_APPEND,
+	HEREDOC,
+	ERROR,
 	IS_WORD
 }			t_token_type;
 
@@ -208,14 +211,17 @@ void	pwd_builtin(t_mini *mini_data);
 void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //lexer
-void	lexer(t_mini *input);
+void	lexer(t_mini *mini_data);
 int		count_quote(char *line, char c);
 int		found_operator(char *line, int index);
 int		count_operator(char *input);
+int 	check_token_type(char *content);
 void	isolate_operater(char *new_line, char *line, int *temp, int *index);
 char	*prep_line(char *line, int operator_count);
 char	**split(char *str);
 void	print_list(t_list *tokens);
+void	delete_token_list(void *content);
+t_token	*new_token_node(char *content);
 
 //parser
 bool	try_parsing(t_mini *mini_data);

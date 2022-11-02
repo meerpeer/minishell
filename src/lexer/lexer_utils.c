@@ -6,11 +6,15 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/28 09:12:16 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 09:56:58 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/02 18:39:27 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/* checks if an operator is present in cmd_line. It return a 1 or 2 if this is
+	the case and 0 if no operator is present
+*/
 
 int	found_operator(char *line, int index)
 {
@@ -42,6 +46,8 @@ int	found_operator(char *line, int index)
 	return (0);
 }
 
+/*counts the amout of operators present*/
+
 int	count_operator(char *input)
 {
 	int		index;
@@ -59,7 +65,7 @@ int	count_operator(char *input)
 		}
 		index++;
 	}
-	printf("counter operator[%d]\n", counter);
+	//printf("counter operator[%d]\n", counter);
 	return (counter);
 }
 
@@ -67,21 +73,22 @@ static int	next_in_line(int *x)
 {
 	return (*x = *x + 1);
 }
+/* this functions sets space around an operator to isolate it. This is to 
+	split the input later on white space 
+*/
+
 static void	isolate_operator(char *new_line, char *str, int *index, int *x)
 {	
-	printf(G47"bij binnenkomst: line[%s]\n"RESET, new_line);
+	//printf(G47"bij binnenkomst: line[%s]\n"RESET, new_line);
 	if (found_operator(str, *index) == 1)
 	{
 		new_line[*x] = ' ';
 		next_in_line(x);
 		new_line[*x] = str[*index];
-		printf("x[%c] i[%c]\n",new_line[*x], str[*index]);
 		next_in_line(x);
 		next_in_line(index);
 		new_line[*x] = ' ';
 		next_in_line(x);
-		printf("next - x[%c] i[%c]\n",new_line[*x], str[*index]);
-		printf("0line[%s]\n", new_line);
 		return ;
 	}
 	if (found_operator(str, *index) == 2)
@@ -96,11 +103,13 @@ static void	isolate_operator(char *new_line, char *str, int *index, int *x)
 		next_in_line(index);
 		new_line[*x] = ' ';
 		next_in_line(x);
-		printf("1line[%s]\n", new_line);
 		return ;
 	}
 }
 
+/*We prep the line for splitting it on white space to get seperate tokens
+	calloc for a new_line that will hold the line with isolated operators
+	we return that new_line so it can be split on white space*/
 char	*prep_line(char *str, int operator_count)
 {
 	char	*new_line;
@@ -117,12 +126,12 @@ char	*prep_line(char *str, int operator_count)
 		if (found_operator(str, index))
 		{
 			isolate_operator(new_line, str, &index, &x);
-			printf(R124"in if statement found operater\n"RESET);
+			//printf(R124"in if statement found operater\n"RESET);
 		}
 		new_line[x] = str[index];
 		x++;
 		index++;
 	}
-	printf("line after going tru whitespace [%s]\n", new_line);
+	//printf("line after going tru whitespace [%s]\n", new_line);
 	return (new_line);
 }

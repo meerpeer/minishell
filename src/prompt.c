@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 07:48:55 by lhoukes           #+#    #+#             */
-/*   Updated: 2022/11/02 12:12:59 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   prompt.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
+/*   Updated: 2022/11/02 18:23:29 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	prompt_loop(t_mini *mini_data)
 		lexer(mini_data);
 		try_parsing(mini_data);
 	//	execute_cmds(mini_data);
+		// print_list(mini_data->token);
+		// ft_lstclear(&mini_data->token, delete_token_list);
 		reset_mini_data(mini_data);
-		
-		
-		//printf(G42"input[%s]\n"RESET, mini_data->cmd_input);
 	}
 }

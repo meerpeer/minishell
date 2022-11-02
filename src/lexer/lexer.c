@@ -6,66 +6,45 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:40 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/10/28 15:27:14 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/02 18:30:41 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	**lexer_input(char *input)
-{
-	int		index;
-	int		operator_count;
-	char	**token;
-	char	*str;
-
-	printf(G50"in lexer_input\n"RESET);
-	operator_count = count_operator(input);
-	str = prep_line(input, operator_count);
-	token = NULL;
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	index = 0;
-	printf("terug in lexer input\n str = [%s]\n", str);
-	token = split(str);
-	while (token[index])
-	{
-		printf(B23"tokens: [%s]\n"RESET, token[index]);
-		index++;
-	}
-	return (token);
-}
-
+/* this fuction preps the cmd_input by counting operators and
+	isololates them. The cmd_ipit is split on white spaces and returns
+	seperate tokens. We create a list of the tokens 
+	and sign them a type 
+*/
 void	lexer(t_mini *mini_data)
 {
 	int		index;
-	char	*result;
-	char	**tokens;
-	int		len;
+	int		operator_count;
+	char	**chunk;
+	t_token *token_value;
+	char	*str;
 
-	len = ft_strlen(mini_data->cmd_input);
+	printf(G50"in lexer_input\n"RESET);
+	operator_count = count_operator(mini_data->cmd_input);
+	str = prep_line(mini_data->cmd_input, operator_count);
+	chunk = NULL;
+	token_value = NULL;
+	if (str == NULL)
+		return ;
+	//printf("terug in lexer input\n str = [%s]\n", str);
+	chunk = split(str);
 	index = 0;
-	
-	result = mini_data->cmd_input;
-	printf("len[%d]\n", len);
-	while (result[index])
+	while (chunk[index])
 	{
-		printf(B17"LINE: [%c]------[%d]\n"RESET, result[index], index);
+		token_value = new_token_node(chunk[index]);
+		//printf("[%s]token value\n", token_value->value);
+		//printf("token type = [%d]\n", token_value->type);
+		ft_lstadd_back(&mini_data->tokens, ft_lstnew((void *)token_value));
 		index++;
 	}
-	printf("[%s]\n", result);
-	printf("[%c]last of line\n", result[index]);
-	tokens = lexer_input(result);
-	index = 0;
-	while (tokens[index])
-	{
-		ft_lstadd_back(&mini_data->tokens, ft_lstnew(tokens[index]));
-		printf(B23"tokens: [%s]\n"RESET, tokens[index]);
-		index++;
-	}
-	print_list(mini_data->tokens);
-	free(tokens);
+	//free(chunk);
+	//print_list(mini_data->tokens);
+	return ;
 }
 
