@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/11/02 11:18:45 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 13:19:40 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	reallocate_to_word_length(t_word *word_copy)
 		return ;
 	old_word = word_copy->word;
 	word_copy->word = protect_check(
-						ft_calloc(word_copy->word_length, sizeof(char)));
+						ft_calloc(word_copy->word_length + 1, sizeof(char)));
 	i = 0;
 	while (i < word_copy->word_length)
 	{
@@ -88,11 +88,11 @@ void	expand_env(char *word, int *i, t_word *word_copy, char **env)
 
 	*i = *i + 1;
 	size = 0;
-	while (word[*i + size] && word[*i + size] != ' ')// check if more space characters
+	while (word[*i + size] && word[*i + size] != ' ' && word[*i + size] != '\"')// check if more space characters
 		size++;
 	key = protect_check(ft_calloc(size + 1, sizeof(char)));
 	j = 0;
-	while (j < size)// see comment above
+	while (j < size)
 	{
 		key[j] = word[*i];
 		*i = *i + 1;
@@ -127,8 +127,11 @@ void	loop_quote(char *word, int *i, t_word *word_copy, char **env)
 			return ;
 		if (should_expand && word[*i] == '$')
 			expand_env(word, i, word_copy, env);
-		add_char_to_word_copy(word[*i], word_copy);
-		*i = *i + 1;
+		else
+		{
+			add_char_to_word_copy(word[*i], word_copy);
+			*i = *i + 1;
+		}
 	}
 }
 
@@ -143,14 +146,12 @@ bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 
 	i = 0;
 	quote_type = NO_QUOTE;
-	printf("starting to parse word\n");
 	word_copy = protect_check(ft_calloc(1, sizeof(t_word)));
 	word_copy->word = protect_check(ft_calloc(8, sizeof(t_word)));
 	word_copy->malloced = 8;
 	while (word[i])
 	{
 		quote_type = update_quote_type(quote_type, word[i]);
-		printf("word[i] = %c\n", word[i]);
 		if (quote_type != NO_QUOTE)
 			loop_quote(word, &i, word_copy, env);
 		else
@@ -164,10 +165,7 @@ bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 		return (printf("syntax error: multiline command"), false);
 	}
 	reallocate_to_word_length(word_copy);
-	printf("done parsing word = %s\n", word_copy->word);
 	add_to_2d_array(&cmd->cmd, word_copy->word);
-	if (cmd->cmd)
-		printf("cmd[0] = %s\n", cmd->cmd[0]);
 	free(word_copy->word);
 	return (true);
 }

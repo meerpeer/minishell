@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 11:16:19 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 13:20:17 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ bool	try_parsing(t_mini *mini_data)
 		return (false);
 	while (tokens)
 	{
-		printf("started parsing\n");
 		cmd = create_new_cmd(mini_data, i);
 		i++;
 		current_token = tokens->content;
