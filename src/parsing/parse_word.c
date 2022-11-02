@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/11/02 13:19:40 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/02 13:30:27 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	reallocate_to_word_length(t_word *word_copy)
 		return ;
 	old_word = word_copy->word;
 	word_copy->word = protect_check(
-						ft_calloc(word_copy->word_length + 1, sizeof(char)));
+						ft_calloc(word_copy->word_length + 2, sizeof(char)));
 	i = 0;
 	while (i < word_copy->word_length)
 	{
@@ -154,6 +154,8 @@ bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 		quote_type = update_quote_type(quote_type, word[i]);
 		if (quote_type != NO_QUOTE)
 			loop_quote(word, &i, word_copy, env);
+		else if (word[i] == '$')
+			expand_env(word, &i, word_copy, env);
 		else
 			add_char_to_word_copy(word[i], word_copy);
 		quote_type = update_quote_type(quote_type, word[i]);
