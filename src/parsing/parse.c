@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:48:21 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 14:40:43 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, char **env)
 			succes = try_parse_word(current_token->value, cmd, env);
 		if (!succes)
 			return (false);
+		if (!(*tokens))
+			break ;
+		current_token = (*tokens)->content;
 		*tokens = (*tokens)->next;
-		if (!*tokens)
+		if (!(*tokens))
 			break ;
 		current_token = (*tokens)->content;
 	}
@@ -84,7 +87,7 @@ bool	try_parsing(t_mini *mini_data)
 		current_token = tokens->content;
 		if (current_token->type == IS_PIPE)
 			return (printf("syntax error near unexpected token `|'"), false);
-		if (!try_fill_cmd(&tokens, cmd, mini_data->env))
+		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data->env))
 			return (false);
 		//tokens = tokens->next;
 	}

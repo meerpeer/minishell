@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:57:17 by merel             #+#    #+#             */
-/*   Updated: 2022/11/03 12:48:09 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:54:35 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 	t_file	*file;
 
 	redirect_token = (*tokens)->content;
+	
 	*tokens = (*tokens)->next;
 	if (!*tokens)
 		return(printf("syntax error near unexpected token `newline'\n"),
@@ -28,6 +29,7 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 		return(printf("syntax error near unexpected token `%s'", 
 				file_token->value), false);
 	file = protect_check(ft_calloc(1, sizeof(t_file)));
+	printf("trying to parse input\n");
 	file->file_name = file_token->value;
 	file->file_type = file_token->type;
 	if (redirect_token->type == IS_REDIRECT_IN)
@@ -42,5 +44,6 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 		return (false);
 	}
 	
+	printf(" all done\n");
 	return (true);
 }
