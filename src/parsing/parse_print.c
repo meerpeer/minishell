@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_print.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 14:56:25 by merel             #+#    #+#             */
-/*   Updated: 2022/11/03 15:49:05 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_print.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/11/03 14:56:25 by merel         #+#    #+#                 */
+/*   Updated: 2022/11/03 15:59:51 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_cmds(t_mini *mini_data)
 	{
 		printf("-------------------\n");
 		printf("CMD %i\n", cmd->cmd_index);
-		printf("cmds: \t\t");print_cmd_word(cmd->cmd);
+		printf(G41"cmds: \t\t"RESET);print_cmd_word(cmd->cmd);
 		printf("infiles:\t");
 		print_cmd_files(cmd->in_files);
 		printf("outiles:\t");

@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/02 18:12:33 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/02 18:19:58 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/03 15:00:36 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token	*new_token_node(char *content)
 		return (NULL);
 	new_input->value = content;
 	new_input->type = check_token_type(content);
-	printf("[%d] new input type\n", new_input->type);
+	//printf("[%d] new input type\n", new_input->type);
 	return (new_input);
 }
 

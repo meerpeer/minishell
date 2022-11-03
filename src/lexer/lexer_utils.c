@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/28 09:12:16 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/02 18:39:27 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/03 15:00:22 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@ int	found_operator(char *line, int index)
 {
 	if (line[index] != '\0' && line[index] == '|' && line[index +1] != '|')
 	{
-		printf("found operator [%c]\n", line[index]);
+		//printf("found operator [%c]\n", line[index]);
 		return (1);
 	}	
 	if (line[index] != '\0' && line[index] == '>' && line[index +1] != '>')
 	{
-		printf("found operator [%c]\n", line[index]);
+		//printf("found operator [%c]\n", line[index]);
 		return (1);
 	}	
 	else if (line[index] != '\0' && line[index] == '>' && line[index +1] == '>')
 	{
-		printf("found operator [%c]\n", line[index]);
+		//printf("found operator [%c]\n", line[index]);
 		return (2);
 	}	
 	if (line[index] != '\0' && line[index] == '<' && line[index +1] != '<')
 	{
-		printf("found operator [%c]\n", line[index]);
+		//printf("found operator [%c]\n", line[index]);
 		return (1);
 	}	
 	else if (line[index] != '\0' && line[index] == '<' && line[index +1] == '<')
 	{
-		printf("found operator [%c]\n", line[index]);
+		//printf("found operator [%c]\n", line[index]);
 		return (2);
 	}	
 	return (0);
