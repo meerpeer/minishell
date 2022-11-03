@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:56:25 by merel             #+#    #+#             */
-/*   Updated: 2022/11/03 15:40:39 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 15:49:05 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void print_cmd_files(t_list *files)
 	while (curr_file)
 	{
 		file = curr_file->content;
-		printf(" %s, ", file->file_name);
+		printf("%s, ", file->file_name);
 		curr_file = curr_file->next;
 	}
 	printf("\n");
@@ -32,7 +32,7 @@ static void	print_cmd_word(char **words)
 	int	i;
 
 	i = 0;
-	printf("cmd = ");
+
 	while (words[i])
 	{
 		printf("%s, ", words[i]);
@@ -47,16 +47,17 @@ void	print_cmds(t_mini *mini_data)
 	t_cmd	*cmd;
 
 	cmd = mini_data->cmds;
+	printf("printing %i cmds: \n", mini_data->cmd_count);
 	while (cmd)
 	{
-		printf("------\n");
-		printf("CMD:\n");
-		print_cmd_word(cmd->cmd);
-		printf("infiles: ");
+		printf("-------------------\n");
+		printf("CMD %i\n", cmd->cmd_index);
+		printf("cmds: \t\t");print_cmd_word(cmd->cmd);
+		printf("infiles:\t");
 		print_cmd_files(cmd->in_files);
-		printf("outiles: ");
+		printf("outiles:\t");
 		print_cmd_files(cmd->out_files);
 		cmd = cmd->next;
-		printf("------\n");
+		printf("-------------------\n");
 	}
 }
