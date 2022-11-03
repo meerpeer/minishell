@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: merel <merel@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/02 18:26:17 by lhoukes       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/03 12:12:23 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ typedef struct s_file {
 // Struct for every cmd, includes the files with their types 
 typedef struct s_cmd {
 	char	**cmd;
-	t_file	*in_files;
-	t_file	*out_files;
+	t_list	*in_files;
+	t_list	*out_files;
 	int		cmd_index;
 	char	*cmd_path;
 	int		pipe_fd[2];
@@ -192,7 +192,7 @@ bool	is_variable_set(char *env_variable);
 //execute
 void	backup_std_in_and_out(int backup[2]);
 void	restore_std_in_and_out(int backup[2]);
-void	redirect_in(int *fd_in, t_file *in_files);
+void	redirect_in(int *fd_in, t_list *in_files);
 void	redirect_out(t_cmd *cmd, t_mini *mini_data);
 void	save_read_fd(t_cmd *current_command, int pipe_read_end);
 bool	is_builtin(char *cmd);

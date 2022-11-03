@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   redirection.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:03:47 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 11:24:32 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/03 12:11:24 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 	* @param *in_files: the first in_file of the current command;
 	* @return the fd of the last file (which should be the infile used)
 */
-void	open_files(int *fd_to_change, t_file *file_list)
+void	open_files(int *fd_to_change, t_list *file_list)
 {
 	t_file	*file;
 	int		last_fd;
 
 	last_fd = 0;
-	file = file_list;
-	while (file)
+	while (file_list)
 	{
+		file = file_list->content;
 		if(last_fd != 0)
 			close (last_fd);
 		if (file->file_type == INPUT)
@@ -40,12 +40,12 @@ void	open_files(int *fd_to_change, t_file *file_list)
 		if (last_fd < 0)
 			return (perror(file->file_name), error_exit(NULL , 1));
 		*fd_to_change = last_fd;
-		file = file->next;
+		file_list = file->next;
 	}
 }
 
 //redirect in files
-void	redirect_in(int *fd_in, t_file *in_files)
+void	redirect_in(int *fd_in, t_list *in_files)
 {
 	open_files(fd_in, in_files);
 	if (*fd_in)

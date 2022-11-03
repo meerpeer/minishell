@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 13:26:44 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:01:40 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ bool	try_parsing(t_mini *mini_data)
 			return (false);
 		//tokens = tokens->next;
 	}
-	printf("cmd->cmd[0] = %s\n", cmd->cmd[0]);
+	//printf("cmd->cmd[0] = %s\n", cmd->cmd[0]);
 	return (true);
 }

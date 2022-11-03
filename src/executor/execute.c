@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   execute.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/27 13:33:14 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 11:24:35 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/03 12:09:48 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 
 /**
 	* Executes executes either builtin, or non-builtin commands
-	* @param *data: minishell data;
+	* @param data: minishell data;
 	* @return VOID
 */
 void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
@@ -103,7 +103,6 @@ void	execute_cmds(t_mini *data)
 		cmd_data = cmd_data->next;
 	}
 	wait_for_cmds(&data->exit_status, data->last_pid);
-	printf("done with command \n");
 	restore_std_in_and_out(data->std_backup);
 
 }
