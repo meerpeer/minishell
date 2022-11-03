@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 14:40:43 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 15:24:44 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_cmd	*create_new_cmd(t_mini *mini_data, int index)
 	cmd = protect_check(ft_calloc(1, sizeof(t_cmd)));
 	cmd->cmd_index = index;
 	cmd->cmd = NULL;
+	cmd->in_files = NULL;
+	cmd->out_files = NULL;
 	mini_data->cmd_count++;
 	first = mini_data->cmds;
 	if (!first)
@@ -89,10 +91,9 @@ bool	try_parsing(t_mini *mini_data)
 			return (printf("syntax error near unexpected token `|'"), false);
 		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data->env))
 			return (false);
-		//tokens = tokens->next;
+		if (!tokens)
+			break ;
+		tokens = tokens->next;
 	}
-	printf("cmd->cmd[0] = %s\n", cmd->cmd[0]);
-	printf("cmd->cmd[1] = %s\n", cmd->cmd[1]);
-	
 	return (true);
 }

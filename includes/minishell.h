@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:35:47 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 15:04:25 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ t_token	*new_token_node(char *content);
 bool	try_parsing(t_mini *mini_data);
 bool	try_parse_word(char *word, t_cmd *cmd, char **env);
 bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
+void	print_cmds(t_mini *mini_data);
 
 
 void	reset_mini_data(t_mini *mini_data);
