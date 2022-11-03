@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:57:17 by merel             #+#    #+#             */
-/*   Updated: 2022/11/03 12:29:24 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:48:09 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 	file->file_name = file_token->value;
 	file->file_type = file_token->type;
 	if (redirect_token->type == IS_REDIRECT_IN)
-		ft_lstadd_back(cmd->in_files, file);
+		ft_lstadd_back(&cmd->in_files, (void *)file);
 	else if (redirect_token->type == IS_REDIRECT_OUT_APPEND
 			|| redirect_token->type == IS_REDIRECT_OUT_APPEND)
-		ft_lstadd_back(cmd->out_files, file);
+		ft_lstadd_back(&cmd->out_files, (void *)file);
 	else
 	{
 		free (file->file_name);

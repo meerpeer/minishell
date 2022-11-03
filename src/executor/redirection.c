@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:24:32 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:11:24 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:46:44 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	open_files(int *fd_to_change, t_list *file_list)
 		if (last_fd < 0)
 			return (perror(file->file_name), error_exit(NULL , 1));
 		*fd_to_change = last_fd;
-		file_list = file->next;
+		file_list = file_list->next;
 	}
 }
 

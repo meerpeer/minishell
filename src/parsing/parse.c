@@ -6,12 +6,12 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:42:52 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:48:21 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-git p
+
 bool	is_redirect(t_token_type type)
 {
 	if (type == IS_REDIRECT_IN
