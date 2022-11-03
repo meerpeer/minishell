@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:11:46 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 12:40:45 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:35:22 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,11 @@ t_quote update_quote_type(t_quote quote_type, char c)
 	else if (quote_type == get__quote_type(c))
 		quote_type = NO_QUOTE;
 	return (quote_type);
+}
+
+bool	is_white_space(char c)
+{
+	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ')
+		return (true);
+	return (false);
 }

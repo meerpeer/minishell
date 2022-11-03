@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:12:23 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:35:47 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,9 +170,10 @@ void	free_cmds(t_cmd	**cmds);
 
 //utils
 t_quote	get__quote_type(char c);
-t_quote update_quote_type(t_quote quote_type, char c);
+t_quote	update_quote_type(t_quote quote_type, char c);
 char	*join_3_strings(char *s1, char *s2, char *s3);
 void	add_to_2d_array(char ***array, char *word);
+bool	is_white_space(char c);
 
 //init
 t_mini	*init_mini_data(void);

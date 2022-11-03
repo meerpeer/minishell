@@ -6,19 +6,25 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 09:14:18 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 11:15:19 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:33:09 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_files(t_file *start_list)
+void	free_files(t_list *start_list)
 {
-	t_file	*previous;
+	t_list	*previous;
+	t_file	*file;
 
 	while (start_list)
 	{
-		free(start_list->file_name);
+		file = start_list->content;
+		if (file)
+		{
+			free(file->file_name);
+			free(file);
+		}
 		previous = start_list;
 		start_list = start_list->next;
 		free (previous);

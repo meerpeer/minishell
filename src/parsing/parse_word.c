@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
-/*   Updated: 2022/11/02 13:30:27 by merel            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:39:12 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	expand_env(char *word, int *i, t_word *word_copy, char **env)
 
 	*i = *i + 1;
 	size = 0;
-	while (word[*i + size] && word[*i + size] != ' ' && word[*i + size] != '\"')// check if more space characters
+	while (word[*i + size] && !is_white_space(word[*i + size]) && word[*i + size] != '\"')
 		size++;
 	key = protect_check(ft_calloc(size + 1, sizeof(char)));
 	j = 0;
