@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_mini_data.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 09:57:43 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/01 12:04:47 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init_mini_data.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/04 13:53:34 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ t_mini	*init_mini_data(void)
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->env = copy_env();
-	
+	//delete_env_entry(data->env, "OLDPWD");
+	set_key_value(data->env, "OLDPWD", NULL);
 
 	//printf("JUST TRYING SOMETHING: %s\n\n", data->env[0]);
 	return (data);
