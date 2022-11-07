@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 12:25:40 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/07 13:20:42 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define READ_END 0
 # define WRITE_END 1
 # define PROMPT "minishell$ "
+# define HERE_DOC_LOCATION "/tmp/here-document"
 
 struct s_mini;
 struct s_cmd;
@@ -233,6 +234,7 @@ void	print_cmds(t_mini *mini_data);
 void	add_char_to_word_copy(char c, t_word *word_copy);
 void	expand_env(char *word, int *i, t_word *word_copy, char **env);
 void	loop_quote(char *word, int *i, t_word *word_copy, char **env);
+void	create_heredoc(char *delimit);
 
 
 #endif

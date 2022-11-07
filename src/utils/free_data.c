@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 09:14:18 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:33:09 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   free_data.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/24 09:14:18 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/07 12:54:48 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	reset_mini_data(t_mini *mini_data)
 	mini_data->cmd_count = 0;
 	//properly free these with Lisanne:
 	mini_data->tokens = NULL;
+	free(mini_data->cmd_input);
 }
 
 void	free_mini_data(t_mini	*mini)
