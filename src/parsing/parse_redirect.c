@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:57:17 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/07 08:40:57 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:33:50 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	add_to_correct_list(t_file *file, t_cmd *cmd)
 {
-	if (file->file_type == INPUT)
+	if (file->file_type == INPUT || file->file_type == INPUT_HEREDOC)
 	{
 		ft_lstadd_back(&cmd->in_files, ft_lstnew((void *)file));
 		return (true);
@@ -36,10 +36,12 @@ t_file	*create_file_struct(t_token *file_token, t_token *redirect_token)
 	file->file_name = file_token->value;
 	if (redirect_token->type == IS_REDIRECT_IN)
 		file->file_type = INPUT;
-	if (redirect_token->type == IS_REDIRECT_OUT_TRUNC)
+	else if (redirect_token->type == IS_REDIRECT_OUT_TRUNC)
 		file->file_type = OUTPUT_TRUNC;
-	if (redirect_token->type == IS_REDIRECT_OUT_APPEND)
+	else if (redirect_token->type == IS_REDIRECT_OUT_APPEND)
 		file->file_type = OUTPUT_APPEND;
+	else if (redirect_token->type == HEREDOC)
+		file->file_type = INPUT_HEREDOC;
 	return (file);
 }
 

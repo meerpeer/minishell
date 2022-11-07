@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 09:13:55 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:25:40 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_token	t_token;
 typedef enum e_redirect_type{
 	NO_REDIRECT,
 	INPUT,
+	INPUT_HEREDOC,
 	OUTPUT_TRUNC,
 	OUTPUT_APPEND
 }			t_redirect_type;
@@ -164,6 +165,7 @@ void	*protect_check(void *ptr);
 int		exit_program(char *message, int id);
 
 //clean
+void	reset_mini_data(t_mini *mini_data);
 void	free_mini_data(t_mini	*mini);
 void	free_cmds(t_cmd	**cmds);
 
@@ -232,6 +234,5 @@ void	add_char_to_word_copy(char c, t_word *word_copy);
 void	expand_env(char *word, int *i, t_word *word_copy, char **env);
 void	loop_quote(char *word, int *i, t_word *word_copy, char **env);
 
-void	reset_mini_data(t_mini *mini_data);
 
 #endif

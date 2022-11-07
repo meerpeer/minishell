@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 09:23:05 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/07 09:33:16 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	error_exit(char *message, int errorCode)
 {
 	//char	*final_message;
 
-	printf("error exiting\n"); //remove this too (SHOULD be on STDERR)
+//	printf("error exiting\n"); //remove this too (SHOULD be on STDERR)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (message)
 		ft_putstr_fd(message, 2);

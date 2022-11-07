@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:30:21 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 15:24:44 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/07 12:26:34 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ bool	is_redirect(t_token_type type)
 {
 	if (type == IS_REDIRECT_IN
 		|| type == IS_REDIRECT_OUT_APPEND
-		|| type == IS_REDIRECT_OUT_TRUNC)
+		|| type == IS_REDIRECT_OUT_TRUNC
+		|| type == HEREDOC)
 		return (true);
 	return (false);
 }

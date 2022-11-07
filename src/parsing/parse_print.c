@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/03 14:56:25 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/07 08:45:01 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/07 12:40:16 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static void	print_cmd_word(char **words)
 	int	i;
 
 	i = 0;
+	if (!words)
+	{
+		printf("\n");
+		return ;
+	}
 	while (words[i])
 	{
 		printf("%s, ", words[i]);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 11:24:35 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 12:09:48 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execute.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/07 10:24:30 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	execute_cmds(t_mini *data)
 	{
 		if (data->cmd_count == 1 && is_builtin(cmd_data->cmd[0]))
 		{
+			redirect_out(cmd_data, data);
 			execute_builtin(cmd_data, data);
 			break ;
 		}
@@ -104,5 +105,4 @@ void	execute_cmds(t_mini *data)
 	}
 	wait_for_cmds(&data->exit_status, data->last_pid);
 	restore_std_in_and_out(data->std_backup);
-
 }
