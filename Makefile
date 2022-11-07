@@ -18,6 +18,7 @@ SRC_FILES = main.c prompt.c\
 			lexer/lexer_utils.c lexer/lexer.c lexer/split_str.c lexer/print_list.c\
 			lexer/token_utils.c\
 			parsing/parse_print.c parsing/parse_redirect.c parsing/parse.c parsing/parse_word.c\
+			parsing/parse_expand.c parsing/parse_quote.c\
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ_FILES))

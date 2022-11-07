@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:23:57 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 15:04:25 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/07 09:13:55 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,8 @@ typedef struct s_word
 
 // Struct to check file type and name for every command
 typedef struct s_file {
-	char	*file_name;
-	int		file_type;
-	t_file	*next;
+	char			*file_name;
+	t_redirect_type	file_type;
 }				t_file;
 
 // Struct for every cmd, includes the files with their types 
@@ -229,7 +228,9 @@ bool	try_parsing(t_mini *mini_data);
 bool	try_parse_word(char *word, t_cmd *cmd, char **env);
 bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
 void	print_cmds(t_mini *mini_data);
-
+void	add_char_to_word_copy(char c, t_word *word_copy);
+void	expand_env(char *word, int *i, t_word *word_copy, char **env);
+void	loop_quote(char *word, int *i, t_word *word_copy, char **env);
 
 void	reset_mini_data(t_mini *mini_data);
 

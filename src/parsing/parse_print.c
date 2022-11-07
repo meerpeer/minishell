@@ -6,13 +6,13 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/03 14:56:25 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/03 15:59:51 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/07 08:45:01 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void print_cmd_files(t_list *files)
+static void	print_cmd_files(t_list *files)
 {
 	t_list	*curr_file;
 	t_file	*file;
@@ -32,7 +32,6 @@ static void	print_cmd_word(char **words)
 	int	i;
 
 	i = 0;
-
 	while (words[i])
 	{
 		printf("%s, ", words[i]);
@@ -40,7 +39,6 @@ static void	print_cmd_word(char **words)
 	}
 	printf("\n");
 }
-
 
 void	print_cmds(t_mini *mini_data)
 {
@@ -52,7 +50,8 @@ void	print_cmds(t_mini *mini_data)
 	{
 		printf("-------------------\n");
 		printf("CMD %i\n", cmd->cmd_index);
-		printf(G41"cmds: \t\t"RESET);print_cmd_word(cmd->cmd);
+		printf(G41"cmds: \t\t"RESET);
+		print_cmd_word(cmd->cmd);
 		printf("infiles:\t");
 		print_cmd_files(cmd->in_files);
 		printf("outiles:\t");
