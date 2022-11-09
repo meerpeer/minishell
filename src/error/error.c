@@ -6,17 +6,11 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:05:04 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 12:43:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	set_exit_code(t_mini *mini_data, int exit_code)
-{
-	exit_code = exit_code % 256;
-	mini_data->exit_status = exit_code;
-}
 
 void	print_error(char *s1, char *s2, char *s3)
 {

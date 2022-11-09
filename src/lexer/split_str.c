@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/02 18:27:48 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/09 12:46:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ char **chop_str(char *str, char **strptr, int words)
 		y = 0;
 		while (find_char(str[index]) == 1)
 			index++;
-		strptr[x] = (char *)malloc(sizeof(char) * word_len(str, index) + 1);
-		if (strptr == NULL)
-			return (NULL);
+		strptr[x] = protect_check((char *)malloc(sizeof(char) * word_len(str, index) + 1));
 		word_end_index = word_len(str, index) + index;
 		while (index < word_end_index && str[index] != '\0')
 		{
@@ -123,7 +121,7 @@ char **split(char *str)
 		return (NULL);
 	words = word_count(str);
 	//printf("word_count[%d]\n", words);
-	strptr = (char **)malloc(sizeof (char *) * (words + 1));
+	strptr = protect_check((char **)malloc(sizeof (char *) * (words + 1)));
 	if (strptr == NULL)
 		return (NULL); 
 	return (chop_str(str, strptr, words));

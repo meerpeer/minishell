@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/02 18:12:33 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/07 10:55:43 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 12:41:55 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*new_token_node(char *content)
 {
 	t_token	*new_input;
 
-	new_input = (t_token*)malloc(sizeof(t_token));
+	new_input = protect_check((t_token*)malloc(sizeof(t_token)));
 	if (!new_input)
 		return (NULL);
 	new_input->value = content;
