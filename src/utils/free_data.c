@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 09:14:18 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 12:54:48 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:26:53 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ void	free_2d_array_(char **array)
 	int	i;
 
 	i = 0;
+	printf("staring to free\n");
 	if (!array)
 		return ;
 	while(array[i])
 	{
+		printf("oi\n");
 		free(array[i]);
 		i++;
 	}
+	printf("trying to free chunk\n");
 	free(array);
 }
 
@@ -66,9 +69,8 @@ void	reset_mini_data(t_mini *mini_data)
 	free_cmds(&mini_data->cmds);
 	mini_data->cmds = NULL;
 	mini_data->cmd_count = 0;
-	//properly free these with Lisanne:
+	ft_lstclear(&mini_data->tokens, delete_token_list);
 	mini_data->tokens = NULL;
-	free(mini_data->cmd_input);
 }
 
 void	free_mini_data(t_mini	*mini)

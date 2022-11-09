@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 12:46:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 12:59:41 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char **chop_str(char *str, char **strptr, int words)
 	strptr[x][y] = '\0';
 	x++;
 	}
-	strptr[x] = 0;
+	strptr[x] = NULL;
 	return (strptr);
 }
 

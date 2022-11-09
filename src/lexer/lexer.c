@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:40 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/02 18:30:41 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/09 13:29:25 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,20 @@ void	lexer(t_mini *mini_data)
 		return ;
 	//printf("terug in lexer input\n str = [%s]\n", str);
 	chunk = split(str);
+	if (!str)
+		free(str);
+	//system("leaks minishell");
 	index = 0;
 	while (chunk[index])
 	{
 		token_value = new_token_node(chunk[index]);
 		//printf("[%s]token value\n", token_value->value);
 		//printf("token type = [%d]\n", token_value->type);
-		ft_lstadd_back(&mini_data->tokens, ft_lstnew((void *)token_value));
+		ft_lstadd_back(&mini_data->tokens, protect_check(ft_lstnew((void *)token_value)));
 		index++;
 	}
-	//free(chunk);
+	free_2d_array_(chunk);
+	printf("freeing worked!\n");
 	//print_list(mini_data->tokens);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 11:39:56 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:27:15 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 
 void	prompt_loop(t_mini *mini_data)
 {
+	char	*input;
+
 	while ("the world turns")
 	{
-		mini_data->cmd_input = readline(Y185"🐌mini🐚$ "RESET);
-		if (mini_data->cmd_input == NULL)
-			exit_program("something went wrong\n", 1);
-		if (mini_data->cmd_input[0] != '\0')
+		input = readline(Y185"🐌mini🐚$ "RESET);
+		if (input == NULL)
+			error_exit("Readline fail", NULL, NULL, 1);
+		if (input)
 		{
-			add_history(mini_data->cmd_input);
+			add_history(input);
+			mini_data->cmd_input = input;
 			lexer(mini_data);
-			if (try_parsing(mini_data))
-			{
-				print_cmds(mini_data);
-				execute_cmds(mini_data);
-			}
+		//	if (try_parsing(mini_data))
+		//	{
+		//		print_cmds(mini_data);
+		//		execute_cmds(mini_data);
+		//	}
+			free(input);
+			reset_mini_data(mini_data);
 		}
-		// print_list(mini_data->token);
-		// ft_lstclear(&mini_data->token, delete_token_list);
-		reset_mini_data(mini_data);
+		// print_list(mini_data->token)
+		
+		
 	}
 }

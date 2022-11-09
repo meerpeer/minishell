@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:45:36 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 12:55:23 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	print_error(char *s1, char *s2, char *s3);
 void	reset_mini_data(t_mini *mini_data);
 void	free_mini_data(t_mini	*mini);
 void	free_cmds(t_cmd	**cmds);
+void	free_2d_array_(char **array);
 
 //utils
 t_quote	get__quote_type(char c);
