@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:19:35 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:08:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ bool	try_parsing(t_mini *mini_data)
 		if (!tokens)
 			break ;
 		tokens = tokens->next;
+		if (!tokens)
+			return(print_error("Multiline pipe not handled", NULL, NULL), false);
 	}
 	return (true);
 }

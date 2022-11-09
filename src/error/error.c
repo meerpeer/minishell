@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 12:43:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:09:33 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	print_error(char *s1, char *s2, char *s3)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	combined_string = join_3_strings(s1, s2, s3);
 	if (combined_string)
+	{
 		ft_putstr_fd(combined_string, STDERR_FILENO);
+		free (combined_string);
+	}
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 

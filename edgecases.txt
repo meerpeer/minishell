@@ -1,0 +1,1 @@
+hoi | ls |			-> minishell: Multiline pipe not handled

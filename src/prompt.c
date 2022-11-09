@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 14:40:50 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 14:56:12 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@ void	prompt_loop(t_mini *mini_data)
 				execute_cmds(mini_data);
 			}
 			free(input);
-			//leak??
 			ft_lstclear(&mini_data->tokens, delete_token_list);
 			reset_mini_data(mini_data);
 		}
-		// print_list(mini_data->token)
-		
-		
 	}
 }
