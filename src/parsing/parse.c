@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 10:59:51 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:19:35 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ bool	is_redirect(t_token_type type)
 bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, t_mini *mini_data)
 {
 	t_token	*current_token;
-	bool	succes;
+	bool	success;
 
-	succes = true;
+	success = true;
 	current_token = (*tokens)->content;
 	while (current_token->type != IS_PIPE)
 	{
 		if (is_redirect(current_token->type))
-			succes = try_parse_redirect(tokens, cmd);
+			success = try_parse_redirect(tokens, cmd);
 		else if (current_token->type == IS_WORD)
-			succes = try_parse_word(current_token->value, cmd, mini_data);
-		if (!succes)
+			success = try_parse_word(current_token->value, cmd, mini_data);
+		if (!success)
 			return (false);
 		if (!(*tokens))
 			break ;
@@ -89,7 +89,8 @@ bool	try_parsing(t_mini *mini_data)
 		i++;
 		current_token = tokens->content;
 		if (current_token->type == IS_PIPE)
-			return (printf("syntax error near unexpected token `|'"), false);
+			return (print_error("syntax error near unexpected token `|'",
+				NULL, NULL), false);
 		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data))
 			return (false);
 		if (!tokens)

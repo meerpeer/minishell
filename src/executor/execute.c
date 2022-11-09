@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:09:26 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:37:00 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 
 	redirect_in(&cmd->fd_in, cmd->in_files);
 	redirect_out(cmd, mini_data);
+	if (!cmd)
+		exit (0);
 	cmd->cmd_path = get_cmd_path(cmd->cmd[0], environ);
 	if (execve(cmd->cmd_path, cmd->cmd, environ) == -1)
-	{
-		perror(NULL);
-		exit (1);
-	}
+		error_exit(strerror(errno), NULL, NULL, 1);
 }
 
 /**
@@ -62,16 +61,16 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
 	pid_t	pid;
-	
+
 	if(pipe(cmd_data->pipe_fd) == -1)
 		error_exit(strerror(errno), NULL, NULL, 1);
 	pid = fork();
 	mini_data->last_pid = pid;
 	if (pid == -1)
-		perror("fork:");
+		print_error(strerror(errno), NULL, NULL);
 	if (pid == 0)
 	{
-		if(is_builtin(cmd_data->cmd[0]))
+		if(cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
 			execute_builtin(cmd_data, mini_data);
 		else
 			child_process(cmd_data, mini_data);
@@ -93,7 +92,7 @@ void	execute_cmds(t_mini *data)
 	backup_std_in_and_out(data->std_backup);
 	while (cmd_data)
 	{
-		if (data->cmd_count == 1 && is_builtin(cmd_data->cmd[0]))
+		if (data->cmd_count == 1 && cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
 		{
 			redirect_out(cmd_data, data);
 			execute_builtin(cmd_data, data);

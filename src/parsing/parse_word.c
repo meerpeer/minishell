@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/09 11:00:02 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:16:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 		i++;
 	}
 	if (quote_type != NO_QUOTE)
-		return (printf("syntax error: multiline command"), false);
+		return (print_error("syntax error: multiline command", NULL, NULL),
+			false);
 	return (true);
 }
 
