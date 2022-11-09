@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 10:51:07 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:20:45 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	update_shell_level(char **env)
 		old_value = get_env_var_value(env, "SHLVL");
 		converted_value = ft_atoi(old_value);
 		converted_value++;
-		printf("new level = %i\n", converted_value);
 		new_value = protect_check(ft_itoa(converted_value));
 		set_key_value(env, "SHLVL", new_value);
 		free(new_value);
@@ -74,9 +73,6 @@ t_mini	*init_mini_data(void)
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->env = copy_env();
-	//delete_env_entry(data->env, "OLDPWD");
 	set_key_value(data->env, "OLDPWD", NULL);
-
-	//printf("JUST TRYING SOMETHING: %s\n\n", data->env[0]);
 	return (data);
 }

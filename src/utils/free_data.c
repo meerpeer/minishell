@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 09:14:18 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 13:52:05 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:19:04 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,7 @@ void	reset_mini_data(t_mini *mini_data)
 
 void	free_mini_data(t_mini	*mini)
 {
-	//t_cmd	*prev_cmd;
-
-
-	printf("starting to free env, env[0] = %s\n", mini->env[1]);
-	
 	free_2d_array_(mini->env);
-	printf("freed env\n");
 	free_cmds(&mini->cmds);
 	free(mini);
 }

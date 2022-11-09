@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:25:40 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/03 14:45:05 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/09 15:19:42 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	check_if_leaks_at_exit()
 int	main()
 {
 	t_mini *mini;
-	//atexit(check_if_leaks_at_exit);
 	mini = init_mini_data();
-	//init_placeholder_data(mini);
 	prompt_loop(mini);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:57:17 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/09 13:51:17 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:18:40 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 	redirect_token = (*tokens)->content;
 	*tokens = (*tokens)->next;
 	if (!*tokens)
-		return (printf("syntax error near unexpected token `newline'\n"),
-			false);
+		return (print_error("syntax error near unexpected token `newline'",
+			NULL, NULL), false);
 	file_token = (*tokens)->content;
 	if (file_token->type != IS_WORD)
-		return (printf("syntax error near unexpected token `%s'\n",
-				redirect_token->value), false);
+		return (print_error("syntax error near unexpected token `",
+				redirect_token->value, "'"), false);
 	file = create_file_struct(file_token, redirect_token);
 	if (add_to_correct_list(file, cmd))
 		return (true);

@@ -1,1 +1,3 @@
-hoi | ls |			-> minishell: Multiline pipe not handled
+hoi | ls |				-> minishell: Multiline pipe not handled
+< Makefile cat || wc	-> minishell: syntax error near unexpected token `|'
+| < Makefile cat | wc |	-> minishell: syntax error near unexpected token `|'

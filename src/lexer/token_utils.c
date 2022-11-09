@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/02 18:12:33 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 14:38:21 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:22:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 int 	check_token_type(char *content)
 {
 	t_token_type	type;
-	int			index;
-	
+	int				index;
+
 	index = 0;
 	type = NOTHING;
-	printf("content for type [%s]\n", content);
-	if (content[index] == '|' && content[index + 1] != '|')
+	if (content[index] == '|')
 		type = IS_PIPE;
-	else if (content[index] == '|' && content[index + 1] == '|')
-		type = ERROR;
 	else if (content[index] == '<' && content[index + 1] != '<')
 		type = IS_REDIRECT_IN;
 	else if (content[index] == '>' && content[index + 1] != '>')
@@ -44,7 +41,6 @@ t_token	*new_token_node(char *content)
 	new_input = protect_check((t_token*)malloc(sizeof(t_token)));
 	new_input->value = protect_check(ft_strdup(content));
 	new_input->type = check_token_type(content);
-	//printf("[%d] new input type\n", new_input->type);
 	return (new_input);
 }
 
