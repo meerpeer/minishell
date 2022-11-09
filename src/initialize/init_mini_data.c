@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/04 13:53:34 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/09 10:51:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**copy_env()
 	i = 0;
 	copy_env = ft_calloc(get_count_env_vars(environ) + 1, sizeof(char *));
 	if (!copy_env)
-		error_exit("environment variable copy failed", 1);
+		error_exit("environment variable copy failed\n", NULL, NULL, 1);
 	while(environ[i])
 	{
 		copy_env[i] = protect_check(ft_strdup(environ[i]));

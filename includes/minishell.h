@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 13:20:42 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:08:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
+#include <string.h>
 # include "../libft/libft.h"
 
 //COLORS
@@ -161,9 +162,10 @@ typedef struct s_cmd {
 void	prompt_loop(t_mini *mini_data);
 
 //error
-void	error_exit(char *message, int errorCode);
+void	error_exit(char *s1, char *s2, char *s3, int errorCode);
 void	*protect_check(void *ptr);
 int		exit_program(char *message, int id);
+void	print_error(char *s1, char *s2, char *s3);
 
 //clean
 void	reset_mini_data(t_mini *mini_data);
@@ -206,9 +208,9 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //builtins
 void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);
-void	echo_builtin(t_cmd *cmd, t_mini *data);
+void	echo_builtin(t_cmd *cmd);
 void	env_builtin(t_mini *mini_data);
-void	exit_builtin(t_cmd *cmd, t_mini *data);
+void	exit_builtin(char **cmd, t_mini *data);
 void	export_builtin(t_cmd *cmd, t_mini *data);
 void	pwd_builtin(t_mini *mini_data);
 void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
@@ -228,13 +230,12 @@ t_token	*new_token_node(char *content);
 
 //parser
 bool	try_parsing(t_mini *mini_data);
-bool	try_parse_word(char *word, t_cmd *cmd, char **env);
+bool	try_parse_word(char *word, t_cmd *cmd, t_mini *mini_data);
 bool	try_parse_redirect(t_list **tokens, t_cmd *cmd);
 void	print_cmds(t_mini *mini_data);
 void	add_char_to_word_copy(char c, t_word *word_copy);
-void	expand_env(char *word, int *i, t_word *word_copy, char **env);
-void	loop_quote(char *word, int *i, t_word *word_copy, char **env);
+void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data);
+void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data);
 void	create_heredoc(char *delimit);
-
 
 #endif

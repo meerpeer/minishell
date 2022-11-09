@@ -6,13 +6,13 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:17 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 10:41:22 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:08:43 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo_builtin(t_cmd *cmd_data, t_mini *mini_data)
+void	echo_builtin(t_cmd *cmd_data)
 {
 	char	**cmd;
 	bool	add_newline;
@@ -34,7 +34,4 @@ void	echo_builtin(t_cmd *cmd_data, t_mini *mini_data)
 	}
 	if (add_newline)
 		printf("\n");
-	(void) mini_data;
-	//mini_data->exit_status = 0;
-	return ;
 }

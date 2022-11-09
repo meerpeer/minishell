@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export_builtin.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 10:22:31 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/02 12:06:26 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   export_builtin.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/09 10:58:22 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 				free (key);
 			}
 			else
-				error_exit(join_3_strings(key, ": not a valid identifier",
-						NULL), 1);
+				error_exit(key, ": not a valid identifier", NULL, 1);
 			i++;
 		}
 	}

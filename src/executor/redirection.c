@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 13:17:16 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 10:54:43 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	open_files(int *fd_to_change, t_list *file_list)
 		else if (file->file_type == INPUT_HEREDOC)
 			last_fd = open(file->file_name, O_RDONLY);
 		if (last_fd < 0)
-			return (perror(file->file_name), error_exit(NULL , 1));
+			return (error_exit(file->file_name, ": ", strerror(errno), 1));
 		*fd_to_change = last_fd;
 		file_list = file_list->next;
 	}

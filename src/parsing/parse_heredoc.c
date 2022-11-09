@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 13:10:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 13:25:05 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:01:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	here_doc_write(char *delimit)
 	{
 		input = readline("> ");
 		if (!input)
-			error_exit("here_doc fail", 1);
+			error_exit("here_doc fail", NULL, NULL, 1);
 		if (!ft_strncmp(input, delimit, delimit_len) && !input[delimit_len])
 		{
 			close(heredoc_fd);
@@ -44,7 +44,7 @@ void	create_heredoc(char *delimit)
 
 	pid = fork();
 	if (pid == -1)
-		error_exit("strerror(errno)", 1);
+		error_exit(strerror(errno), NULL, NULL, 1);
 	if (pid == 0)
 		here_doc_write(delimit);
 	waitpid(pid, NULL, 0);

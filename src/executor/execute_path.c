@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:51:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:01:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ char	*get_cmd_path(char *cmd, char **envp)
 	free_2d_array (paths);
 	if (path)
 		return (path);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	error_exit(": command not found\n", 127);
+	error_exit(cmd, ": command not found", NULL, 127);
 	return (NULL);
 }

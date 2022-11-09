@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 12:26:34 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 10:59:51 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	is_redirect(t_token_type type)
 	return (false);
 }
 
-bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, char **env)
+bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, t_mini *mini_data)
 {
 	t_token	*current_token;
 	bool	succes;
@@ -34,7 +34,7 @@ bool	try_fill_cmd(t_list **tokens, t_cmd *cmd, char **env)
 		if (is_redirect(current_token->type))
 			succes = try_parse_redirect(tokens, cmd);
 		else if (current_token->type == IS_WORD)
-			succes = try_parse_word(current_token->value, cmd, env);
+			succes = try_parse_word(current_token->value, cmd, mini_data);
 		if (!succes)
 			return (false);
 		if (!(*tokens))
@@ -90,7 +90,7 @@ bool	try_parsing(t_mini *mini_data)
 		current_token = tokens->content;
 		if (current_token->type == IS_PIPE)
 			return (printf("syntax error near unexpected token `|'"), false);
-		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data->env))
+		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data))
 			return (false);
 		if (!tokens)
 			break ;

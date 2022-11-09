@@ -6,13 +6,13 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 09:13:15 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 09:13:48 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:00:21 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop_quote(char *word, int *i, t_word *word_copy, char **env)
+void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data)
 {
 	bool	should_expand;
 	t_quote	quote_type;
@@ -28,7 +28,7 @@ void	loop_quote(char *word, int *i, t_word *word_copy, char **env)
 		if (quote_type == NO_QUOTE)
 			return ;
 		if (should_expand && word[*i] == '$')
-			expand_env(word, i, word_copy, env);
+			expand_env(word, i, word_copy, mini_data);
 		else
 		{
 			add_char_to_word_copy(word[*i], word_copy);

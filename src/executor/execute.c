@@ -6,31 +6,30 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/07 10:24:30 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:09:26 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
-	// TODO: make sure to redirect output!
 	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
-		echo_builtin(cmd_data, mini_data);
+		echo_builtin(cmd_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
 		pwd_builtin(mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "unset", 6) == 0)
 		unset_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "exit", 5) == 0)
-		exit_builtin(cmd_data, mini_data);
+		exit_builtin(cmd_data->cmd, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "cd", 3) == 0)
 		cd_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "export", 7) == 0)
 		export_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
 		env_builtin(mini_data);
-	return ; //should return error?
+	mini_data->exit_status = 0;
+	return ;
 }
 /**
 	* Child process (not built-in)
@@ -65,7 +64,7 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	pid_t	pid;
 	
 	if(pipe(cmd_data->pipe_fd) == -1)
-		error_exit(strerror(errno), 1);
+		error_exit(strerror(errno), NULL, NULL, 1);
 	pid = fork();
 	mini_data->last_pid = pid;
 	if (pid == -1)

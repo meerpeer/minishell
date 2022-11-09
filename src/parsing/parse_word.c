@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/07 09:20:16 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:00:02 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static t_word	*init_word_copy(void)
 	return (word_copy);
 }
 
-static bool	copy_word(t_word *word_copy, char *word, char **env)
+static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 {
 	int		i;
 	t_quote	quote_type;
@@ -90,9 +90,9 @@ static bool	copy_word(t_word *word_copy, char *word, char **env)
 	{
 		quote_type = update_quote_type(quote_type, word[i]);
 		if (quote_type != NO_QUOTE)
-			loop_quote(word, &i, word_copy, env);
+			loop_quote(word, &i, word_copy, mini_data);
 		else if (word[i] == '$')
-			expand_env(word, &i, word_copy, env);
+			expand_env(word, &i, word_copy, mini_data);
 		else
 			add_char_to_word_copy(word[i], word_copy);
 		quote_type = update_quote_type(quote_type, word[i]);
@@ -106,7 +106,7 @@ static bool	copy_word(t_word *word_copy, char *word, char **env)
 /**
 	TODO: test!
 */
-bool	try_parse_word(char *word, t_cmd *cmd, char **env)
+bool	try_parse_word(char *word, t_cmd *cmd, t_mini *mini_data)
 {
 	int		i;
 	t_word	*word_copy;
@@ -114,7 +114,7 @@ bool	try_parse_word(char *word, t_cmd *cmd, char **env)
 
 	i = 0;
 	word_copy = init_word_copy();
-	quotes_complete = copy_word(word_copy, word, env);
+	quotes_complete = copy_word(word_copy, word, mini_data);
 	reallocate_to_word_length(word_copy);
 	add_to_2d_array(&cmd->cmd, word_copy->word);
 	free(word_copy->word);
