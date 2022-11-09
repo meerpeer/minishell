@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 17:31:40 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/09 18:26:52 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	update_pwd(t_mini *data, char *new_path)
 {
 	new_path = getcwd(NULL, 0);
 	set_key_value(data->env, "PWD", new_path);
+	free(new_path);
+	system(G22"leaks -q minishell"RESET);
 }
 
 void	cd_builtin(t_cmd *cmd, t_mini *data)
@@ -78,12 +80,9 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 	}
 	else
 		printf(R124"dir changed\n"RESET);
-	//printf("path = [%s]\n", path);
-	
-	// (void) data;
-	//(void) cmd;
 	free(new_path);
-	printf("cd :D\n");
+	printf("cd :D newpath+[%s]\n", new_path);
+	system("leaks -q minishell");
 	//exit_status?//
 	return ;
 }
