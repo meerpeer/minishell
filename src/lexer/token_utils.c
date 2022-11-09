@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/02 18:12:33 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 13:08:02 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:42:49 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	delete_token_list(void *content)
 	t_token	*token;
 
 	token = (t_token *)content;
+	printf("value was: %s\n", token->value);
 	free(token->value);
-	//free(token->type);// hoe deze te verwijderen?
-	free(content);
-	content = NULL;
+	//free(content);
+	//content = NULL;
 }

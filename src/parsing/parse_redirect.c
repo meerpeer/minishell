@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:57:17 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/07 13:23:52 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:51:17 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_file	*create_file_struct(t_token *file_token, t_token *redirect_token)
 	t_file	*file;
 
 	file = protect_check(ft_calloc(1, sizeof(t_file)));
-	file->file_name = file_token->value;
+	file->file_name = protect_check(ft_strdup(file_token->value));
 	if (redirect_token->type == IS_REDIRECT_IN)
 		file->file_type = INPUT;
 	else if (redirect_token->type == IS_REDIRECT_OUT_TRUNC)

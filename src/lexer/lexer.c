@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:40 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 13:29:25 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:40:47 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lexer(t_mini *mini_data)
 		return ;
 	//printf("terug in lexer input\n str = [%s]\n", str);
 	chunk = split(str);
-	if (!str)
+	if (str)
 		free(str);
 	//system("leaks minishell");
 	index = 0;
