@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:01:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 16:02:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,7 @@ char	*get_path_str(char **envp, char *cmd)
 		i++;
 	}
 	if (!path_str)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		exit (1);
-	}
+		error_exit(cmd, ": No such file or directory\n", NULL, 1);
 	return (path_str);
 }
 
