@@ -6,13 +6,13 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 15:16:47 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/10 13:48:03 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int find_char(char c)
+int	find_char(char c)
 {
 	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ')
 		return (1);
@@ -29,11 +29,11 @@ static t_quote	get_quote_type(char c)
 	return (NO_QUOTE);
 }
 
-int word_count(char *str)
+int	word_count(char *str)
 {
-	int index;
-	int words;
-	t_quote quote_type;
+	int		index;
+	int		words;
+	t_quote	quote_type;
 
 	quote_type = NO_QUOTE;
 	if (!str)
@@ -48,7 +48,8 @@ int word_count(char *str)
 			quote_type = NO_QUOTE;
 		if (quote_type == NO_QUOTE || str[index + 1] == '\0')
 		{
-			if (find_char(str[index]) == 0 && (find_char(str[index  +  1]) == 1 || str[index + 1] == '\0'))
+			if (find_char(str[index]) == 0 && (find_char(str[index + 1]) == 1 \
+				|| str[index + 1] == '\0'))
 				words++;
 		}
 		index++;
@@ -56,16 +57,15 @@ int word_count(char *str)
 	return (words);
 }
 
-int word_len(char *str, int tracker)
+int	word_len(char *str, int tracker)
 {
-	int word_len;
-
-	t_quote quote_type;
+	int		word_len;
+	t_quote	quote_type;
 
 	quote_type = NO_QUOTE;
 	word_len = 0;
 	if (!str)
-		return(0);
+		return (0);
 	while (str[tracker] != '\0')
 	{
 		if (quote_type == NO_QUOTE)
@@ -80,14 +80,14 @@ int word_len(char *str, int tracker)
 	return (word_len);
 }
 
-char **chop_str(char *str, char **strptr, int words)
+char	**chop_str(char *str, char **strptr, int words)
 {
-	int index;
-	int x;
-	int y;
-	int word_end_index;
+	int	index;
+	int	x;
+	int	y;
+	int	word_end_index;
 
-	word_end_index = 0; 
+	word_end_index = 0;
 	if (!str)
 		return (0);
 	index = 0;
@@ -104,7 +104,7 @@ char **chop_str(char *str, char **strptr, int words)
 			strptr[x][y] = str[index];
 			y++;
 			index++;
-	}
+		}
 	strptr[x][y] = '\0';
 	x++;
 	}
@@ -114,14 +114,14 @@ char **chop_str(char *str, char **strptr, int words)
 
 char **split(char *str)
 {
-	char **strptr;
-	int words;
-	
+	char	**strptr;
+	int		words;
+
 	if (str == NULL)
 		return (NULL);
 	words = word_count(str);
 	strptr = protect_check((char **)malloc(sizeof (char *) * (words + 1)));
 	if (strptr == NULL)
-		return (NULL); 
+		return (NULL);
 	return (chop_str(str, strptr, words));
 }

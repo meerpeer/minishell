@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 12:55:23 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/10 08:09:12 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
-#include <string.h>
+# include <string.h>
+# include <signal.h>
 # include "../libft/libft.h"
 
 //COLORS
