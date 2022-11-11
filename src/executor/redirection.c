@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:58:10 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:35:53 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,18 @@ static void	redirect_in(int *fd_in)
 void	redirect_out(t_cmd *cmd, t_mini *mini_data)
 {
 	//open_files(&cmd->fd_out, cmd->out_files);
+	if (cmd->cmd_index != mini_data->cmd_count - 1)
+	{
+		if (dup2(cmd->pipe_fd[WRITE_END], STDOUT_FILENO) == -1)
+			perror("dup2");
+	}
+	close(cmd->pipe_fd[WRITE_END]);
 	if (cmd->fd_out > 0)
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 			perror("dup2");
 		close(cmd->fd_out);
 	}
-	else
-	{
-		if (dup2(cmd->pipe_fd[WRITE_END], STDOUT_FILENO) == -1)
-			perror("dup2");
-		if (cmd->cmd_index == mini_data->cmd_count - 1)
-		{
-			if (dup2(mini_data->std_backup[WRITE_END], STDOUT_FILENO) == -1)
-				perror("dup2");
-		}
-	}
-	close(cmd->pipe_fd[WRITE_END]);
 }
 
 void	redirect(t_cmd *cmd, t_mini	*mini_data)
