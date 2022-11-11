@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:57:27 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:29:12 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 	extern char	**environ;
 	
 	//signal(SIGINT, SIG_DFL);
-	//signal(SIGQUIT, SIG_DFL);
+//	signal(SIGQUIT, SIG_DFL);
 	redirect(cmd, mini_data);
 	close(cmd->pipe_fd[READ_END]);
 	if (!cmd)

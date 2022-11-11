@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:31:38 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:37:01 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	save_read_fd(t_cmd *current_command, int pipe_read_end)
 	next_command = current_command->next;
 	if (next_command)
 	{
-		next_command->fd_in = dup(pipe_read_end);
+		dup2(pipe_read_end, next_command->fd_in);
 		if (next_command->fd_in == -1)
 			perror("dup:");
 		close (pipe_read_end);
