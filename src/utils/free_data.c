@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 09:14:18 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 15:19:04 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 14:00:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ void	free_cmds(t_cmd	**cmds)
 
 	while (cmds[0])
 	{
-		free_files(cmds[0]->out_files);
+		free_files(cmds[0]->files);
 		free_2d_array_(cmds[0]->cmd);
-		free_files(cmds[0]->in_files);
 		prev_cmd = cmds[0];
 		cmds[0] = cmds[0]->next;
 		free(prev_cmd);

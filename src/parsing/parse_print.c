@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/03 14:56:25 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/07 12:40:16 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 13:58:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	print_cmds(t_mini *mini_data)
 		printf("CMD %i\n", cmd->cmd_index);
 		printf(G41"cmds: \t\t"RESET);
 		print_cmd_word(cmd->cmd);
-		printf("infiles:\t");
-		print_cmd_files(cmd->in_files);
-		printf("outiles:\t");
-		print_cmd_files(cmd->out_files);
+		printf("files:\t");
+		print_cmd_files(cmd->files);
+		//printf("outiles:\t");
+		//print_cmd_files(cmd->out_files);
 		cmd = cmd->next;
 		printf("-------------------\n");
 	}

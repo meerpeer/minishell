@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:41:50 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 10:57:08 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 13:31:38 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	save_read_fd(t_cmd *current_command, int pipe_read_end)
 		next_command->fd_in = dup(pipe_read_end);
 		if (next_command->fd_in == -1)
 			perror("dup:");
+		close (pipe_read_end);
 	}
 }
 
@@ -59,4 +60,3 @@ void	restore_std_in_and_out(int backup[2])
 	close(backup[READ_END]);
 	close(backup[WRITE_END]);
 }
-
