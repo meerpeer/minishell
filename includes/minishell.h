@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/10 13:45:06 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/09 12:55:23 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ typedef struct s_cmd {
 	--------------------------------------------------
 */
 //general
-void	prompt_loop(t_mini *mini_data, char *input_outside);
+void	prompt_loop(t_mini *mini_data);
 
 //error
 void	error_exit(char *s1, char *s2, char *s3, int errorCode);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   string_utils.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: merel <merel@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/26 09:11:46 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 16:38:17 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 09:11:46 by mevan-de          #+#    #+#             */
+/*   Updated: 2022/11/03 12:35:22 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	add_to_2d_array(char ***array, char *word)
 	old_array = *array;
 	i = 0;
 	while (old_array && old_array[i])
+	{
+		printf("%s\n", old_array[i]);
 		i++;
+	}
 	new_array = protect_check(ft_calloc(i + 3, sizeof(char *)));
 	i = 0;
 	while (old_array && old_array[i])
@@ -90,7 +93,7 @@ t_quote update_quote_type(t_quote quote_type, char c)
 
 bool	is_white_space(char c)
 {
-	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ' || c == '\f')
+	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ')
 		return (true);
 	return (false);
 }

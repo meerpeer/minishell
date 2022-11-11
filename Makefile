@@ -35,7 +35,7 @@ $(NAME): $(OBJS)
 
 obj/%.o: src/%.c $(INC)/$(HEADERFILES)
 	@mkdir -p obj/$(dir $*)
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
