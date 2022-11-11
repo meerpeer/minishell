@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/10 13:45:06 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 13:38:28 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,4 +239,8 @@ void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data);
 void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data);
 void	create_heredoc(char *delimit);
 
+
+//signals
+void	handle_signals(void);
+void	set_signals_noninteractive(void);
 #endif

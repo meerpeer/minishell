@@ -19,23 +19,28 @@ SRC_FILES = main.c prompt.c\
 			lexer/token_utils.c\
 			parsing/parse_print.c parsing/parse_redirect.c parsing/parse.c parsing/parse_word.c\
 			parsing/parse_expand.c parsing/parse_quote.c parsing/parse_heredoc.c\
+			signals/signals.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ_FILES))
 
 LIB += libft/libft.a
-LIB += -lreadline #-lhistory
+LIB += -lreadline  -L `brew --prefix readline`/lib #-lhistory
 LIBFT_DIR = libft/
 
-all: $(NAME)
+all: start $(NAME)
 
+start:
+		echo '╔╦╗╦╔╗╔╦╔═╗╦ ╦╔═╗╦  ╦'  
+		echo '║║║║║║║║╚═╗╠═╣║╣ ║  ║'  
+		echo '╩ ╩╩╝╚╝╩╚═╝╩ ╩╚═╝╩═╝╩═╝'
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS)  $(OBJS) $(LIB) -o $(NAME)
 
 obj/%.o: src/%.c $(INC)/$(HEADERFILES)
 	@mkdir -p obj/$(dir $*)
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I $(INC) -I `brew --prefix readline`/include
 
 clean:
 	rm -f $(OBJS)

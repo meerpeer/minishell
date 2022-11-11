@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/11 10:38:07 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 14:05:19 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 
 	while ("the world turns")
 	{
+		handle_signals();
 		if (input_outside) 
 			input = input_outside;
 		else
 			input = readline(Y185"🐌mini🐚$ "RESET);
+		//set_signals_noninteractive();
 		if (input == NULL)
-			error_exit("Readline fail", NULL, NULL, 1);
+			error_exit("Readline fail", NULL, NULL, 1);// kloptniet.nl
 		if (input)
 		{
 			add_history(input);
 			mini_data->cmd_input = input;
-			lexer(mini_data);	
+			lexer(mini_data);
 			if (try_parsing(mini_data))
 			{
 				//print_cmds(mini_data);
@@ -41,5 +43,4 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 			free(input);
 		}
 	}
-	
 }

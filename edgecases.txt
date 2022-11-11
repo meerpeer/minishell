@@ -14,3 +14,6 @@ exit +012345678			-> should exit with exit code 78
 
 //pipes
 echo kaas | hoi
+
+//PWD/ OLDPWD unset
+-> should not be added to env when cd is called

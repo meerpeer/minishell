@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/09 15:16:47 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 11:39:31 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,33 +80,39 @@ int word_len(char *str, int tracker)
 	return (word_len);
 }
 
-char **chop_str(char *str, char **strptr, int words)
+void	chop_loop(char **strptr, int x, char *str, int *index)
 {
-	int index;
-	int x;
-	int y;
-	int word_end_index;
+	int	y;
+	int	word_end_index;
 
-	word_end_index = 0; 
+	y = 0;
+	word_end_index = word_len(str, *index) + *index;
+	while (*index < word_end_index && str[*index] != '\0')
+	{
+		strptr[x][y] = str[*index];
+		y++;
+		*index = *index + 1;
+	}
+	strptr[x][y] = '\0';
+}
+
+char	**chop_str(char *str, char **strptr, int words)
+{
+	int	index;
+	int	x;
+
 	if (!str)
 		return (0);
 	index = 0;
 	x = 0;
 	while (str[index] != '\0' && x < words)
 	{
-		y = 0;
 		while (find_char(str[index]) == 1)
 			index++;
-		strptr[x] = protect_check((char *)malloc(sizeof(char) * word_len(str, index) + 1));
-		word_end_index = word_len(str, index) + index;
-		while (index < word_end_index && str[index] != '\0')
-		{
-			strptr[x][y] = str[index];
-			y++;
-			index++;
-	}
-	strptr[x][y] = '\0';
-	x++;
+		strptr[x] = protect_check((char *)malloc(sizeof(char) \
+			* word_len(str, index) + 1));
+		chop_loop(strptr, x, str, &index);
+		x++;
 	}
 	strptr[x] = NULL;
 	return (strptr);
@@ -116,7 +122,7 @@ char **split(char *str)
 {
 	char **strptr;
 	int words;
-	
+
 	if (str == NULL)
 		return (NULL);
 	words = word_count(str);
@@ -125,3 +131,35 @@ char **split(char *str)
 		return (NULL); 
 	return (chop_str(str, strptr, words));
 }
+
+// char **chop_str(char *str, char **strptr, int words)
+// {
+// 	int index;
+// 	int x;
+// 	int y;
+// 	int word_end_index;
+
+// 	word_end_index = 0; 
+// 	if (!str)
+// 		return (0);
+// 	index = 0;
+// 	x = 0;
+// 	while (str[index] != '\0' && x < words)
+// 	{
+// 		y = 0;
+// 		while (find_char(str[index]) == 1)
+// 			index++;
+// 		strptr[x] = protect_check((char *)malloc(sizeof(char) * word_len(str, index) + 1));
+// 		word_end_index = word_len(str, index) + index;
+// 		while (index < word_end_index && str[index] != '\0')
+// 		{
+// 			strptr[x][y] = str[index];
+// 			y++;
+// 			index++;
+// 	}
+// 	strptr[x][y] = '\0';
+// 	x++;
+// 	}
+// 	strptr[x] = NULL;
+// 	return (strptr);
+// }

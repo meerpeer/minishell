@@ -6,26 +6,13 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 18:26:52 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/11 14:12:48 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//change dir functie
-// OLDPATH opslaan/ current path in PATH
-// bij binnenkomst minishell - OLDPATH & PATH update??
-// placeholder pwd = getcwd 
-// als nog niet bestaat : oldpwd set value = pwd
-// als wel delete en set new oldpwd
-// chdir 
-// delete current PWD
-// pwd = getcwd 
-// add new PWD; 
-
-//callo or malloc for new_path?? 
-
-static int		ft_strcmp(char *s1, char *s2)
+static int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 == *s2 && *s1)
 	{
@@ -40,58 +27,34 @@ static void	update_pwd(t_mini *data, char *new_path)
 	new_path = getcwd(NULL, 0);
 	set_key_value(data->env, "PWD", new_path);
 	free(new_path);
-	system(G22"leaks -q minishell"RESET);
 }
 
 void	cd_builtin(t_cmd *cmd, t_mini *data)
 {
 	int		go_to;
-	char 	*new_path;
+	char	*new_path;
 
 	go_to = 0;
-	
 	new_path = getcwd(NULL, 0);
-	if (!key_exists(data->env, "OLDPWD"))
-		add_new_env_entry(&data->env, "OLDPWD", new_path);
-	else
-		set_key_value(data->env, "OLDPWD", get_env_var_value(data->env, "PWD"));
-	if (!cmd->cmd[1] || ft_strcmp(cmd->cmd[1], "~")== 0)
+	set_key_value(data->env, "OLDPWD", new_path);
+	if (!cmd->cmd[1] || (ft_strcmp(cmd->cmd[1], "cd") == 0 && !cmd->cmd[2]))
 	{
-		printf("new path[before home: %s]\n", new_path);
+		if (!key_exists(data->env, "HOME"))
+		{
+			printf("minshell: cd: HOME not set\n");
+			return ;
+		}
 		go_to = chdir(get_env_var_value(data->env, "HOME"));
-		//new_path = getcwd(NULL, 0);
 		update_pwd(data, new_path);
-		printf("new path[home: %s]\n", new_path);
-		printf(G50"succesfully changed dir[home]\n"RESET);
 	}
 	else if (!cmd->cmd[2])
 	{
 		go_to = chdir(cmd->cmd[1]);
-		printf("go_to [%d]\n", go_to);
-		// new_path = getcwd(NULL, 0);
 		update_pwd(data, new_path);
-		printf("new path[current: %s]\n", new_path);
-		printf(G50"succesfully changed dir[current]\n"RESET);
 	}
 	if (go_to == -1)
-	{
 		printf(R124"no can do: GO_TO error!\n"RESET);
-		//should be a print error//
-	}
 	else
 		printf(R124"dir changed\n"RESET);
 	free(new_path);
-	printf("cd :D newpath+[%s]\n", new_path);
-	system("leaks -q minishell");
-	//exit_status?//
-	return ;
 }
-
-// else if (cmd->cmd[1] && ft_strncmp(cmd->cmd[1], "-", 1) == 0)
-	// {
-	// 	go_to = chdir(get_env_var_value(data->env, "OLDPDW"));
-	// 	new_path = getcwd(NULL, 0);
-	// 	printf("new path[previous: %s]\n", new_path);
-	// 	update_pwd(data, new_path);
-	// 	printf(G50"succesfully changed dir[previous]\n"RESET);
-	// }
