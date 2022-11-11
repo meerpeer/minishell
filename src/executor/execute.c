@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/10 10:50:23 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 13:57:27 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
-	redirect_out(cmd_data, mini_data);
+	redirect(cmd_data, mini_data);
 	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
 		echo_builtin(cmd_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "pwd", 4) == 0)
@@ -45,9 +45,11 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 void	child_process(t_cmd *cmd, t_mini *mini_data)
 {
 	extern char	**environ;
-
-	redirect_in(&cmd->fd_in, cmd->in_files);
-	redirect_out(cmd, mini_data);
+	
+	//signal(SIGINT, SIG_DFL);
+	//signal(SIGQUIT, SIG_DFL);
+	redirect(cmd, mini_data);
+	close(cmd->pipe_fd[READ_END]);
 	if (!cmd)
 		exit (0);
 	cmd->cmd_path = get_cmd_path(cmd->cmd[0], environ);

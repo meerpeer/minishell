@@ -6,23 +6,20 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:57:17 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/09 15:18:40 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 13:59:06 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	add_to_correct_list(t_file *file, t_cmd *cmd)
+bool	add_to_file_list(t_file *file, t_cmd *cmd)
 {
-	if (file->file_type == INPUT || file->file_type == INPUT_HEREDOC)
-	{
-		ft_lstadd_back(&cmd->in_files, ft_lstnew((void *)file));
-		return (true);
-	}
-	else if (file->file_type == OUTPUT_APPEND
+	if (file->file_type == INPUT
+		|| file->file_type == INPUT_HEREDOC
+		|| file->file_type == OUTPUT_APPEND
 		|| file->file_type == OUTPUT_TRUNC)
 	{
-		ft_lstadd_back(&cmd->out_files, ft_lstnew((void *)file));
+		ft_lstadd_back(&cmd->files, ft_lstnew((void *)file));
 		return (true);
 	}
 	return (false);
@@ -65,7 +62,7 @@ bool	try_parse_redirect(t_list **tokens, t_cmd *cmd)
 		return (print_error("syntax error near unexpected token `",
 				redirect_token->value, "'"), false);
 	file = create_file_struct(file_token, redirect_token);
-	if (add_to_correct_list(file, cmd))
+	if (add_to_file_list(file, cmd))
 		return (true);
 	free (file->file_name);
 	free (file);
