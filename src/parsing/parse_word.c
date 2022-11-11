@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/09 15:59:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 10:48:23 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	reallocate_to_word_length(t_word *word_copy)
 	char	*old_word;
 	int		i;
 
-	if (word_copy->malloced == word_copy->word_length)
+	if (word_copy->malloced <= word_copy->word_length - 1)
 		return ;
 	old_word = word_copy->word;
 	word_copy->word = protect_check(
@@ -34,6 +34,7 @@ static void	reallocate_to_word_length(t_word *word_copy)
 		word_copy->word[i] = old_word[i];
 		i++;
 	}
+	word_copy->word[i] = '\0';
 	free (old_word);
 }
 

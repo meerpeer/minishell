@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/10 10:46:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 10:38:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 			lexer(mini_data);	
 			if (try_parsing(mini_data))
 			{
-				print_cmds(mini_data);
+				//print_cmds(mini_data);
 				execute_cmds(mini_data);
 			}
 			ft_lstclear(&mini_data->tokens, delete_token_list);
