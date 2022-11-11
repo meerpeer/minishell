@@ -6,16 +6,15 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/28 09:12:16 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/10 13:41:16 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/09 15:16:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*	Checks if an operator is present in cmd_line. It return a 1 or 2 if this is
+/* checks if an operator is present in cmd_line. It return a 1 or 2 if this is
 	the case and 0 if no operator is present
 */
-
 int	found_operator(char *line, int index)
 {
 	if (line[index] != '\0' && line[index] == '|' && line[index +1] != '|')
@@ -32,7 +31,6 @@ int	found_operator(char *line, int index)
 }
 
 /*counts the amount of operators present*/
-
 int	count_operator(char *input)
 {
 	int		index;
@@ -58,10 +56,9 @@ static int	next_in_line(int *x)
 	return (*x = *x + 1);
 }
 
-/*	This functions sets space around an operator to isolate it. 
-	This is to split the input later on white space 
+/* this functions sets space around an operator to isolate it. This is to 
+	split the input later on white space 
 */
-
 static void	isolate_operator(char *new_line, char *str, int *index, int *x)
 {	
 	if (found_operator(str, *index) == 1)
@@ -91,10 +88,9 @@ static void	isolate_operator(char *new_line, char *str, int *index, int *x)
 	}
 }
 
-/*	We prep the line for splitting it on white space to get separate tokens.
-	Calloc for a new_line that will hold the line with isolated operators.
-	We return that new_line so it can be split on white space.
-*/
+/*We prep the line for splitting it on white space to get separate tokens
+	calloc for a new_line that will hold the line with isolated operators
+	we return that new_line so it can be split on white space*/
 char	*prep_line(char *str, int operator_count)
 {
 	char	*new_line;
@@ -103,8 +99,7 @@ char	*prep_line(char *str, int operator_count)
 
 	index = 0;
 	x = 0;
-	new_line = protect_check(ft_calloc((ft_strlen(str) + operator_count) + 1, \
-		sizeof(new_line)));
+	new_line = protect_check(ft_calloc((ft_strlen(str) + operator_count) + 1, sizeof(new_line)));
 	while (str[index])
 	{
 		if (found_operator(str, index))
