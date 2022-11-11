@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/10 10:46:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/11 10:24:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 		else
 			input = readline(Y185"🐌mini🐚$ "RESET);
 		if (input == NULL)
-			error_exit("Readline fail", NULL, NULL, 1);
+			error_exit("Readline fail", NULL, NULL, 1 );
 		if (input)
 		{
 			add_history(input);
