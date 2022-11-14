@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:17 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 15:55:22 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 14:18:57 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	echo_builtin(t_cmd *cmd_data)
 	add_newline = true;
 	cmd = cmd_data->cmd;
 	cmd++;
-	if (*cmd && ft_strncmp(*cmd, "-n", 3) == 0)
+	while (*cmd && ft_strncmp(*cmd, "-n", 2) == 0)
 	{
 		add_newline = false;
-		cmd++;
+		cmd ++;
+		while (*cmd && ft_strncmp(*cmd, "n", 1) == 0)
+			cmd++;
 	}
 	while (*cmd)
 	{
