@@ -6,11 +6,11 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 16:02:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:45:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	free_2d_array(char	**array)
 {

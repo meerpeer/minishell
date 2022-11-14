@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:38:27 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:49:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ void	execute_cmds(t_mini *data);
 char	*get_cmd_path(char *cmd, char **envp);
 void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
+void	open_files(int *fd_out, int *fd_in, t_list *file_list);
 
 //builtins
 void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);

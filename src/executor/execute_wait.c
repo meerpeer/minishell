@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   wait.c                                             :+:    :+:            */
+/*   execute_wait.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 09:54:49 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:38:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:52:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 */
 void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit)
 {
-	int status;
+	int	status;
 
 	waitpid(pid, &status, WUNTRACED);
 	while (wait(NULL) > 0)

@@ -6,13 +6,17 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:40:07 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 14:06:53 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+void	fork_error(t_mini *mini_data)
+{
+	print_error("fork: ", strerror(errno), NULL);
+	mini_data->exit_status = 1;
+}
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
@@ -47,7 +51,7 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 void	child_process(t_cmd *cmd, t_mini *mini_data)
 {
 	extern char	**environ;
-	
+
 	close(cmd->pipe_fd[READ_END]);
 	redirect(cmd, mini_data);
 	if (!cmd)
@@ -71,11 +75,7 @@ bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	pid = fork();
 	mini_data->last_pid = pid;
 	if (pid == -1)
-	{
-		print_error("fork: ", strerror(errno), NULL);
-		mini_data->exit_status = 1;
-		return (false);
-	}
+		return (fork_error(mini_data), false);
 	if (pid == 0)
 	{
 		if (cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
