@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/09 17:39:34 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/11 13:59:37 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/14 13:18:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	handle_signals(void)
 	struct sigaction	action;
 	struct termios		hide;
 
-	printf("in handle signals[1]\n");
+	//printf("in handle signals[1]\n");
 	tcgetattr(STDIN_FILENO, &hide);
 	hide.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &hide);

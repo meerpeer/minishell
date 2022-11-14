@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:59:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 11:56:27 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_cmd	*create_new_cmd(t_mini *mini_data, int index)
 	cmd->cmd_index = index;
 	cmd->cmd = NULL;
 	cmd->files = NULL;
+	cmd->fd_in = 0;
+	cmd->fd_out = 0;
 	mini_data->cmd_count++;
 	first = mini_data->cmds;
 	if (!first)

@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:32 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 15:35:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:17:03 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	open_files(int *fd_out, int *fd_in, t_list *file_list)
 //redirect in files
 static void	redirect_in(int *fd_in)
 {
-	//open_files(fd_in, in_files);
 	if (*fd_in)
 	{
 		if (dup2(*fd_in, STDIN_FILENO) == -1)
@@ -72,17 +71,16 @@ static void	redirect_in(int *fd_in)
 //redirect out files
 void	redirect_out(t_cmd *cmd, t_mini *mini_data)
 {
-	//open_files(&cmd->fd_out, cmd->out_files);
 	if (cmd->cmd_index != mini_data->cmd_count - 1)
 	{
 		if (dup2(cmd->pipe_fd[WRITE_END], STDOUT_FILENO) == -1)
-			perror("dup2");
+			print_error("dup2: ", strerror(errno), NULL);
 	}
 	close(cmd->pipe_fd[WRITE_END]);
 	if (cmd->fd_out > 0)
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
-			perror("dup2");
+			print_error("dup2: ", strerror(errno), NULL);
 		close(cmd->fd_out);
 	}
 }
