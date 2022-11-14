@@ -7,3 +7,4 @@ a.out
 *.a
 out*
 .gitignore
+*.log

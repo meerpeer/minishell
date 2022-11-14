@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/11 10:48:23 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 15:41:17 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	reallocate_to_word_length(t_word *word_copy)
 		return ;
 	old_word = word_copy->word;
 	word_copy->word = protect_check(
-			ft_calloc(word_copy->word_length + 2, sizeof(char)));
+			ft_calloc(word_copy->word_length + 1, sizeof(char)));
 	i = 0;
 	while (i < word_copy->word_length)
 	{
@@ -96,6 +96,8 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 			expand_env(word, &i, word_copy, mini_data);
 		else
 			add_char_to_word_copy(word[i], word_copy);
+		if(!word[i])
+			break ;
 		quote_type = update_quote_type(quote_type, word[i]);
 		i++;
 	}
