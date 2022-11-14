@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 14:06:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 15:59:43 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 */
 void	child_process(t_cmd *cmd, t_mini *mini_data)
 {
-	extern char	**environ;
-
 	close(cmd->pipe_fd[READ_END]);
 	redirect(cmd, mini_data);
 	if (!cmd)
 		exit (0);
-	cmd->cmd_path = get_cmd_path(cmd->cmd[0], environ);
-	if (execve(cmd->cmd_path, cmd->cmd, environ) == -1)
+	cmd->cmd_path = get_cmd_path(cmd->cmd[0], mini_data->env);
+	if (execve(cmd->cmd_path, cmd->cmd, mini_data->env) == -1)
 		error_exit(strerror(errno), NULL, NULL, 1);
 }
 
