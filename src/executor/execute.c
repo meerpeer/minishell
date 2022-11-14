@@ -6,11 +6,13 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:17:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:40:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
@@ -60,7 +62,7 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 	* @param data: minishell data;
 	* @return VOID
 */
-void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
+bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
 	pid_t	pid;
 
@@ -69,7 +71,11 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	pid = fork();
 	mini_data->last_pid = pid;
 	if (pid == -1)
-		print_error(strerror(errno), NULL, NULL);
+	{
+		print_error("fork: ", strerror(errno), NULL);
+		mini_data->exit_status = 1;
+		return (false);
+	}
 	if (pid == 0)
 	{
 		if (cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
@@ -83,16 +89,18 @@ void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	close (cmd_data->pipe_fd[WRITE_END]);
 	dup2(cmd_data->pipe_fd[READ_END], STDIN_FILENO);
 	close (cmd_data->pipe_fd[READ_END]);
-	return ;
+	return (true);
 }
 
 void	execute_cmds(t_mini *data)
 {
 	t_cmd	*cmd_data;
+	bool	set_exit;
 
 	cmd_data = data->cmds;
 	data->last_pid = -1;
 	backup_std_in_and_out(data->std_backup);
+	set_exit = true;
 	while (cmd_data)
 	{
 		if (data->cmd_count == 1 && cmd_data->cmd
@@ -101,9 +109,13 @@ void	execute_cmds(t_mini *data)
 			execute_builtin(cmd_data, data);
 			break ;
 		}
-		execute_in_child(cmd_data, data);
+		if (!execute_in_child(cmd_data, data))
+		{
+			set_exit = false;
+			break ;
+		}
 		cmd_data = cmd_data->next;
 	}
-	wait_for_cmds(&data->exit_status, data->last_pid);
+	wait_for_cmds(&data->exit_status, data->last_pid, set_exit);
 	restore_std_in_and_out(data->std_backup);
 }

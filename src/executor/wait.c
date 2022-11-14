@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 09:54:49 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 14:02:46 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 13:38:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 	* @param *pid: the current process ID to wait for;
 	* @return NOTHING
 */
-void	wait_for_cmds(int *exit_status, pid_t pid)
+void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit)
 {
 	int status;
 
 	waitpid(pid, &status, WUNTRACED);
 	while (wait(NULL) > 0)
 		continue ;
-	if (WIFEXITED(status))
+	if (WIFEXITED(status) && set_exit)
 		*exit_status = WEXITSTATUS(status);
 }

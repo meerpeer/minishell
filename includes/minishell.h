@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 14:16:43 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/14 13:38:27 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ void	save_read_fd(t_cmd *current_command, int pipe_read_end);
 bool	is_builtin(char *cmd);
 void	execute_cmds(t_mini *data);
 char	*get_cmd_path(char *cmd, char **envp);
-void	wait_for_cmds(int *exit_status, pid_t pid);
+void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //builtins
