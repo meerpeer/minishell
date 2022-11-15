@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_word.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: merel <merel@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/14 15:41:17 by mevan-de      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_word.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/31 10:58:39 by merel             #+#    #+#             */
+/*   Updated: 2022/11/15 17:36:53 by merel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,9 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 */
 bool	try_parse_word(char *word, t_cmd *cmd, t_mini *mini_data)
 {
-	int		i;
 	t_word	*word_copy;
 	bool	quotes_complete;
 
-	i = 0;
 	word_copy = init_word_copy();
 	quotes_complete = copy_word(word_copy, word, mini_data);
 	reallocate_to_word_length(word_copy);
