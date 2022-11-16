@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 08:47:37 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 15:31:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 10:50:50 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	get_key_size(int i, char *word)
 	int	size;
 
 	size = 0;
+	if (word[i + size] && word[i + size] == '?')
+		return (1);
 	while (word[i + size] && !is_white_space(word[i + size])
 		&& word[i + size] != '\"')
 		size++;
@@ -50,6 +52,16 @@ static char	*copy_key_to_str(int i, char *word, int size)
 	return (key);
 }
 
+static bool	check_is_only_expand_sign(char *word, int i, t_word *word_copy)
+{
+	if (!word[i] || word[i] == ' ' || word[i] == '\"')
+	{
+		add_char_to_word_copy('$', word_copy);
+		return (true);
+	}
+	return (false);
+}
+
 /**
  * @brief should expand the environment variable if it's there and should
  * increment i past the env variable;
@@ -67,10 +79,12 @@ void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data)
 	char	*value;
 
 	*i = *i + 1;
+	if (check_is_only_expand_sign(word, *i, word_copy))
+		return ;
 	size = get_key_size(*i, word);
 	key = copy_key_to_str(*i, word, size);
-	*i = *i + size;
-	if (ft_strncmp(key, "?", 1) == 0 && key[1] == '\0')
+	*i = *i + size ;
+	if (ft_strncmp(key, "?", 1) == 0)
 	{
 		value = protect_check(ft_itoa(mini_data->exit_status));
 		free(key);

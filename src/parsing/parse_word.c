@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/16 08:21:30 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 10:53:33 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 		if (quote_type != NO_QUOTE)
 			loop_quote(word, &i, word_copy, mini_data);
 		else if (word[i] == '$')
+		{
 			expand_env(word, &i, word_copy, mini_data);
+			continue ;
+		}
 		else
 			add_char_to_word_copy(word[i], word_copy);
 		if (!word[i])
@@ -101,10 +104,9 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 		quote_type = update_quote_type(quote_type, word[i]);
 		i++;
 	}
-	if (quote_type != NO_QUOTE)
-		return (print_error("syntax error: multiline command", NULL, NULL),
-			false);
-	return (true);
+	if (quote_type == NO_QUOTE)
+		return (true);
+	return (print_error("syntax error: multiline command", NULL, NULL), false);
 }
 
 /**

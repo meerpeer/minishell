@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 21:52:04 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 10:42:57 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool	try_parsing(t_mini *mini_data)
 		current_token = tokens->content;
 		if (current_token->type == IS_PIPE)
 			return (print_error("syntax error near unexpected token `|'",
-				NULL, NULL), false);
+					NULL, NULL), false);
 		if (tokens && !try_fill_cmd(&tokens, cmd, mini_data))
 			return (false);
 		if (!tokens)
@@ -99,7 +99,7 @@ bool	try_parsing(t_mini *mini_data)
 		tokens = tokens->next;
 		if (!tokens)
 			return (print_error("Multiline pipe not handled",
-				NULL, NULL), false);
+					NULL, NULL), false);
 	}
 	return (true);
 }
