@@ -1,0 +1,200 @@
+/*
+  info_mimi.strings
+  minishell_xcd
+
+  Created by Julia Demura on 15/07/2022.
+  
+*/
+
+TEST
+
+#BUILTIN echo
+echo
+echo -n
+echo -nnnnnnnnnnn
+echo -n -n
+echo -nf -n
+echo -n -nf
+echo test -n
+echo -n test
+echo test -n -n
+echo -n -n test
+echo -n test -n
+echo testOne testTwo testThree
+echo $PWD
+echo $OLDPWD
+echo ''
+
+
+#BUILTIN cd
+cd
+cd NOT_EXISTING_DIR
+
+
+'//cd NOT_EXISTING_FILE - ??
+'//cd LICENSE		-??
+cd ..
+cd includes/../srcs
+
+
+
+#BUILTIN env
+env | grep --invert-match | sort
+env
+
+#BUILTIN pwd
+pwd
+pwd bla
+pwd 1
+pwd bla bla
+
+
+#BUILTIN unset
+unset USER
+unset BLA
+unset bla
+unset PATH1
+unset 1PATH !!!!!!! err
+unset PATH USER
+unset PATH USER LOGNAME
+unset _PATH
+unset PATH_
+
+
+#BUILTIN export
+export | grep --invert-match 'declare -x _='
+
+#QUOTES single quote
+echo 'hello there'
+echo '"hello there"'
+echo ''hello''
+echo '$PWD'
+echo 'I am a pipe | and I am a redirect > < << >>'
+
+#QUOTES double quote
+echo "hello there"
+echo "'hello there'"
+echo ""hello""
+echo "$PWD"
+echo "I am a pipe | and I am a redirect > < << >>"
+
+
+#REDIRECT input
+< Makefile
+cat < Makefile
+cat < LICENSE < Makefile
+cat < Dockerfile < LICENSE < Makefile
+
+
+#REDIRECT output
+ls -la > OUT
+cat < Makefile > OUT
+ls -la > OUT1 > OUT2
+ls -la > OUT1 > OUT2 > OUT3
+
+
+#REDIRECT heredoc
+#PIPES
+ls -l | wc -l
+echo "bla di bla" | wc -l
+echo "bla di bla" | grep "bla" | wc -l
+env | ls -l | wc -l
+echo cat | wc -l | cat
+pwd | cat | env | sort
+echo one | cat -e | cat -e | grep one
+ls -l | wc -l | echo cat
+ls -l | wc -l | echo cat | wc -l
+pwd | wc -l | echo cat | wc -l
+ls -l | head -n 6 | tail -n 5 | head -n 4 | tail -n 3 | head -n 2 | wc -l
+
+#BUILTIN exit
+exit
+exit 255
+exit 10000
+exit bla 24
+exit 24 bla
+exit bla bla
+exit bla bla bla
+exit 1 2 3
+exit -3
+exit -3 7
+
+
+#PARSER spaces
+echo one  two   three    four
+cat<Makefile|grep NAME>OUT
+
+
+#PARSER word splitting
+cat Make'file'
+cat 'Make'file
+cat Make"file"
+cat "Make"file
+cat "Make"'file'
+cat 'Make'"file"
+cat $HOME"/.bashrc"
+ls "$HOME"'/../'$USER
+echo $USER$PWD
+
+#PARSER normalization / word order
+< Makefile cat
+< README.md < Makefile cat -e
+cat < README.md < Makefile -e
+< README.md cat -e < Makefile
+> OUT cat -e < Makefile
+< Makefile grep NAME > OUT
+
+#PATHRESOLVE
+ls
+/bin/ls
+/bin/../bin/ls
+/usr/bin/../../bin/ls
+
+#ENVIRONMENT variables
+echo $
+echo $USER
+echo "$USER"
+echo "$USER $PWD $HOME"
+echo one | grep -q two
+
+
+#EVAL
+/bin/ls
+/bin/ls -l
+echo Hi
+echo -n Hi
+exit
+exit 42
+exit -3
+exit bla
+/bin/ls -l
+/bin/ls filethatdoesntexist
+expr $? + $?
+echo "bla bla"
+echo "cat lol.c | cat > lol.c"
+echo ''
+echo 'bla'
+exit '42'
+echo 'env'
+echo 'ls -l | wc -l'
+echo '$USER'
+env | sort
+env | grep USER=
+cd tests
+cd tests
+cd .
+cd ..
+pwd
+export TEST=1
+unset TEST
+export TEST=directory1:directory2
+cat < Makefile
+< Makefile cat
+ls -la > OUT1
+< OUT1 ls -la >> OUT1
+dsbksdgbksdghsd
+echo $PATH
+echo "$PATH"
+echo $USER
+echo "$USER"
+
