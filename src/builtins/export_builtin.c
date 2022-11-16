@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 22:17:33 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 14:05:19 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	print_export(char **env)
 
 bool	is_valid_export(char *export)
 {
-	int	i;
+	int		i;
+	char	*key;
 
 	if (!ft_isalpha(export[0]) && export[0] != '_')
 		return (false);
@@ -59,8 +60,21 @@ bool	is_valid_export(char *export)
 	while (export[i])
 	{
 		if (export[i])
-		i++;
+			i++;
 	}
+	key = get_key_from_full_env_var(export);
+	if (!key)
+		return (false);
+	i = 0;
+	while (key[i]
+		&& (ft_isalpha(key[i]) || ft_isdigit(key[i]) || key[i] == '+'))
+		i++;
+	if (key[i])
+	{
+		free (key);
+		return (false);
+	}
+	free (key);
 	return (true);
 }
 
@@ -79,18 +93,21 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 		i = 1;
 		while (to_export[i])
 		{
+			key = get_key_from_full_env_var(to_export[i]);
 			if (is_valid_export(to_export[i]))
 			{
-				key = get_key_from_full_env_var(to_export[i]);
 				value = get_value_from_full_env_var(to_export[i]);
 				if (key_exists(data->env, key))
 					set_key_value(data->env, key, value);
 				else
 					add_new_env_entry(&data->env, key, value);
-				free (key);
 			}
 			else
-				error_exit(key, ": not a valid identifier", NULL, 1);
+			{
+				print_error(key, ": not a valid identifier", NULL);
+				data->exit_status = 1;
+			}
+			free (key);
 			i++;
 		}
 	}
