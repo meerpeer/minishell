@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:58:39 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/14 15:41:17 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:54:01 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static bool	copy_word(t_word *word_copy, char *word, t_mini *mini_data)
 			expand_env(word, &i, word_copy, mini_data);
 		else
 			add_char_to_word_copy(word[i], word_copy);
-		if(!word[i])
+		if (!word[i])
 			break ;
 		quote_type = update_quote_type(quote_type, word[i]);
 		i++;

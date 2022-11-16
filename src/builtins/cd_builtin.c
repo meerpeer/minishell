@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 14:12:48 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/15 22:11:16 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	ft_strcmp(char *s1, char *s2)
 static void	update_pwd(t_mini *data, char *new_path)
 {
 	new_path = getcwd(NULL, 0);
-	set_key_value(data->env, "PWD", new_path);
+	if (key_exists(data->env, "PWD"))
+		set_key_value(data->env, "PWD", new_path);
 	free(new_path);
 }
 
@@ -33,10 +34,20 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 {
 	int		go_to;
 	char	*new_path;
+	char	*empty;
+
+	empty = " ";
 
 	go_to = 0;
 	new_path = getcwd(NULL, 0);
-	set_key_value(data->env, "OLDPWD", new_path);
+	if (key_exists(data->env, "PWD"))
+		set_key_value(data->env, "OLDPWD", new_path);
+	else
+	{
+		set_key_value(data->env, "OLDPWD", empty);
+		printf("pwd does not exixt\n");
+	} 
+		
 	if (!cmd->cmd[1] || (ft_strcmp(cmd->cmd[1], "cd") == 0 && !cmd->cmd[2]))
 	{
 		if (!key_exists(data->env, "HOME"))
@@ -58,3 +69,4 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 		printf(R124"dir changed\n"RESET);
 	free(new_path);
 }
+// need to set OLDPWD to "OLDPWD= " is PWD is unset

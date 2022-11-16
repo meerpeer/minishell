@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/23 14:17:46 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 11:29:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:55:45 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_key_from_full_env_var(char *full_str)
 {
 	int		i;
 	char	*key;
-	
+
 	i = 0;
 	key = NULL;
 	while (full_str[i] && full_str[i] != '=')

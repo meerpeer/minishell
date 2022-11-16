@@ -6,13 +6,13 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/02 18:12:33 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/14 15:36:35 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:33:30 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int 	check_token_type(char *content)
+int	check_token_type(char *content)
 {
 	t_token_type	type;
 	int				index;
@@ -38,7 +38,7 @@ t_token	*new_token_node(char *content)
 {
 	t_token	*new_input;
 
-	new_input = protect_check((t_token*)malloc(sizeof(t_token)));
+	new_input = protect_check((t_token *)malloc(sizeof(t_token)));
 	new_input->value = protect_check(ft_strdup(content));
 	new_input->type = check_token_type(content);
 	return (new_input);

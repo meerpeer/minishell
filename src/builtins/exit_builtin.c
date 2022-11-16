@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:27 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 16:58:25 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 22:17:56 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static bool	is_num(char *str)
 	if (!str)
 		return (false);
 	i = 0;
-	while(is_white_space(str[i]))
+	while (is_white_space(str[i]))
 		i++;
-	if(str[i] == '-' || str[i] == '+')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i])
 	{
@@ -62,7 +62,7 @@ static bool	is_num(char *str)
 		{
 			while (is_white_space(str[i]))
 				i++;
-			if(str[i] == '\0')
+			if (str[i] == '\0')
 				return (true);
 			return (false);
 		}

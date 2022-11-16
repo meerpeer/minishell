@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:49:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:38:33 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ typedef struct s_file {
 // Struct for every cmd, includes the files with their types 
 typedef struct s_cmd {
 	char	**cmd;
+	char	*cmd_path;
 	t_list	*files;
 	int		cmd_index;
-	char	*cmd_path;
 	int		pipe_fd[2];
 	int		fd_in;
 	int		fd_out;
@@ -163,8 +163,8 @@ void	prompt_loop(t_mini *mini_data, char *input_outside);
 //error
 void	error_exit(char *s1, char *s2, char *s3, int errorCode);
 void	*protect_check(void *ptr);
-int		exit_program(char *message, int id);
 void	print_error(char *s1, char *s2, char *s3);
+int		exit_program(char *message, int id);
 
 //clean
 void	reset_mini_data(t_mini *mini_data);
@@ -175,36 +175,36 @@ void	free_2d_array_(char **array);
 //utils
 t_quote	get__quote_type(char c);
 t_quote	update_quote_type(t_quote quote_type, char c);
-char	*join_3_strings(char *s1, char *s2, char *s3);
 void	add_to_2d_array(char ***array, char *word);
 bool	is_white_space(char c);
+char	*join_3_strings(char *s1, char *s2, char *s3);
 
 //init
 t_mini	*init_mini_data(void);
 
 //environment variables
-int		get_count_env_vars(char **env);
-char	*get_env_var_value(char **env, char *key);
 void	add_new_env_entry(char ***env, char *key, char *value);
 void	delete_env_entry(char **env, char *key);
 void	set_key_value(char **env, char *key, char *value);
+int		get_count_env_vars(char **env);
 int		get_env_var_index(char **env, char *key);
 bool	key_exists(char **env, char *key);
+bool	is_variable_set(char *env_variable);
+char	*get_env_var_value(char **env, char *key);
 char	*get_key_from_full_env_var(char *full_str);
 char	*get_value_from_full_env_var(char *full_str);
-bool	is_variable_set(char *env_variable);
 
 //execute
 void	backup_std_in_and_out(int backup[2]);
 void	restore_std_in_and_out(int backup[2]);
 void	redirect(t_cmd *cmd, t_mini	*mini_data);
 void	save_read_fd(t_cmd *current_command, int pipe_read_end);
-bool	is_builtin(char *cmd);
 void	execute_cmds(t_mini *data);
-char	*get_cmd_path(char *cmd, char **envp);
 void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit);
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data);
 void	open_files(int *fd_out, int *fd_in, t_list *file_list);
+bool	is_builtin(char *cmd);
+char	*get_cmd_path(char *cmd, char **envp);
 
 //builtins
 void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);
@@ -217,15 +217,19 @@ void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //lexer
 void	lexer(t_mini *mini_data);
+void	chop_loop(char **strptr, int x, char *str, int *index);
+void	isolate_operater(char *new_line, char *line, int *temp, int *index);
+void	print_list(t_list *tokens);
+void	delete_token_list(void *content);
 int		count_quote(char *line, char c);
 int		found_operator(char *line, int index);
 int		count_operator(char *input);
-int 	check_token_type(char *content);
-void	isolate_operater(char *new_line, char *line, int *temp, int *index);
+int		check_token_type(char *content);
+int		word_len(char *str, int tracker);
+int		word_count(char *str);
+int		find_char(char c);
 char	*prep_line(char *line, int operator_count);
 char	**split(char *str);
-void	print_list(t_list *tokens);
-void	delete_token_list(void *content);
 t_token	*new_token_node(char *content);
 
 //parser
@@ -242,4 +246,8 @@ void	create_heredoc(char *delimit);
 //signals
 void	handle_signals(void);
 void	set_signals_noninteractive(void);
+void	deactivate_signals(void);
+void	activate_signals(void);
+void	clear_prompt(int num);
+
 #endif

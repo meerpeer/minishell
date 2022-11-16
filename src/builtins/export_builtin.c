@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/09 10:58:22 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 22:17:33 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	print_export_key(char *env_var)
 	char	*key;
 
 	key = get_key_from_full_env_var(env_var);
-	
 	ft_putstr_fd(key, STDOUT_FILENO);
 	free (key);
 }
@@ -52,7 +51,7 @@ void	print_export(char **env)
 
 bool	is_valid_export(char *export)
 {
-	int i;
+	int	i;
 
 	if (!ft_isalpha(export[0]) && export[0] != '_')
 		return (false);
@@ -64,7 +63,6 @@ bool	is_valid_export(char *export)
 	}
 	return (true);
 }
-
 
 void	export_builtin(t_cmd *cmd, t_mini *data)
 {

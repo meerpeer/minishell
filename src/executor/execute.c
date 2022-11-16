@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 15:59:43 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:22:02 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 */
 void	child_process(t_cmd *cmd, t_mini *mini_data)
 {
+	deactivate_signals();
 	close(cmd->pipe_fd[READ_END]);
 	redirect(cmd, mini_data);
 	if (!cmd)
@@ -68,6 +69,7 @@ bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
 	pid_t	pid;
 
+	signal(SIGINT, SIG_IGN);
 	if (pipe(cmd_data->pipe_fd) == -1)
 		error_exit(strerror(errno), NULL, NULL, 1);
 	pid = fork();
@@ -82,7 +84,9 @@ bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 			exit (0);
 		}
 		else
+		{
 			child_process(cmd_data, mini_data);
+		}
 	}
 	close (cmd_data->pipe_fd[WRITE_END]);
 	dup2(cmd_data->pipe_fd[READ_END], STDIN_FILENO);

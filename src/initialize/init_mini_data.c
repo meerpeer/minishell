@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 16:01:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 21:55:01 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ void	update_shell_level(char **env)
 	* @param *env environment variables from the main env;
 	* @return the copied environment variables!
 */
-char	**copy_env()
+char	**copy_env(void)
 {
 	int			i;
 	extern char	**environ;
 	char		**copy_env;
-	
+
 	i = 0;
 	copy_env = ft_calloc(get_count_env_vars(environ) + 1, sizeof(char *));
 	if (!copy_env)
 		error_exit("environment variable copy failed\n", NULL, NULL, 1);
-	while(environ[i])
+	while (environ[i])
 	{
 		copy_env[i] = protect_check(ft_strdup(environ[i]));
 		i++;

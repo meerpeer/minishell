@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 09:11:46 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/11 10:49:00 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/15 22:16:59 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 */
 char	*join_3_strings(char *s1, char *s2, char *s3)
 {
-	char *full_sentence;
-	char *temp_join;
+	char	*full_sentence;
+	char	*temp_join;
 
 	if (!s1)
 		return (NULL);
@@ -47,9 +47,9 @@ char	*join_3_strings(char *s1, char *s2, char *s3)
 */
 void	add_to_2d_array(char ***array, char *word)
 {
-	int i;
-	char **new_array;
-	char **old_array;
+	int		i;
+	char	**new_array;
+	char	**old_array;
 
 	old_array = *array;
 	i = 0;
@@ -79,7 +79,7 @@ t_quote	get__quote_type(char c)
 	return (NO_QUOTE);
 }
 
-t_quote update_quote_type(t_quote quote_type, char c)
+t_quote	update_quote_type(t_quote quote_type, char c)
 {
 	if (quote_type == NO_QUOTE)
 		quote_type = get__quote_type(c);
@@ -90,7 +90,8 @@ t_quote update_quote_type(t_quote quote_type, char c)
 
 bool	is_white_space(char c)
 {
-	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ' || c == '\f')
+	if (c == '\n' || c == '\t' || c == '\v' || \
+		c == '\r' || c == ' ' || c == '\f')
 		return (true);
 	return (false);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   split_str.c                                        :+:    :+:            */
+/*   split_utiles.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/11 11:39:31 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/15 21:33:16 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int find_char(char c)
+int	find_char(char c)
 {
 	if (c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == ' ')
 		return (1);
@@ -29,11 +29,11 @@ static t_quote	get_quote_type(char c)
 	return (NO_QUOTE);
 }
 
-int word_count(char *str)
+int	word_count(char *str)
 {
-	int index;
-	int words;
-	t_quote quote_type;
+	int		index;
+	int		words;
+	t_quote	quote_type;
 
 	quote_type = NO_QUOTE;
 	if (!str)
@@ -48,7 +48,8 @@ int word_count(char *str)
 			quote_type = NO_QUOTE;
 		if (quote_type == NO_QUOTE || str[index + 1] == '\0')
 		{
-			if (find_char(str[index]) == 0 && (find_char(str[index  +  1]) == 1 || str[index + 1] == '\0'))
+			if (find_char(str[index]) == 0 && \
+			(find_char(str[index + 1]) == 1 || str[index + 1] == '\0'))
 				words++;
 		}
 		index++;
@@ -56,16 +57,15 @@ int word_count(char *str)
 	return (words);
 }
 
-int word_len(char *str, int tracker)
+int	word_len(char *str, int tracker)
 {
-	int word_len;
-
-	t_quote quote_type;
+	int		word_len;
+	t_quote	quote_type;
 
 	quote_type = NO_QUOTE;
 	word_len = 0;
 	if (!str)
-		return(0);
+		return (0);
 	while (str[tracker] != '\0')
 	{
 		if (quote_type == NO_QUOTE)
@@ -95,71 +95,3 @@ void	chop_loop(char **strptr, int x, char *str, int *index)
 	}
 	strptr[x][y] = '\0';
 }
-
-char	**chop_str(char *str, char **strptr, int words)
-{
-	int	index;
-	int	x;
-
-	if (!str)
-		return (0);
-	index = 0;
-	x = 0;
-	while (str[index] != '\0' && x < words)
-	{
-		while (find_char(str[index]) == 1)
-			index++;
-		strptr[x] = protect_check((char *)malloc(sizeof(char) \
-			* word_len(str, index) + 1));
-		chop_loop(strptr, x, str, &index);
-		x++;
-	}
-	strptr[x] = NULL;
-	return (strptr);
-}
-
-char **split(char *str)
-{
-	char **strptr;
-	int words;
-
-	if (str == NULL)
-		return (NULL);
-	words = word_count(str);
-	strptr = protect_check((char **)malloc(sizeof (char *) * (words + 1)));
-	if (strptr == NULL)
-		return (NULL); 
-	return (chop_str(str, strptr, words));
-}
-
-// char **chop_str(char *str, char **strptr, int words)
-// {
-// 	int index;
-// 	int x;
-// 	int y;
-// 	int word_end_index;
-
-// 	word_end_index = 0; 
-// 	if (!str)
-// 		return (0);
-// 	index = 0;
-// 	x = 0;
-// 	while (str[index] != '\0' && x < words)
-// 	{
-// 		y = 0;
-// 		while (find_char(str[index]) == 1)
-// 			index++;
-// 		strptr[x] = protect_check((char *)malloc(sizeof(char) * word_len(str, index) + 1));
-// 		word_end_index = word_len(str, index) + index;
-// 		while (index < word_end_index && str[index] != '\0')
-// 		{
-// 			strptr[x][y] = str[index];
-// 			y++;
-// 			index++;
-// 	}
-// 	strptr[x][y] = '\0';
-// 	x++;
-// 	}
-// 	strptr[x] = NULL;
-// 	return (strptr);
-// }

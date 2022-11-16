@@ -15,8 +15,8 @@ SRC_FILES = main.c prompt.c\
 			environment/env_gets.c environment/env_change.c environment/env_utils.c\
 			error/error.c\
 			utils/free_data.c utils/string_utils.c\
-			lexer/lexer_utils.c lexer/lexer.c lexer/split_str.c lexer/print_list.c\
-			lexer/token_utils.c\
+			lexer/lexer_utils.c lexer/lexer.c lexer/split_utiles.c lexer/print_list.c\
+			lexer/token_utils.c lexer/split_for_tokens.c\
 			parsing/parse_print.c parsing/parse_redirect.c parsing/parse.c parsing/parse_word.c\
 			parsing/parse_expand.c parsing/parse_quote.c parsing/parse_heredoc.c\
 			signals/signals.c
@@ -37,8 +37,6 @@ ORANGE			=	\033[38;5;208m
 NO_COLOR		=	\033[0m
 #-------------------------------------------#
 
-
-
 all: start $(NAME)
 
 start:
@@ -46,7 +44,7 @@ start:
 		@echo "\033[38;5;42m\t╔╦╗╦╔╗╔╦╔═╗╦ ╦╔═╗╦  ╦\033[0m"
 		@echo "\033[38;5;43m\t║║║║║║║║╚═╗╠═╣║╣ ║  ║\033[0m"  
 		@echo "\033[38;5;44m\t╩ ╩╩╝╚╝╩╚═╝╩ ╩╚═╝╩═╝╩═╝\033[0m"
-		@echo "\033[38;5;25m\t  WE SHALL BASH!\033[0m"
+		@echo "\033[38;5;25m\t    WE SHALL BASH!\033[0m"
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS)  $(OBJS) $(LIB) -o $(NAME)
@@ -61,6 +59,11 @@ clean:
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)
+		@echo "\033[38;5;118m 🐌The Operating Systers 🐚 thank you for using:\033[0m"
+		@echo "\033[38;5;64m\t╔╦╗╦╔╗╔╦╔═╗╦ ╦╔═╗╦  ╦\033[0m"
+		@echo "\033[38;5;65m\t║║║║║║║║╚═╗╠═╣║╣ ║  ║\033[0m"  
+		@echo "\033[38;5;66m\t╩ ╩╩╝╚╝╩╚═╝╩ ╩╚═╝╩═╝╩═╝\033[0m"
+		@echo "\033[38;5;230m\t    WE SHALL BASH!\033[0m"
 
 re: fclean all
 
