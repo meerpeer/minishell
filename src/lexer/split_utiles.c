@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:50:08 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/15 21:33:16 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 09:53:19 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	find_char(char c)
 		return (0);
 }
 
-static t_quote	get_quote_type(char c)
+t_quote	get_quote_type(char c)
 {
 	if (c == '\'')
 		return (SINGLE);

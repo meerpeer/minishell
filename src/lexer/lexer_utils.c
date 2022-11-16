@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/28 09:12:16 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/15 21:24:09 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 09:56:11 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,20 @@ char	*prep_line(char *str, int operator_count)
 	char	*new_line;
 	int		index;
 	int		x;
+	t_quote	quote_type;
 
 	index = 0;
 	x = 0;
+	quote_type = NO_QUOTE;
 	new_line = protect_check(ft_calloc((ft_strlen(str) + operator_count) \
 		+ 1, sizeof(new_line)));
 	while (str[index])
 	{
-		if (found_operator(str, index))
+		if (quote_type == NO_QUOTE)
+			quote_type = get_quote_type(str[index]);
+		else if (quote_type == get_quote_type(str[index]))
+			quote_type = NO_QUOTE;
+		if (found_operator(str, index) && quote_type == NO_QUOTE)
 			isolate_operator(new_line, str, &index, &x);
 		new_line[x] = str[index];
 		x++;

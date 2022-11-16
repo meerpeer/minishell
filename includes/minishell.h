@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 21:38:33 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 09:54:40 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ int		word_count(char *str);
 int		find_char(char c);
 char	*prep_line(char *line, int operator_count);
 char	**split(char *str);
+t_quote	get_quote_type(char c);
 t_token	*new_token_node(char *content);
 
 //parser
