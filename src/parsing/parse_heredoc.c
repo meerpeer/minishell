@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 13:10:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 20:55:22 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 18:01:04 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	here_doc_write(char *delimit)
 	if (heredoc_fd == -1)
 		exit (1);
 	delimit_len = ft_strlen(delimit);
-	//signal(SIGINT, SIG_IGN);
 	while ("ants exist")
 	{
 		input = readline("> ");
@@ -38,14 +37,12 @@ static void	here_doc_write(char *delimit)
 		free(input);
 	}
 	signal(SIGINT, SIG_DFL);
-	//activate_signals();
 }
 
 void	create_heredoc(char *delimit)
 {
 	int	pid;
 
-	//signal(SIGINT, SIG_DFL);
 	pid = fork();
 	if (pid == -1)
 		error_exit(strerror(errno), NULL, NULL, 1);
