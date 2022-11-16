@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/16 08:12:17 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 10:04:24 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 		else
 			input = readline(Y185"MINISHELL$ "RESET);
 		if (input == NULL)
-			error_exit("exit", NULL, NULL, 1);// kloptniet.nl
+			exit(mini_data->exit_status);
 		if (input)
 		{
 			add_history(input);

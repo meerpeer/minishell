@@ -1,6 +1,6 @@
 .vscode
 minishell
-test*
+tester/test_files/invalid*
 *.DS*
 a.out
 *.o
