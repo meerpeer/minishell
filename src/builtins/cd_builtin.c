@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 09:36:19 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 14:11:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	check_if_key_exist(t_mini *data, char *new_path)
 	else
 	{
 		set_key_value(data->env, "OLDPWD", empty);
-		printf("pwd does not exixt\n");
+		printf("pwd does not exist\n");
 	}
 }
 
@@ -56,7 +56,8 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 	{
 		if (!key_exists(data->env, "HOME"))
 		{
-			printf("minshell: cd: HOME not set\n");
+			print_error(cmd->cmd[0], ": HOME not set", NULL);
+			data->exit_status = 1;
 			return ;
 		}
 		go_to = chdir(get_env_var_value(data->env, "HOME"));
@@ -68,7 +69,10 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 		update_pwd(data, new_path);
 	}
 	if (go_to == -1)
-		printf(R124"no can do: GO_TO error!\n"RESET);// exit ???
+	{
+		print_error(strerror(errno), NULL, NULL);
+		data->exit_status = 1;
+	}
 	free(new_path);
 }
 // need to set OLDPWD to "OLDPWD= " is PWD is unset
