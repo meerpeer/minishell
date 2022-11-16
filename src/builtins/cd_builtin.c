@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 22:11:16 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 09:36:19 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,28 @@ static void	update_pwd(t_mini *data, char *new_path)
 	free(new_path);
 }
 
-void	cd_builtin(t_cmd *cmd, t_mini *data)
+static void	check_if_key_exist(t_mini *data, char *new_path)
 {
-	int		go_to;
-	char	*new_path;
 	char	*empty;
 
 	empty = " ";
-
-	go_to = 0;
-	new_path = getcwd(NULL, 0);
 	if (key_exists(data->env, "PWD"))
 		set_key_value(data->env, "OLDPWD", new_path);
 	else
 	{
 		set_key_value(data->env, "OLDPWD", empty);
 		printf("pwd does not exixt\n");
-	} 
-		
+	}
+}
+
+void	cd_builtin(t_cmd *cmd, t_mini *data)
+{
+	int		go_to;
+	char	*new_path;
+
+	go_to = 0;
+	new_path = getcwd(NULL, 0);
+	check_if_key_exist(data, new_path);
 	if (!cmd->cmd[1] || (ft_strcmp(cmd->cmd[1], "cd") == 0 && !cmd->cmd[2]))
 	{
 		if (!key_exists(data->env, "HOME"))
@@ -64,9 +68,7 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 		update_pwd(data, new_path);
 	}
 	if (go_to == -1)
-		printf(R124"no can do: GO_TO error!\n"RESET);
-	else
-		printf(R124"dir changed\n"RESET);
+		printf(R124"no can do: GO_TO error!\n"RESET);// exit ???
 	free(new_path);
 }
 // need to set OLDPWD to "OLDPWD= " is PWD is unset
