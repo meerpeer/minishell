@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/03 14:56:25 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/11 13:58:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 14:59:29 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	print_cmds(t_mini *mini_data)
 		print_cmd_word(cmd->cmd);
 		printf("files:\t");
 		print_cmd_files(cmd->files);
-		//printf("outiles:\t");
-		//print_cmd_files(cmd->out_files);
 		cmd = cmd->next;
 		printf("-------------------\n");
 	}

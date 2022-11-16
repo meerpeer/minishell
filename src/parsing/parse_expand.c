@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 08:47:37 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 10:50:50 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 14:58:30 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int	get_key_size(int i, char *word)
 	int	size;
 
 	size = 0;
-	if (word[i + size] && word[i + size] == '?')
+	if (word[i + size] && (word[i + size] == '?' || ft_isdigit(word[i + size])))
 		return (1);
 	while (word[i + size] && !is_white_space(word[i + size])
-		&& word[i + size] != '\"')
+		&& ft_isalnum(word[i + size]))
 		size++;
 	return (size);
 }

@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 09:13:15 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 10:37:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 14:58:38 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data)
 		quote_type = update_quote_type(quote_type, word[*i]);
 		if (quote_type == NO_QUOTE)
 			return ;
-		if (should_expand && word[*i] == '$')
+		else if (should_expand && word[*i] == '$')
 			expand_env(word, i, word_copy, mini_data);
 		else
 		{
