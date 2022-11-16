@@ -6,50 +6,13 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 16:45:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 17:58:18 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_export_key(char *env_var)
-{
-	char	*key;
-
-	key = get_key_from_full_env_var(env_var);
-	ft_putstr_fd(key, STDOUT_FILENO);
-	free (key);
-}
-
-void	try_print_export_value(char *env_var)
-{
-	char	*value;
-
-	value = get_value_from_full_env_var(env_var);
-	if (!value)
-		return ;
-	ft_putchar_fd('=', STDOUT_FILENO);
-	ft_putchar_fd('"', STDOUT_FILENO);
-	ft_putstr_fd(value, STDOUT_FILENO);
-	ft_putchar_fd('"', STDOUT_FILENO);
-}
-
-void	print_export(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		print_export_key(env[i]);
-		try_print_export_value(env[i]);
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		i++;
-	}
-}
-
-bool	is_valid_export(char *export)
+static bool	is_valid_export(char *export)
 {
 	int		i;
 	char	*key;
@@ -78,42 +41,41 @@ bool	is_valid_export(char *export)
 	return (true);
 }
 
-void	export_builtin(t_cmd *cmd, t_mini *data)
+static void	export_argument(char *cmd, t_mini *data)
 {
-	char	**to_export;
-	int		i;
 	char	*key;
 	char	*value;
 
-	to_export = cmd->cmd;
-	if (!to_export[1])
+	key = get_key_from_full_env_var(cmd);
+	if (is_valid_export(cmd))
+	{
+		value = get_value_from_full_env_var(cmd);
+		if (key_exists(data->env, key))
+			set_key_value(data->env, key, value);
+		else
+			add_new_env_entry(data, key, value);
+	}
+	else
+	{
+		print_error(key, ": not a valid identifier", NULL);
+		data->exit_status = 1;
+	}
+	free (key);
+}
+
+void	export_builtin(t_cmd *cmd, t_mini *data)
+{
+	int		i;
+
+	if (!cmd->cmd[1])
 		print_export(data->env);
 	else
 	{
 		i = 1;
-		while (to_export[i])
+		while (cmd->cmd[i])
 		{
-			key = get_key_from_full_env_var(to_export[i]);
-			if (is_valid_export(to_export[i]))
-			{
-				value = get_value_from_full_env_var(to_export[i]);
-				if (key_exists(data->env, key))
-					set_key_value(data->env, key, value);
-				else
-					add_new_env_entry(data, key, value);
-			}
-			else
-			{
-				print_error(key, ": not a valid identifier", NULL);
-				data->exit_status = 1;
-			}
-			free (key);
+			export_argument(cmd->cmd[i], data);
 			i++;
 		}
 	}
 }
-
-// export: `", s,
-//				"': not a valid identifier"
-// if starting with a number
-// if starting with anything else then _ or alphabetic char

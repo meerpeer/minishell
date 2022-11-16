@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 16:43:29 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 17:49:36 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ void	echo_builtin(t_cmd *cmd);
 void	env_builtin(t_mini *mini_data, char **cmd);
 void	exit_builtin(char **cmd, t_mini *data);
 void	export_builtin(t_cmd *cmd, t_mini *data);
+void	print_export(char **env);
 void	pwd_builtin(t_mini *mini_data);
 void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
