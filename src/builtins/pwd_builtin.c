@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:36 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/18 11:03:16 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 17:37:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 */
 void	pwd_builtin(t_mini *mini_data)
 {
-	//make sure to set the error code pls
-	(void)	mini_data;
 	char	*pwd_str;
 
 	pwd_str = getcwd(NULL, 0);
@@ -29,6 +27,9 @@ void	pwd_builtin(t_mini *mini_data)
 	{
 		printf("%s\n", pwd_str);
 		free(pwd_str);
+		return ;
 	}
+	print_error("pwd: ", strerror(errno), NULL);
+	mini_data->exit_status = 1;
 	return ;
 }
