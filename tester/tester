@@ -9,8 +9,12 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
-		"builtins"
+		"cd"
+		"unset"
 		"echo"
+		"pwd"
+		"exit"
+		"export"
 		"pipes"
 		"redirects"
 		"extras"
