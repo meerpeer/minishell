@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:27 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 13:59:47 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 17:21:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ bool	is_in_range(char *cmd, bool negative)
 	return (true);
 }
 
+static int	get_index_after_whitespace(char *str, bool *negative)
+{
+	int	i;
+
+	i = 0;
+	while (is_white_space(str[i]))
+		i++;
+	if (str[i] && str[i] == '+')
+		i++;
+	else if (str[i] && str[i] == '-')
+	{
+		i++;
+		*negative = true;
+	}
+	return (i);
+}
+
 /**
  * checks if all characters in the strings are numbers
  * 
@@ -40,16 +57,7 @@ static bool	is_num(char *str)
 	negative = false;
 	if (!str)
 		return (false);
-	i = 0;
-	while (is_white_space(str[i]))
-		i++;
-	if (str[i] && str[i] == '+')
-		i++;
-	else if (str[i] && str[i] == '-')
-	{
-		i++;
-		negative = true;
-	}
+	i = get_index_after_whitespace(str, &negative);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -57,7 +65,7 @@ static bool	is_num(char *str)
 			while (is_white_space(str[i]))
 				i++;
 			if (str[i] == '\0')
-				return (is_in_range(str, negative));
+				break ;
 			return (false);
 		}
 		i++;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo_builtin.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: merel <merel@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 10:22:17 by mevan-de          #+#    #+#             */
-/*   Updated: 2022/11/15 18:33:17 by merel            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   echo_builtin.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: merel <merel@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/16 10:22:17 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/16 17:14:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool should_add_new_line(char ***original_cmd)
+bool	should_add_new_line(char ***original_cmd)
 {
 	char	**cmd;
 	char	*option;
