@@ -6,20 +6,20 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 12:59:39 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 15:33:03 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include <sys/stat.h>
+#include <sys/stat.h>
 
 bool	cmd_is_dir(char *cmd)
 {
-	struct stat cmd_stat;
+	struct stat	cmd_stat;
 
 	ft_memset(&cmd_stat, 0, sizeof(cmd_stat));
 	stat(cmd, &cmd_stat);
-	return(S_ISDIR(cmd_stat.st_mode));
+	return (S_ISDIR(cmd_stat.st_mode));
 }
 
 void	check_if_path_error(char **envp, char *cmd)
@@ -79,10 +79,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	int		i;
 
 	if (access(cmd, F_OK | X_OK) == 0)
-	{
-		check_if_path_error(envp, cmd);
-		return (cmd);
-	}
+		return (check_if_path_error(envp, cmd), cmd);
 	path_str = get_path_str(envp, cmd);
 	paths = ft_split(path_str, ':');
 	path = NULL;
@@ -93,11 +90,10 @@ char	*get_cmd_path(char *cmd, char **envp)
 		if (access(paths[i], F_OK | X_OK) == 0)
 			path = ft_strdup(paths[i]);
 		i++;
-	}		
+	}
 	free (path_str);
 	free_2d_array_(paths);
 	if (path)
 		return (path);
-	check_if_path_error(envp, cmd);
-	return (NULL);
+	return (check_if_path_error(envp, cmd), NULL);
 }

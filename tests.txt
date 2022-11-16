@@ -9,8 +9,8 @@
 TEST
 
 #BUILTIN echo
-echo
-echo -n
+✅ echo
+✅ echo -n
 echo -nnnnnnnnnnn
 echo -n -n
 echo -nf -n
@@ -47,6 +47,7 @@ pwd
 pwd bla
 pwd 1
 pwd bla bla
+
 
 
 #BUILTIN unset
@@ -157,6 +158,46 @@ echo "$USER"
 echo "$USER $PWD $HOME"
 echo one | grep -q two
 
+✅ 
+#EVAL
+✅ /bin/ls
+✅ /bin/ls -l
+✅ echo Hi
+✅ echo -n Hi
+✅ exit
+✅ exit 42
+✅ exit -3
+✅ exit bla
+✅ /bin/ls -l
+✅ /bin/ls filethatdoesntexist
+✅ expr $? + $?
+✅ echo "bla bla"
+echo "cat lol.c | cat > lol.c"
+echo ''
+echo 'bla'
+exit '42'
+echo 'env'
+echo 'ls -l | wc -l'
+echo '$USER'
+env | sort
+env | grep USER=
+cd tests
+cd tests
+cd .
+cd ..
+pwd
+export TEST=1
+unset TEST
+export TEST=directory1:directory2
+cat < Makefile
+< Makefile cat
+ls -la > OUT1
+< OUT1 ls -la >> OUT1
+dsbksdgbksdghsd
+echo $PATH
+echo "$PATH"
+echo $USER
+echo "$USER"
 
 #EVAL
 /bin/ls
@@ -197,4 +238,3 @@ echo $PATH
 echo "$PATH"
 echo $USER
 echo "$USER"
-
