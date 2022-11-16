@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/31 10:57:17 by merel         #+#    #+#                 */
-/*   Updated: 2022/11/16 10:51:46 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:59:13 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_file	*create_file_struct(t_token *file_token, t_token *redirect_token)
 	else if (redirect_token->type == HEREDOC)
 	{
 		create_heredoc(file_token->value);
+		free(file->file_name);
 		file->file_name = protect_check(ft_strdup(HERE_DOC_LOCATION));
 		file->file_type = INPUT_HEREDOC;
 	}
