@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/10 10:07:31 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/14 16:43:29 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	main(int argc, char **argv)
 {
 	t_mini	*mini;
 
+	//system("./minishell -c \"echo\" > out_mini");
 	mini = init_mini_data();
 	if (argc == 3)
 		prompt_loop(mini, argv[2]);
 	else
 		prompt_loop(mini, NULL);
-//	rl_replace_line();
 	return (0);
 }

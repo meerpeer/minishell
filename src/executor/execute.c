@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 21:22:02 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 13:01:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fork_error(t_mini *mini_data)
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
+	mini_data->exit_status = 0;
 	redirect(cmd_data, mini_data);
 	if (ft_strncmp(cmd_data->cmd[0], "echo", 5) == 0)
 		echo_builtin(cmd_data);
@@ -35,7 +36,6 @@ void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 		export_builtin(cmd_data, mini_data);
 	else if (ft_strncmp(cmd_data->cmd[0], "env", 4) == 0)
 		env_builtin(mini_data);
-	mini_data->exit_status = 0;
 	return ;
 }
 
@@ -81,7 +81,7 @@ bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 		if (cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
 		{
 			execute_builtin(cmd_data, mini_data);
-			exit (0);
+			exit (mini_data->exit_status);
 		}
 		else
 		{

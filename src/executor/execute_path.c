@@ -6,26 +6,33 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 13:45:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 12:59:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+# include <sys/stat.h>
 
-void	free_2d_array(char	**array)
+bool	cmd_is_dir(char *cmd)
 {
-	int	i;
+	struct stat cmd_stat;
 
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free (array);
-	return ;
+	ft_memset(&cmd_stat, 0, sizeof(cmd_stat));
+	stat(cmd, &cmd_stat);
+	return(S_ISDIR(cmd_stat.st_mode));
+}
+
+void	check_if_path_error(char **envp, char *cmd)
+{
+	if (ft_strchr(cmd, '/') == NULL
+		&& key_exists(envp, "PATH"))
+		error_exit(cmd, ": command not found", NULL, 127);
+	else if (cmd_is_dir(cmd))
+		error_exit(cmd, ": is a directory", NULL, 126);
+	else if (access(cmd, F_OK) != 0)
+		error_exit(cmd, ": ", strerror(errno), 127);
+	else if (access(cmd, F_OK | X_OK) != 0)
+		error_exit(cmd, ": ", strerror(errno), 126);
 }
 
 char	*get_path_str(char **envp, char *cmd)
@@ -72,7 +79,10 @@ char	*get_cmd_path(char *cmd, char **envp)
 	int		i;
 
 	if (access(cmd, F_OK | X_OK) == 0)
+	{
+		check_if_path_error(envp, cmd);
 		return (cmd);
+	}
 	path_str = get_path_str(envp, cmd);
 	paths = ft_split(path_str, ':');
 	path = NULL;
@@ -85,9 +95,9 @@ char	*get_cmd_path(char *cmd, char **envp)
 		i++;
 	}		
 	free (path_str);
-	free_2d_array (paths);
+	free_2d_array_(paths);
 	if (path)
 		return (path);
-	error_exit(cmd, ": command not found", NULL, 127);
+	check_if_path_error(envp, cmd);
 	return (NULL);
 }
