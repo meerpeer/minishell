@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 14:05:19 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:45:53 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	export_builtin(t_cmd *cmd, t_mini *data)
 				if (key_exists(data->env, key))
 					set_key_value(data->env, key, value);
 				else
-					add_new_env_entry(&data->env, key, value);
+					add_new_env_entry(data, key, value);
 			}
 			else
 			{

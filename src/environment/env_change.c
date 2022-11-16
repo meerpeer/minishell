@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/23 11:41:05 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/10/26 14:15:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:51:52 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	delete_env_entry(char **env, char *key)
 	free (env[i]);
 	while (env[i + 1])
 	{
-		env[i] = env[i + 1];
+		env[i] = protect_check(ft_strdup(env[i + 1]));
+		free(env[i + 1]);
 		i++;
 	}
 	env[i] = NULL;
@@ -70,16 +71,16 @@ void	set_key_value(char **env, char *key, char *value)
 	* @param value optional value to be set instantly, NULL if there is no value
 	* @return nothing
 */
-void	add_new_env_entry(char ***env, char *key, char *value)
+void	add_new_env_entry(t_mini *mini_data, char *key, char *value)
 {
 	int		i;
 	int		original_size;
 	char	**new_env;
 	char	**old_env;
 
-	old_env = *env;
+	old_env = mini_data->env;
 	original_size = get_count_env_vars(old_env);
-	new_env = protect_check(ft_calloc(original_size + 2, sizeof(char **)));
+	new_env = protect_check(ft_calloc(original_size + 3, sizeof(char **)));
 	i = 0;
 	while (old_env[i])
 	{
@@ -91,6 +92,6 @@ void	add_new_env_entry(char ***env, char *key, char *value)
 	new_env[i + 1] = NULL;
 	if (value)
 		set_key_value(new_env, key, value);
-	free(*env);
-	*env = new_env;
+	free(mini_data->env);
+	mini_data->env = new_env;
 }

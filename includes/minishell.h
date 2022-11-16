@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 15:29:38 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:43:29 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ char	*join_3_strings(char *s1, char *s2, char *s3);
 t_mini	*init_mini_data(void);
 
 //environment variables
-void	add_new_env_entry(char ***env, char *key, char *value);
+void	add_new_env_entry(t_mini *mini_data, char *key, char *value);
 void	delete_env_entry(char **env, char *key);
 void	set_key_value(char **env, char *key, char *value);
 int		get_count_env_vars(char **env);

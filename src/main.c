@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/14 16:43:29 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:18:11 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	check_if_leaks_at_exit(void)
 int	main(int argc, char **argv)
 {
 	t_mini	*mini;
+
 
 	//system("./minishell -c \"echo\" > out_mini");
 	mini = init_mini_data();

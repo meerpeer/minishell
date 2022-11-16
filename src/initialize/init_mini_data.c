@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/15 21:55:01 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/16 16:53:09 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 	* @param *env environment variables from the main env;
 	* @return the copied environment variables!
 */
-void	update_shell_level(char **env)
+void	update_shell_level(t_mini *mini_data)
 {
 	char	*old_value;
 	char	*new_value;
 	int		converted_value;
 
-	if (!key_exists(env, "SHLVL"))
-		add_new_env_entry(&env, "SHLVL", "1");
+	if (!key_exists(mini_data->env, "SHLVL"))
+		add_new_env_entry(mini_data, "SHLVL", "1");
 	else
 	{
-		old_value = get_env_var_value(env, "SHLVL");
+		old_value = get_env_var_value(mini_data->env, "SHLVL");
 		converted_value = ft_atoi(old_value);
 		converted_value++;
 		new_value = protect_check(ft_itoa(converted_value));
-		set_key_value(env, "SHLVL", new_value);
+		set_key_value(mini_data->env, "SHLVL", new_value);
 		free(new_value);
 	}
 }
@@ -49,6 +49,7 @@ char	**copy_env(void)
 	char		**copy_env;
 
 	i = 0;
+	
 	copy_env = ft_calloc(get_count_env_vars(environ) + 1, sizeof(char *));
 	if (!copy_env)
 		error_exit("environment variable copy failed\n", NULL, NULL, 1);
@@ -58,7 +59,7 @@ char	**copy_env(void)
 		i++;
 	}
 	copy_env[i] = NULL;
-	update_shell_level(copy_env);
+	
 	return (copy_env);
 }
 
@@ -74,5 +75,6 @@ t_mini	*init_mini_data(void)
 	data->tokens = NULL;
 	data->env = copy_env();
 	set_key_value(data->env, "OLDPWD", NULL);
+	update_shell_level(data);
 	return (data);
 }

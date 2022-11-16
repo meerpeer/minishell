@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 15:29:52 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/16 16:05:07 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	execute_cmds(t_mini *data)
 			&& is_builtin(cmd_data->cmd[0]))
 		{
 			execute_builtin(cmd_data, data);
-			break ;
+			restore_std_in_and_out(data->std_backup);
+			return ;
 		}
 		if (!execute_in_child(cmd_data, data))
 		{
