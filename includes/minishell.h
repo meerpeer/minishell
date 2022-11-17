@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 15:08:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 16:38:09 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
-#include <string.h>
+# include <string.h>
 # include "../libft/libft.h"
 
 //COLORS
@@ -50,16 +50,16 @@
 # define PROMPT "minishell$ "
 # define HERE_DOC_LOCATION "/tmp/here-document"
 
-struct s_mini;
-struct s_cmd;
-struct s_file;
+struct					s_mini;
+struct					s_cmd;
+struct					s_file;
 
 typedef struct s_mini	t_mini;
 typedef struct s_cmd	t_cmd;
 typedef struct s_file	t_file;
 typedef struct s_token	t_token;
 
-int	g_exit_status;
+int						g_exit_status;
 
 /*
 	--------------------------------------------------
@@ -114,9 +114,9 @@ typedef struct s_mini {
 	char	*cmd_input;
 	t_list	*tokens;
 	t_cmd	*cmds;
-	char	**env; // I'll need these to get the path for the commands
-	int		cmd_count; // to see how many pipes there are
-	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
+	char	**env;
+	int		cmd_count;
+	int		cmd_index;
 	pid_t	last_pid;
 	int		std_backup[2];
 }				t_mini;
@@ -159,7 +159,7 @@ typedef struct s_cmd {
 	--------------------------------------------------
 */
 //general
-void	prompt_loop(t_mini *mini_data, char *input_outside);
+void	prompt_loop(t_mini *mini_data);
 
 //error
 void	error_exit(char *s1, char *s2, char *s3, int errorCode);
@@ -180,6 +180,7 @@ t_quote	update_quote_type(t_quote quote_type, char c);
 void	add_to_2d_array(char ***array, char *word);
 bool	is_white_space(char c);
 char	*join_3_strings(char *s1, char *s2, char *s3);
+void	free_files(t_list *start_list);
 
 //init
 t_mini	*init_mini_data(void);
@@ -245,8 +246,7 @@ void	print_cmds(t_mini *mini_data);
 void	add_char_to_word_copy(char c, t_word *word_copy);
 void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data);
 void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data);
-int		create_heredoc(char *delimit);
-
+void	create_heredoc(char *delimit);
 
 //signals
 void	handle_signals(void);

@@ -6,31 +6,19 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:25:40 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 16:18:11 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 16:47:43 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-//#include <readline/readline.h>
 
-void	check_if_leaks_at_exit(void)
-{
-	printf("\n\n----\n\n");
-	system("leaks -q minishell");
-	printf("\n\n----\n\n");
-	return ;
-}
-
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_mini	*mini;
 
-
-	//system("./minishell -c \"echo\" > out_mini");
 	mini = init_mini_data();
-	if (argc == 3)
-		prompt_loop(mini, argv[2]);
-	else
-		prompt_loop(mini, NULL);
+	if (!mini)
+		exit (1);
+	prompt_loop(mini);
 	return (0);
 }

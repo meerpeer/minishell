@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 13:10:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 14:13:20 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 16:26:49 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	here_doc_write(char *delimit)
 	handle_signals();
 }
 
-int	create_heredoc(char *delimit)
+void	create_heredoc(char *delimit)
 {
 	int	pid;
 	int	status;
@@ -50,16 +50,17 @@ int	create_heredoc(char *delimit)
 	if (pid == -1)
 		error_exit(strerror(errno), NULL, NULL, 1);
 	if (pid == 0)
+	{
 		here_doc_write(delimit);
+	}
 	waitpid(pid, &status, 0);
 	if (WTERMSIG(status) == SIGINT)
 	{
-		printf("in check ctr c\n");
 		g_exit_status = 128 + WTERMSIG(status);
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		printf("exit status [%d]\n", g_exit_status);
-		return (1);
+		return ;
 	}
-	printf("exit status [%d]\n", g_exit_status);
-	return (0);
+	else
+		g_exit_status = WEXITSTATUS(status);
+	return ;
 }

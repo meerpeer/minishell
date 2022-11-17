@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/09 17:39:34 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/17 14:11:01 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 16:52:39 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	default_signals(int id)
 
 void	handle_signals(void)
 {
-	struct termios	attributes;
+	struct termios	overwrite;
 
-	tcgetattr(STDIN_FILENO, &attributes);
-	attributes.c_lflag |= ECHO;
-	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
+	tcgetattr(STDIN_FILENO, &overwrite);
+	overwrite.c_lflag |= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &overwrite);
 	signal(SIGINT, clear_prompt);
 	signal(SIGQUIT, SIG_IGN);
 	if (signal(SIGINT, &clear_prompt) == SIG_ERR
