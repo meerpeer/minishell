@@ -11,7 +11,7 @@ SRC_FILES = main.c prompt.c\
 			executor/execute_utils.c executor/execute_path.c executor/execute_filehandler.c\
 			builtins/cd_builtin.c builtins/echo_builtin.c builtins/env_builtin.c\
 			builtins/exit_builtin.c builtins/export_builtin.c builtins/export_print_builtin.c\
-			builtins/pwd_builtin.c builtins/unset_builtin.c\
+			builtins/export_sort.c builtins/pwd_builtin.c builtins/unset_builtin.c\
 			environment/env_gets.c environment/env_change.c environment/env_utils.c\
 			error/error.c\
 			utils/free_data.c utils/string_utils.c\

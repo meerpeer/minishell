@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/16 17:48:55 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 17:52:57 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 14:02:02 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ static void	try_print_export_value(char *env_var)
 
 void	print_export(char **env)
 {
-	int	i;
+	int		i;
+	char	**sorted_env;
 
 	i = 0;
-	while (env[i])
+	sorted_env = get_alphabetized_env(env);
+	while (sorted_env[i])
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		print_export_key(env[i]);
-		try_print_export_value(env[i]);
+		print_export_key(sorted_env[i]);
+		try_print_export_value(sorted_env[i]);
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
+	free_2d_array_(sorted_env);
 }

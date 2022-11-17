@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstdelone.c                                     :+:    :+:            */
+/*   ft_strcmp.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/17 14:58:45 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 14:58:46 by mevan-de      ########   odam.nl         */
+/*   Created: 2022/03/09 10:25:54 by mevan-de      #+#    #+#                 */
+/*   Updated: 2022/11/17 14:09:54 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	while (*str1 == *str2 && *str1 != '\0' && *str2 != '0')
+	{
+		str1++;
+		str2++;
+	}
+	return (*str1 - *str2);
 }

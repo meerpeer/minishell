@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 13:28:20 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 13:57:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,10 +212,11 @@ void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);
 void	echo_builtin(t_cmd *cmd);
 void	env_builtin(t_mini *mini_data, char **cmd);
 void	exit_builtin(char **cmd);
-void	export_builtin(t_cmd *cmd, t_mini *data);
-void	print_export(char **env);
 void	pwd_builtin(void);
 void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
+void	export_builtin(t_cmd *cmd, t_mini *data);
+void	print_export(char **env);
+char	**get_alphabetized_env(char **env);
 
 //lexer
 void	lexer(t_mini *mini_data);
