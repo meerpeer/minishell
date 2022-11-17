@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:31 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 17:58:18 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:41:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	export_argument(char *cmd, t_mini *data)
 	else
 	{
 		print_error(key, ": not a valid identifier", NULL);
-		data->exit_status = 1;
+		g_exit_status = 1;
 	}
 	free (key);
 }

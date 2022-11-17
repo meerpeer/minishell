@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:27 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 17:21:13 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:46:25 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,17 @@ static bool	is_num(char *str)
  * 
  * @param cmd the exit cmd and possible exit code
 */
-void	exit_builtin(char **cmd, t_mini *data)
+void	exit_builtin(char **cmd)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (!cmd[1])
-		exit(data->exit_status);
+		exit(g_exit_status);
 	if (!is_num(cmd[1]))
 		error_exit("exit: ", cmd[1], ": numeric argument required", 255);
 	if (cmd[2])
 	{
 		print_error("exit: too many arguments", NULL, NULL);
-		data->exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	exit(ft_atoll(cmd[1]));

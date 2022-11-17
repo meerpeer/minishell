@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/16 10:04:24 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:40:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 		else
 			input = readline(Y185"MINISHELL$ "RESET);
 		if (input == NULL)
-			exit(mini_data->exit_status);
+			exit(g_exit_status);
 		if (input)
 		{
 			add_history(input);
@@ -37,7 +37,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 			}
 			ft_lstclear(&mini_data->tokens, delete_token_list);
 			if (input_outside)
-				exit (mini_data->exit_status);
+				exit (g_exit_status);
 			reset_mini_data(mini_data);
 			free(input);
 		}

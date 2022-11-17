@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 08:47:37 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 14:58:30 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:40:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data)
 	*i = *i + size ;
 	if (ft_strncmp(key, "?", 1) == 0)
 	{
-		value = protect_check(ft_itoa(mini_data->exit_status));
+		value = protect_check(ft_itoa(g_exit_status));
 		free(key);
 		copy_value_to_word(value, word_copy);
 		free(value);

@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 17:49:36 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:50:46 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_mini	t_mini;
 typedef struct s_cmd	t_cmd;
 typedef struct s_file	t_file;
 typedef struct s_token	t_token;
+
+int	g_exit_status;
 
 /*
 	--------------------------------------------------
@@ -115,7 +117,6 @@ typedef struct s_mini {
 	char	**env; // I'll need these to get the path for the commands
 	int		cmd_count; // to see how many pipes there are
 	int		cmd_index; // to see on which command we're currently at (last and first are important for pipe reasons?)
-	int		exit_status; //will take the exit status off the last child process :)
 	pid_t	last_pid;
 	int		std_backup[2];
 }				t_mini;
@@ -210,10 +211,10 @@ char	*get_cmd_path(char *cmd, char **envp);
 void	cd_builtin(t_cmd *cmd_data, t_mini *mini_data);
 void	echo_builtin(t_cmd *cmd);
 void	env_builtin(t_mini *mini_data, char **cmd);
-void	exit_builtin(char **cmd, t_mini *data);
+void	exit_builtin(char **cmd);
 void	export_builtin(t_cmd *cmd, t_mini *data);
 void	print_export(char **env);
-void	pwd_builtin(t_mini *mini_data);
+void	pwd_builtin(void);
 void	unset_builtin(t_cmd *cmd_data, t_mini *mini_data);
 
 //lexer

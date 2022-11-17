@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 09:57:43 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 18:00:32 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:41:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_mini	*init_mini_data(void)
 	data = ft_calloc(1, sizeof(t_mini));
 	data->cmd_count = 0;
 	data->cmd_index = 0;
-	data->exit_status = 0;
+	g_exit_status = 0;
 	data->cmds = NULL;
 	data->tokens = NULL;
 	data->env = copy_env();

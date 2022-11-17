@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:36 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 17:37:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:47:28 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	* @param *mini_data: minishell data, used to set the exit_code;
 	* @return VOID
 */
-void	pwd_builtin(t_mini *mini_data)
+void	pwd_builtin(void)
 {
 	char	*pwd_str;
 
@@ -30,6 +30,6 @@ void	pwd_builtin(t_mini *mini_data)
 		return ;
 	}
 	print_error("pwd: ", strerror(errno), NULL);
-	mini_data->exit_status = 1;
+	g_exit_status = 1;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 14:11:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:41:10 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 		if (!key_exists(data->env, "HOME"))
 		{
 			print_error(cmd->cmd[0], ": HOME not set", NULL);
-			data->exit_status = 1;
+			g_exit_status = 1;
 			return ;
 		}
 		go_to = chdir(get_env_var_value(data->env, "HOME"));
@@ -71,7 +71,7 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 	if (go_to == -1)
 	{
 		print_error(strerror(errno), NULL, NULL);
-		data->exit_status = 1;
+		g_exit_status = 1;
 	}
 	free(new_path);
 }

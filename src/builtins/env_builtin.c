@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:22:22 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 15:30:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:40:58 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	env_builtin(t_mini *mini_data, char **cmd)
 
 	if (!mini_data->env)
 	{
-		mini_data->exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	else if (cmd && cmd[0] && cmd[1])
 	{
 		print_error("env: ", "too many arguments", NULL);
-		mini_data->exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	i = 0;
