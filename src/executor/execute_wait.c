@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 09:54:49 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 16:53:51 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 13:31:20 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ void	wait_for_cmds(int *exit_status, pid_t pid, bool set_exit)
 	waitpid(pid, &status, WUNTRACED);
 	while (wait(NULL) > 0)
 		continue ;
-	if (WIFSIGNALED(status))
+	if (WTERMSIG(status) == SIGQUIT)
+	{
+		g_exit_status = 128 + WTERMSIG(status);
+		write(1, "\b\b  \b\b^\\Quit: 3\n", 16);
+	}
+	else if (WTERMSIG(status) == SIGINT)
+	{
+		g_exit_status = 128 + WTERMSIG(status);
+		write(1, "\n", 1);
+	}
+	else if (WIFSIGNALED(status))
 		*exit_status = WTERMSIG(status) + 128;
 	else if (WIFEXITED(status) && set_exit)
 		*exit_status = WEXITSTATUS(status);

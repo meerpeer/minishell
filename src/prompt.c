@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 07:48:55 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/17 11:40:58 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 13:31:42 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside)
 {
 	char	*input;
 
+	rl_catch_signals = 0;
 	while ("the world turns")
 	{
 		handle_signals();

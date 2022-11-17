@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 11:50:46 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 13:28:20 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,9 +248,7 @@ void	create_heredoc(char *delimit);
 
 //signals
 void	handle_signals(void);
-void	set_signals_noninteractive(void);
-void	deactivate_signals(void);
-void	activate_signals(void);
+void	default_signals(int id);
 void	clear_prompt(int num);
 
 #endif

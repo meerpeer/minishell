@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/09 17:39:34 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/15 21:15:33 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 13:34:47 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,96 +14,42 @@
 #include <readline/readline.h>
 #include <termios.h>
 #include <signal.h>
-//signal header
 
-void	clear_prompt(int num)
+void	clear_prompt(int sig)
 {
-	(void)num;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_exit_status = 1;
+	}
 }
 
-void	static_func(int i)
+void	default_signals(int id)
 {
-	(void)i;
-	printf("\n");
-}
-
-void	quit(int num)
-{
-	(void)num;
-	printf("exit: 3\n");
+	if (id == 1)
+		signal(SIGINT, SIG_IGN);
+	if (id == 2)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	if (id == 3)
+		signal(SIGINT, SIG_DFL);
 }
 
 void	handle_signals(void)
 {
-	struct termios	hide;
+	struct termios	attributes;
 
-	tcgetattr(STDIN_FILENO, &hide);
-	hide.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &hide);
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag |= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
 	signal(SIGINT, clear_prompt);
 	signal(SIGQUIT, SIG_IGN);
+	if (signal(SIGINT, &clear_prompt) == SIG_ERR
+		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		exit(1);
 }
-
-void	deactivate_signals(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, quit);
-}
-
-
-// void	quit_signal_off()
-// {
-// 	struct sigaction action;
-
-// 	ft_memset(&action, 0, sizeof(action));
-// 	action.sa_handler = SIG_IGN;
-// 	sigaction(SIGQUIT, &action, NULL);
-// }
-
-// void	clear_prompt(int signum)
-// {
-// 	(void)signum;
-// 	write(1, "\n", 1);
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
-
-// }
-
-// void	signal_print_newline(int signal)
-// {
-// 	(void)signal;
-// 	rl_on_new_line();
-// 	//ft_putchar_fd('\n', STDOUT_FILENO);
-// }
-
-// void	set_signals_noninteractive(void)
-// {
-// 	struct sigaction	act;
-
-// 	printf("in handle signals[2]\n");
-// 	ft_memset(&act, 0, sizeof(act));
-// 	act.sa_handler = &signal_print_newline;
-// 	sigaction(SIGINT, &act, NULL);
-// 	sigaction(SIGQUIT, &act, NULL);
-// }
-// //main function for in the prompt loop
-// //overrides the ctrl \ ctrl c to exit
-// void	handle_signals(void)
-// {
-// 	struct sigaction	action;
-// 	struct termios		hide;
-	
-// 	tcgetattr(STDIN_FILENO, &hide);
-// 	hide.c_lflag &= ~(ECHOCTL);
-// 	tcsetattr(STDIN_FILENO, TCSANOW, &hide);
-// 	sigemptyset(&action.sa_mask);
-// 	quit_signal_off(); // ctrl '\'
-// 	ft_memset(&action, 0, sizeof(action));
-// 	action.sa_handler = &clear_prompt; // input to a blank line
-// 	sigaction(SIGINT, &action, NULL); //ctrl -c
-// }
