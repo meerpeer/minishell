@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 13:30:21 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 18:02:53 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 15:27:46 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,13 @@ t_cmd	*create_new_cmd(t_mini *mini_data, int index)
 	return (cmd);
 }
 
-bool	try_parsing(t_mini *mini_data)
+bool	create_commands(t_mini *mini_data, t_list *tokens)
 {
-	t_list	*tokens;
 	t_token	*current_token;
 	t_cmd	*cmd;
 	int		i;
 
 	i = 0;
-	tokens = mini_data->tokens;
-	if (!tokens)
-		return (false);
 	while (tokens)
 	{
 		cmd = create_new_cmd(mini_data, i);
@@ -102,4 +98,16 @@ bool	try_parsing(t_mini *mini_data)
 					NULL, NULL), false);
 	}
 	return (true);
+}
+
+bool	try_parsing(t_mini *mini_data)
+{
+	t_list	*tokens;
+
+	tokens = mini_data->tokens;
+	if (!tokens)
+		return (false);
+	if (create_commands(mini_data, tokens))
+		return (true);
+	return (false);
 }
