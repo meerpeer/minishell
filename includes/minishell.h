@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 15:04:08 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 15:08:59 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	prompt_loop(t_mini *mini_data, char *input_outside);
 void	error_exit(char *s1, char *s2, char *s3, int errorCode);
 void	*protect_check(void *ptr);
 void	print_error(char *s1, char *s2, char *s3);
+void	fork_error(void);
 int		exit_program(char *message, int id);
 
 //clean

@@ -6,17 +6,11 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 11:24:35 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 13:37:12 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 15:11:51 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	fork_error(void)
-{
-	print_error("fork: ", strerror(errno), NULL);
-	g_exit_status = 1;
-}
 
 void	execute_builtin(t_cmd *cmd_data, t_mini *mini_data)
 {
@@ -59,12 +53,24 @@ void	child_process(t_cmd *cmd, t_mini *mini_data)
 		error_exit(strerror(errno), NULL, NULL, 1);
 }
 
+void	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
+{
+	default_signals(2);
+	if (cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
+	{
+		execute_builtin(cmd_data, mini_data);
+		exit (g_exit_status);
+	}
+	else
+		child_process(cmd_data, mini_data);
+}
+
 /**
 	* Executes executes either builtin, or non-builtin commands
 	* @param data: minishell data;
 	* @return VOID
 */
-bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
+bool	start_execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 {
 	pid_t	pid;
 
@@ -75,18 +81,7 @@ bool	execute_in_child(t_cmd *cmd_data, t_mini *mini_data)
 	if (pid == -1)
 		return (fork_error(), false);
 	if (pid == 0)
-	{
-		default_signals(2);
-		if (cmd_data->cmd && is_builtin(cmd_data->cmd[0]))
-		{
-			execute_builtin(cmd_data, mini_data);
-			exit (g_exit_status);
-		}
-		else
-		{
-			child_process(cmd_data, mini_data);
-		}
-	}
+		execute_in_child(cmd_data, mini_data);
 	default_signals(1);
 	close (cmd_data->pipe_fd[WRITE_END]);
 	dup2(cmd_data->pipe_fd[READ_END], STDIN_FILENO);
@@ -112,7 +107,7 @@ void	execute_cmds(t_mini *data)
 			restore_std_in_and_out(data->std_backup);
 			return ;
 		}
-		if (!execute_in_child(cmd_data, data))
+		if (!start_execute_in_child(cmd_data, data))
 		{
 			set_exit = false;
 			break ;
