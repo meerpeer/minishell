@@ -6,7 +6,7 @@
 /*   By: merel <merel@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 15:23:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 13:57:59 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 15:04:08 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void	print_cmds(t_mini *mini_data);
 void	add_char_to_word_copy(char c, t_word *word_copy);
 void	expand_env(char *word, int *i, t_word *word_copy, t_mini *mini_data);
 void	loop_quote(char *word, int *i, t_word *word_copy, t_mini *mini_data);
-void	create_heredoc(char *delimit);
+int		create_heredoc(char *delimit);
 
 
 //signals

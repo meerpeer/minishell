@@ -6,7 +6,7 @@
 /*   By: lhoukes <lhoukes@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/09 17:39:34 by lhoukes       #+#    #+#                 */
-/*   Updated: 2022/11/17 13:34:47 by lhoukes       ########   odam.nl         */
+/*   Updated: 2022/11/17 14:11:01 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	default_signals(int id)
 	}
 	if (id == 3)
 		signal(SIGINT, SIG_DFL);
+	g_exit_status = 1;
 }
 
 void	handle_signals(void)

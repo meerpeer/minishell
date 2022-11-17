@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 11:20:00 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 15:33:03 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 14:55:05 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_path_str(char **envp, char *cmd)
 		i++;
 	}
 	if (!path_str)
-		error_exit(cmd, ": No such file or directory\n", NULL, 1);
+		error_exit(cmd, ": No such file or directory", NULL, 1);
 	return (path_str);
 }
 
