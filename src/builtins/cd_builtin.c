@@ -6,7 +6,7 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/16 10:21:57 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/17 15:02:26 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 15:13:14 by lhoukes       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ static void	check_if_key_exist(t_mini *data, char *new_path)
 	}
 }
 
+static void	take_me_home(t_cmd *cmd, t_mini *data, char *new_path)
+{
+	int	go_to;
+
+	go_to = 0;
+	if (!key_exists(data->env, "HOME"))
+	{
+		print_error(cmd->cmd[0], ": HOME not set", NULL);
+		g_exit_status = 1;
+		return ;
+	}
+	go_to = chdir(get_env_var_value(data->env, "HOME"));
+	update_pwd(data, new_path);
+}
+
 void	cd_builtin(t_cmd *cmd, t_mini *data)
 {
 	int		go_to;
@@ -43,16 +58,7 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 	new_path = getcwd(NULL, 0);
 	check_if_key_exist(data, new_path);
 	if (!cmd->cmd[1] || (ft_strcmp(cmd->cmd[1], "cd") == 0 && !cmd->cmd[2]))
-	{
-		if (!key_exists(data->env, "HOME"))
-		{
-			print_error(cmd->cmd[0], ": HOME not set", NULL);
-			g_exit_status = 1;
-			return ;
-		}
-		go_to = chdir(get_env_var_value(data->env, "HOME"));
-		update_pwd(data, new_path);
-	}
+		take_me_home(cmd, data, new_path);
 	else if (!cmd->cmd[2])
 	{
 		go_to = chdir(cmd->cmd[1]);
@@ -65,4 +71,3 @@ void	cd_builtin(t_cmd *cmd, t_mini *data)
 	}
 	free(new_path);
 }
-// need to set OLDPWD to "OLDPWD= " is PWD is unset
