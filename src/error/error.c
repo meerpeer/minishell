@@ -6,11 +6,17 @@
 /*   By: mevan-de <mevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/13 09:31:41 by mevan-de      #+#    #+#                 */
-/*   Updated: 2022/11/16 18:00:00 by mevan-de      ########   odam.nl         */
+/*   Updated: 2022/11/17 15:08:41 by mevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	fork_error(void)
+{
+	print_error("fork: ", strerror(errno), NULL);
+	g_exit_status = 1;
+}
 
 void	print_error(char *s1, char *s2, char *s3)
 {
